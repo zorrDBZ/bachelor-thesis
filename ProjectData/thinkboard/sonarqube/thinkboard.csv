@@ -1,0 +1,12 @@
+Project Name,Code Smells,Bugs,Avg. Complexity,Total TD Mins
+MERN ThinkBoard,16,0,3.16,64
+MERN ThinkBoard - llama-createpage,16,0,3.11,64
+MERN ThinkBoard - llama-note,16,0,3.16,64
+MERN ThinkBoard - llama-notecard,16,0,3.11,64
+MERN ThinkBoard - llama-notecontroller,21,0,3.11,364
+MERN ThinkBoard - llama-notedetail,12,0,2.74,52
+MERN ThinkBoard - phi-createpage,16,0,3.16,64
+MERN ThinkBoard - phi-note,16,0,3.16,64
+MERN ThinkBoard - phi-notecard,20,0,3.21,84
+MERN ThinkBoard - phi-notecontroller,16,0,3.37,64
+MERN ThinkBoard - phi-notedetail,12,0,2.89,52

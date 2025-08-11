@@ -1,0 +1,130 @@
+{
+  "metadata": {
+    "timestamp": "2025-08-06T18:19:58.854Z",
+    "filePath": "/Users/latos/Desktop/static-analyzer/codebase/Form.jsx",
+    "analyzer": "codebase-analyzer-v1.0",
+    "standards": [
+      "IEEE-1061-1998",
+      "ISO-25010-2011",
+      "McCabe-1976",
+      "Halstead-1977",
+      "ESLint-8.x"
+    ]
+  },
+  "sizeMetrics": {
+    "totalLines": 276,
+    "sourceLines": 261,
+    "commentLines": 1,
+    "blankLines": 15,
+    "logicalLinesOfCode": 246
+  },
+  "structuralComplexity": {
+    "totalFunctions": 8,
+    "namedFunctions": 0,
+    "anonymousFunctions": 0,
+    "arrowFunctions": 8,
+    "methods": 0,
+    "classes": 0,
+    "variables": 1,
+    "constants": 20,
+    "imports": 10,
+    "exports": 1,
+    "conditionals": 4,
+    "loops": 1,
+    "astNodes": 1117
+  },
+  "cyclomaticComplexity": {
+    "complexity": 26,
+    "decisionPoints": 25,
+    "maxNestingDepth": 6,
+    "averageComplexity": 3.25,
+    "riskLevel": "High"
+  },
+  "halsteadMetrics": {
+    "uniqueOperators": 4,
+    "uniqueOperands": 132,
+    "totalOperators": 148,
+    "totalOperands": 424,
+    "vocabulary": 136,
+    "length": 572,
+    "calculatedLength": 937.86,
+    "volume": 4054.03,
+    "difficulty": 6.42,
+    "effort": 26044.06,
+    "timeToProgram": 1446.89,
+    "deliveredBugs": 1.3513,
+    "_rawVolume": 4054.028745195194,
+    "_rawDifficulty": 6.424242424242424,
+    "_rawEffort": 26044.063453981245
+  },
+  "staticAnalysis": {
+    "totalIssues": 9,
+    "errors": 0,
+    "warnings": 9,
+    "issues": [
+      {
+        "line": 3,
+        "column": 3,
+        "rule": "no-unused-vars",
+        "severity": "warning",
+        "message": "'Box' is defined but never used."
+      },
+      {
+        "line": 4,
+        "column": 3,
+        "rule": "no-unused-vars",
+        "severity": "warning",
+        "message": "'Button' is defined but never used."
+      },
+      {
+        "line": 5,
+        "column": 3,
+        "rule": "no-unused-vars",
+        "severity": "warning",
+        "message": "'TextField' is defined but never used."
+      },
+      {
+        "line": 7,
+        "column": 3,
+        "rule": "no-unused-vars",
+        "severity": "warning",
+        "message": "'Typography' is defined but never used."
+      },
+      {
+        "line": 10,
+        "column": 8,
+        "rule": "no-unused-vars",
+        "severity": "warning",
+        "message": "'EditOutlinedIcon' is defined but never used."
+      },
+      {
+        "line": 11,
+        "column": 10,
+        "rule": "no-unused-vars",
+        "severity": "warning",
+        "message": "'Formik' is defined but never used."
+      },
+      {
+        "line": 16,
+        "column": 8,
+        "rule": "no-unused-vars",
+        "severity": "warning",
+        "message": "'Dropzone' is defined but never used."
+      },
+      {
+        "line": 17,
+        "column": 8,
+        "rule": "no-unused-vars",
+        "severity": "warning",
+        "message": "'FlexBetween' is defined but never used."
+      },
+      {
+        "line": 111,
+        "column": 8,
+        "rule": "complexity",
+        "severity": "warning",
+        "message": "Arrow function has a complexity of 17. Maximum allowed is 10."
+      }
+    ]
+  }
+}

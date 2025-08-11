@@ -1,0 +1,16 @@
+FileName,Source,LogicalLinesOfCode,CyclomaticComplexity,HalsteadEffort,HalsteadBugs,TotalIssues
+message.controller.js,Human,43,7,6061.01,0.3574,0
+user.controller.js,Human,9,2,361.38,0.0779,0
+auth.controller.js,Human,60,11,14426.39,0.5537,0
+Conversation.jsx,Human,31,4,1202.22,0.104,0
+Message.jsx,Human,24,5,987.67,0.1117,0
+auth.controller.js,LLama,50,16,14209.03,0.5471,0
+Message.jsx,LLama,43,7,1059.15,0.1046,0
+user.controller.js,LLama,8,2,326.78,0.0749,0
+message.controller.js,LLama,39,5,4028.24,0.286,2
+Conversation.jsx,LLama,26,2,372.81,0.0654,1
+Conversation.jsx,Phi,26,4,1038.37,0.0846,1
+message.controller.js,Phi,44,9,17426.45,0.4451,0
+user.controller.js,Phi,10,2,476.08,0.102,0
+Message.jsx,Phi,14,2,152.29,0.0305,1
+auth.controller.js,Phi,54,16,17646.59,0.6128,0

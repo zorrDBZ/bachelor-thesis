@@ -1,0 +1,16 @@
+FileName,Source,LogicalLinesOfCode,CyclomaticComplexity,HalsteadEffort,HalsteadBugs,TotalIssues
+NoteCard.jsx,Human,43,3,1903.96,0.1862,3
+CreatePage.jsx,Human,82,6,3248.47,0.3147,2
+NoteDetailPage.jsx,Human,104,9,4378.46,0.4718,4
+notesController.js,Human,46,9,10117.92,0.4746,0
+Note.js,Human,15,1,189.73,0.033,0
+NoteDetailPage.jsx,LLama,37,3,632.11,0.1321,1
+NoteCard.jsx,LLama,35,3,1657.74,0.1666,3
+Note.js,LLama,17,1,231.43,0.04,0
+notesController.js,LLama,38,8,6728.57,0.3527,0
+CreatePage.jsx,LLama,71,5,2049.48,0.259,2
+NoteCard.jsx,Phi,36,5,3360.78,0.2147,2
+Note.js,Phi,13,1,170.86,0.0347,0
+CreatePage.jsx,Phi,81,5,2141.09,0.2699,1
+notesController.js,Phi,81,13,11764.45,0.5193,0
+NoteDetailPage.jsx,Phi,63,6,2013.83,0.1948,1

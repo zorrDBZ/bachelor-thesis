@@ -1,0 +1,109 @@
+{
+  "metadata": {
+    "timestamp": "2025-08-06T18:17:41.143Z",
+    "filePath": "/Users/latos/Desktop/static-analyzer/codebase/MyPostWidget.jsx",
+    "analyzer": "codebase-analyzer-v1.0",
+    "standards": [
+      "IEEE-1061-1998",
+      "ISO-25010-2011",
+      "McCabe-1976",
+      "Halstead-1977",
+      "ESLint-8.x"
+    ]
+  },
+  "sizeMetrics": {
+    "totalLines": 153,
+    "sourceLines": 148,
+    "commentLines": 0,
+    "blankLines": 5,
+    "logicalLinesOfCode": 146
+  },
+  "structuralComplexity": {
+    "totalFunctions": 6,
+    "namedFunctions": 0,
+    "anonymousFunctions": 0,
+    "arrowFunctions": 6,
+    "methods": 0,
+    "classes": 0,
+    "variables": 0,
+    "constants": 12,
+    "imports": 8,
+    "exports": 1,
+    "conditionals": 0,
+    "loops": 0,
+    "astNodes": 609
+  },
+  "cyclomaticComplexity": {
+    "complexity": 3,
+    "decisionPoints": 2,
+    "maxNestingDepth": 5,
+    "averageComplexity": 0.5,
+    "riskLevel": "Low"
+  },
+  "halsteadMetrics": {
+    "uniqueOperators": 3,
+    "uniqueOperands": 90,
+    "totalOperators": 47,
+    "totalOperands": 185,
+    "vocabulary": 93,
+    "length": 232,
+    "calculatedLength": 589.02,
+    "volume": 1517.08,
+    "difficulty": 3.08,
+    "effort": 4677.68,
+    "timeToProgram": 259.87,
+    "deliveredBugs": 0.5057,
+    "_rawVolume": 1517.0848441770631,
+    "_rawDifficulty": 3.083333333333333,
+    "_rawEffort": 4677.678269545944
+  },
+  "staticAnalysis": {
+    "totalIssues": 6,
+    "errors": 0,
+    "warnings": 6,
+    "issues": [
+      {
+        "line": 1,
+        "column": 10,
+        "rule": "no-unused-vars",
+        "severity": "warning",
+        "message": "'Box' is defined but never used."
+      },
+      {
+        "line": 1,
+        "column": 15,
+        "rule": "no-unused-vars",
+        "severity": "warning",
+        "message": "'Typography' is defined but never used."
+      },
+      {
+        "line": 2,
+        "column": 8,
+        "rule": "no-unused-vars",
+        "severity": "warning",
+        "message": "'FlexBetween' is defined but never used."
+      },
+      {
+        "line": 3,
+        "column": 8,
+        "rule": "no-unused-vars",
+        "severity": "warning",
+        "message": "'WidgetWrapper' is defined but never used."
+      },
+      {
+        "line": 8,
+        "column": 8,
+        "rule": "no-unused-vars",
+        "severity": "warning",
+        "message": "'Dropzone' is defined but never used."
+      },
+      {
+        "line": 13,
+        "column": 9,
+        "rule": "no-unused-vars",
+        "severity": "warning",
+        "message": "'navigate' is assigned a value but never used."
+      }
+    ]
+  }
+}

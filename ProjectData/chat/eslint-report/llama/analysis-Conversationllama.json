@@ -1,0 +1,74 @@
+{
+  "metadata": {
+    "timestamp": "2025-08-06T18:11:23.368Z",
+    "filePath": "/Users/latos/Desktop/static-analyzer/codebase/Conversation.jsx",
+    "analyzer": "codebase-analyzer-v1.0",
+    "standards": [
+      "IEEE-1061-1998",
+      "ISO-25010-2011",
+      "McCabe-1976",
+      "Halstead-1977",
+      "ESLint-8.x"
+    ]
+  },
+  "sizeMetrics": {
+    "totalLines": 33,
+    "sourceLines": 28,
+    "commentLines": 0,
+    "blankLines": 5,
+    "logicalLinesOfCode": 26
+  },
+  "structuralComplexity": {
+    "totalFunctions": 2,
+    "namedFunctions": 0,
+    "anonymousFunctions": 0,
+    "arrowFunctions": 2,
+    "methods": 0,
+    "classes": 0,
+    "variables": 0,
+    "constants": 3,
+    "imports": 2,
+    "exports": 1,
+    "conditionals": 0,
+    "loops": 0,
+    "astNodes": 132
+  },
+  "cyclomaticComplexity": {
+    "complexity": 2,
+    "decisionPoints": 1,
+    "maxNestingDepth": 4,
+    "averageComplexity": 1,
+    "riskLevel": "Low"
+  },
+  "halsteadMetrics": {
+    "uniqueOperators": 2,
+    "uniqueOperands": 20,
+    "totalOperators": 6,
+    "totalOperands": 38,
+    "vocabulary": 22,
+    "length": 44,
+    "calculatedLength": 88.44,
+    "volume": 196.21,
+    "difficulty": 1.9,
+    "effort": 372.81,
+    "timeToProgram": 20.71,
+    "deliveredBugs": 0.0654,
+    "_rawVolume": 196.21499122004107,
+    "_rawDifficulty": 1.9,
+    "_rawEffort": 372.808483318078
+  },
+  "staticAnalysis": {
+    "totalIssues": 1,
+    "errors": 0,
+    "warnings": 1,
+    "issues": [
+      {
+        "line": 2,
+        "column": 10,
+        "rule": "no-unused-vars",
+        "severity": "warning",
+        "message": "'getRandomEmoji' is defined but never used."
+      }
+    ]
+  }
+}

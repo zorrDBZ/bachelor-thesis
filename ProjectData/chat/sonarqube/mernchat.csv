@@ -1,0 +1,12 @@
+Project Name,Code Smells,Bugs,Avg. Complexity,Total TD Mins
+Chat App - llama-authcontroller,36,1,3.41,301
+Chat App - llama-conversation,37,1,3.26,322
+Chat App - llama-message,36,1,3.37,321
+Chat App - llama-messagecontroller,38,2,3.26,437
+Chat App - llama-usercontroller,36,1,3.3,301
+Chat App - phi-authcontroller,36,1,3.41,301
+Chat App - phi-conversation,36,1,3.3,321
+Chat App - phi-message,35,1,3.24,316
+Chat App - phi-messagecontroller,35,1,3.37,301
+Chat App - phi-usercontroller,37,1,3.33,306
+MERN Chat App,36,1,3.23,331

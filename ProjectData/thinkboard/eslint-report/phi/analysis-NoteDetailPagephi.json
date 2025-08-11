@@ -1,0 +1,74 @@
+{
+  "metadata": {
+    "timestamp": "2025-08-07T08:21:20.093Z",
+    "filePath": "/Users/latos/Desktop/static-analyzer/codebase/NoteDetailPage.jsx",
+    "analyzer": "codebase-analyzer-v1.0",
+    "standards": [
+      "IEEE-1061-1998",
+      "ISO-25010-2011",
+      "McCabe-1976",
+      "Halstead-1977",
+      "ESLint-8.x"
+    ]
+  },
+  "sizeMetrics": {
+    "totalLines": 76,
+    "sourceLines": 69,
+    "commentLines": 0,
+    "blankLines": 7,
+    "logicalLinesOfCode": 63
+  },
+  "structuralComplexity": {
+    "totalFunctions": 3,
+    "namedFunctions": 0,
+    "anonymousFunctions": 0,
+    "arrowFunctions": 3,
+    "methods": 0,
+    "classes": 0,
+    "variables": 0,
+    "constants": 6,
+    "imports": 4,
+    "exports": 1,
+    "conditionals": 3,
+    "loops": 0,
+    "astNodes": 312
+  },
+  "cyclomaticComplexity": {
+    "complexity": 6,
+    "decisionPoints": 5,
+    "maxNestingDepth": 11,
+    "averageComplexity": 2,
+    "riskLevel": "Low"
+  },
+  "halsteadMetrics": {
+    "uniqueOperators": 4,
+    "uniqueOperands": 47,
+    "totalOperators": 22,
+    "totalOperands": 81,
+    "vocabulary": 51,
+    "length": 103,
+    "calculatedLength": 269.07,
+    "volume": 584.26,
+    "difficulty": 3.45,
+    "effort": 2013.83,
+    "timeToProgram": 111.88,
+    "deliveredBugs": 0.1948,
+    "_rawVolume": 584.259810223064,
+    "_rawDifficulty": 3.4468085106382977,
+    "_rawEffort": 2013.831686300774
+  },
+  "staticAnalysis": {
+    "totalIssues": 1,
+    "errors": 0,
+    "warnings": 1,
+    "issues": [
+      {
+        "line": 2,
+        "column": 21,
+        "rule": "no-unused-vars",
+        "severity": "warning",
+        "message": "'Link' is defined but never used."
+      }
+    ]
+  }
+}

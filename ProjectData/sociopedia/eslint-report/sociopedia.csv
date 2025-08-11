@@ -1,0 +1,16 @@
+FileName,Source,LogicalLinesOfCode,CyclomaticComplexity,HalsteadEffort,HalsteadBugs,TotalIssues
+auth.js,Human,45,5,7734.59,0.3922,0
+Form.jsx,Human,246,26,26044.06,1.3513,9
+posts.js,Human,53,6,4395.23,0.4022,0
+users.js,Human,45,5,15330.74,0.4671,0
+MyPostWidget.jsx,Human,159,6,6232.67,0.6257,17
+posts.js,LLama,62,1,18.09,0.006,4
+auth.js,LLama,44,5,4946.88,0.391,0
+Form.jsx,LLama,102,3,2933.75,0.3975,3
+MyPostWidget.jsx,LLama,146,3,4677.68,0.5057,6
+users.js,LLama,33,9,14118.96,0.3629,0
+auth.js,Phi,55,8,8464.34,0.4967,0
+posts.js,Phi,56,12,13279.93,0.5272,0
+Form.jsx,Phi,91,11,3143.21,0.4728,5
+MyPostWidget.jsx,Phi,86,6,3206.1,0.3899,9
+users.js,Phi,41,8,11471.73,0.3365,0

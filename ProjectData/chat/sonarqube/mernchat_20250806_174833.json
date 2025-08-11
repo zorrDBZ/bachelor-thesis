@@ -1,0 +1,2055 @@
+{
+  "export_timestamp": "2025-08-06T17:48:28.884024",
+  "sonarqube_url": "http://localhost:9001",
+  "total_projects_discovered": 11,
+  "total_projects_processed": 11,
+  "tool_name": "SonarQube Comprehensive Data Exporter",
+  "tool_version": "2.0.0",
+  "export_purpose": "Statistical Analysis and Quality Assessment",
+  "data_format_version": "1.0",
+  "data_completeness": {
+    "metrics": true,
+    "issues_breakdown": true,
+    "file_analysis": true,
+    "analysis_history": true,
+    "quality_indicators": true
+  },
+  "projects": [
+    {
+      "key": "chatapp-llama-authcontroller",
+      "name": "Chat App - llama-authcontroller",
+      "qualifier": "TRK",
+      "visibility": "public",
+      "last_analysis_date": "2025-08-05T16:41:56+0000",
+      "metrics": {
+        "coverage": 0.0,
+        "reliability_rating": 2.0,
+        "code_smells": 36,
+        "security_rating": 5.0,
+        "sqale_debt_ratio": 0.5,
+        "security_hotspots": 1,
+        "sqale_index": 176,
+        "sqale_rating": 1.0,
+        "lines_to_cover": 381,
+        "uncovered_lines": 381,
+        "vulnerabilities": 4,
+        "line_coverage": 0.0,
+        "minor_violations": 1,
+        "new_vulnerabilities": null,
+        "new_coverage": null,
+        "new_bugs": null,
+        "critical_violations": 0,
+        "new_code_smells": null,
+        "new_duplicated_lines": null,
+        "blocker_violations": 4,
+        "info_violations": 0,
+        "major_violations": 36,
+        "new_uncovered_lines": null,
+        "new_lines_to_cover": null,
+        "new_duplicated_lines_density": null
+      },
+      "issues_analysis": {
+        "by_severity": {
+          "blocker": {
+            "count": 4,
+            "debt_minutes": 120
+          },
+          "critical": {
+            "count": 0,
+            "debt_minutes": 0
+          },
+          "major": {
+            "count": 36,
+            "debt_minutes": 176
+          },
+          "minor": {
+            "count": 1,
+            "debt_minutes": 5
+          },
+          "info": {
+            "count": 0,
+            "debt_minutes": 0
+          }
+        },
+        "by_type": {
+          "bug": {
+            "count": 1,
+            "debt_minutes": 5
+          },
+          "vulnerability": {
+            "count": 4,
+            "debt_minutes": 120
+          },
+          "code_smell": {
+            "count": 36,
+            "debt_minutes": 176
+          }
+        },
+        "by_status": {},
+        "total_technical_debt_minutes": 301,
+        "summary": {
+          "total_issues": 41,
+          "total_debt_hours": 5.02
+        }
+      },
+      "file_analysis": {
+        "total_files": 46,
+        "complexity_distribution": {
+          "low": 43,
+          "medium": 3,
+          "high": 0,
+          "very_high": 0
+        },
+        "size_distribution": {
+          "small": 45,
+          "medium": 1,
+          "large": 0,
+          "very_large": 0
+        },
+        "languages": {
+          "css": 2,
+          "jsx": 18,
+          "js": 24,
+          "html": 1,
+          "sh": 1
+        },
+        "avg_complexity_per_file": 3.41,
+        "avg_lines_per_file": 26.37
+      },
+      "analysis_statistics": {
+        "total_analyses": 6,
+        "first_analysis": "2025-08-05T16:15:39+0000",
+        "last_analysis": "2025-08-05T16:41:56+0000",
+        "analysis_frequency_days": null,
+        "recent_analyses": [
+          {
+            "key": "2b43f2cc-6b6b-4873-8fc8-0333cf078283",
+            "date": "2025-08-05T16:41:56+0000",
+            "events": [
+              {
+                "key": "4084a7fa-9882-428d-80ed-c905f60fcaf5",
+                "category": "VERSION",
+                "name": "1.0"
+              }
+            ],
+            "projectVersion": "1.0",
+            "manualNewCodePeriodBaseline": false,
+            "revision": "5e0e02c3280846fe3644a05d9ae558da7a3ee00b",
+            "detectedCI": "undetected"
+          },
+          {
+            "key": "bf3d1dec-60c0-4cde-8f65-e3a9ebdfc699",
+            "date": "2025-08-05T16:31:50+0000",
+            "events": [],
+            "projectVersion": "1.0",
+            "manualNewCodePeriodBaseline": false,
+            "revision": "5e0e02c3280846fe3644a05d9ae558da7a3ee00b",
+            "detectedCI": "undetected"
+          },
+          {
+            "key": "00a30672-026b-41b7-a25b-d1c557b6237b",
+            "date": "2025-08-05T16:22:56+0000",
+            "events": [],
+            "projectVersion": "1.0",
+            "manualNewCodePeriodBaseline": false,
+            "revision": "5e0e02c3280846fe3644a05d9ae558da7a3ee00b",
+            "detectedCI": "undetected"
+          },
+          {
+            "key": "c6268786-892c-4ddc-9d20-50a9e0b89c6f",
+            "date": "2025-08-05T16:21:35+0000",
+            "events": [
+              {
+                "key": "0a69da6d-2352-4f55-b2fe-9d308a715c59",
+                "category": "QUALITY_GATE",
+                "name": "Failed",
+                "description": "Coverage on New Code < 80"
+              }
+            ],
+            "projectVersion": "1.0",
+            "manualNewCodePeriodBaseline": false,
+            "revision": "c285365844a927abb020c787e298ebce4562ddcf",
+            "detectedCI": "undetected"
+          },
+          {
+            "key": "f7ae1c08-1414-4d3d-84da-47c8067659cf",
+            "date": "2025-08-05T16:20:27+0000",
+            "events": [],
+            "projectVersion": "1.0",
+            "manualNewCodePeriodBaseline": false,
+            "revision": "ff87605524291fbae6f2c50d047ff0ef7ed5b825",
+            "detectedCI": "undetected"
+          },
+          {
+            "key": "61fba2db-04f8-4f19-999b-9343227850ff",
+            "date": "2025-08-05T16:15:39+0000",
+            "events": [
+              {
+                "key": "cebd8600-4dc9-4d3d-879f-f791869ccc71",
+                "category": "SQ_UPGRADE",
+                "name": "25.7.0.110598"
+              }
+            ],
+            "projectVersion": "1.0",
+            "manualNewCodePeriodBaseline": false,
+            "revision": "ff87605524291fbae6f2c50d047ff0ef7ed5b825",
+            "detectedCI": "undetected"
+          }
+        ]
+      },
+      "quality_indicators": {
+        "defect_density_per_1k_loc": 0,
+        "vulnerability_density_per_1k_loc": 0,
+        "code_smell_density_per_1k_loc": 0,
+        "comment_ratio_percentage": 0,
+        "technical_debt_per_loc": 0,
+        "coverage_category": "none",
+        "complexity_category": "none",
+        "complexity_per_line": 0,
+        "quality_gate_status": "NONE",
+        "quality_gate_passed": false,
+        "maintainability_rating": "A",
+        "reliability_rating": "B",
+        "security_rating": "E",
+        "has_tests": false,
+        "test_count": 0
+      }
+    },
+    {
+      "key": "chatapp-llama-conversation",
+      "name": "Chat App - llama-conversation",
+      "qualifier": "TRK",
+      "visibility": "public",
+      "last_analysis_date": "2025-08-05T18:37:58+0000",
+      "metrics": {
+        "coverage": 0.0,
+        "reliability_rating": 2.0,
+        "code_smells": 37,
+        "security_rating": 5.0,
+        "sqale_debt_ratio": 0.5,
+        "security_hotspots": 1,
+        "sqale_index": 177,
+        "sqale_rating": 1.0,
+        "lines_to_cover": 378,
+        "uncovered_lines": 378,
+        "vulnerabilities": 4,
+        "line_coverage": 0.0,
+        "minor_violations": 2,
+        "new_vulnerabilities": null,
+        "new_coverage": null,
+        "new_bugs": null,
+        "critical_violations": 0,
+        "new_code_smells": null,
+        "new_duplicated_lines": null,
+        "blocker_violations": 4,
+        "info_violations": 0,
+        "major_violations": 36,
+        "new_uncovered_lines": null,
+        "new_lines_to_cover": null,
+        "new_duplicated_lines_density": null
+      },
+      "issues_analysis": {
+        "by_severity": {
+          "blocker": {
+            "count": 4,
+            "debt_minutes": 120
+          },
+          "critical": {
+            "count": 0,
+            "debt_minutes": 0
+          },
+          "major": {
+            "count": 40,
+            "debt_minutes": 196
+          },
+          "minor": {
+            "count": 2,
+            "debt_minutes": 6
+          },
+          "info": {
+            "count": 0,
+            "debt_minutes": 0
+          }
+        },
+        "by_type": {
+          "bug": {
+            "count": 1,
+            "debt_minutes": 5
+          },
+          "vulnerability": {
+            "count": 4,
+            "debt_minutes": 120
+          },
+          "code_smell": {
+            "count": 41,
+            "debt_minutes": 197
+          }
+        },
+        "by_status": {},
+        "total_technical_debt_minutes": 322,
+        "summary": {
+          "total_issues": 46,
+          "total_debt_hours": 5.37
+        }
+      },
+      "file_analysis": {
+        "total_files": 46,
+        "complexity_distribution": {
+          "low": 43,
+          "medium": 3,
+          "high": 0,
+          "very_high": 0
+        },
+        "size_distribution": {
+          "small": 45,
+          "medium": 1,
+          "large": 0,
+          "very_large": 0
+        },
+        "languages": {
+          "css": 2,
+          "jsx": 18,
+          "js": 24,
+          "html": 1,
+          "sh": 1
+        },
+        "avg_complexity_per_file": 3.26,
+        "avg_lines_per_file": 26.39
+      },
+      "analysis_statistics": {
+        "total_analyses": 3,
+        "first_analysis": "2025-08-05T16:16:01+0000",
+        "last_analysis": "2025-08-05T18:37:58+0000",
+        "analysis_frequency_days": null,
+        "recent_analyses": [
+          {
+            "key": "d061a244-a76a-4c3f-9603-0b7bf5b830a2",
+            "date": "2025-08-05T18:37:58+0000",
+            "events": [
+              {
+                "key": "bddd8ae0-35ba-460f-b2a0-f5356c5f4b6f",
+                "category": "VERSION",
+                "name": "1.0"
+              }
+            ],
+            "projectVersion": "1.0",
+            "manualNewCodePeriodBaseline": false,
+            "revision": "0208e4b50535ab7b240d7e3d69febb5627f4e08c",
+            "detectedCI": "undetected"
+          },
+          {
+            "key": "69e4a59f-206d-458d-af4b-4f50cd3980a1",
+            "date": "2025-08-05T16:32:17+0000",
+            "events": [
+              {
+                "key": "9a7a1dd9-0076-4132-bc9e-64b0ab20b037",
+                "category": "QUALITY_GATE",
+                "name": "Failed",
+                "description": "New Issues > 0, Coverage on New Code < 80"
+              }
+            ],
+            "projectVersion": "1.0",
+            "manualNewCodePeriodBaseline": false,
+            "revision": "0208e4b50535ab7b240d7e3d69febb5627f4e08c",
+            "detectedCI": "undetected"
+          },
+          {
+            "key": "fd5a84f4-617b-472d-b4d9-0a6cd3ae9b1a",
+            "date": "2025-08-05T16:16:01+0000",
+            "events": [
+              {
+                "key": "d74e2be7-ad1b-4da6-8c98-9630b212117c",
+                "category": "SQ_UPGRADE",
+                "name": "25.7.0.110598"
+              }
+            ],
+            "projectVersion": "1.0",
+            "manualNewCodePeriodBaseline": false,
+            "revision": "ff87605524291fbae6f2c50d047ff0ef7ed5b825",
+            "detectedCI": "undetected"
+          }
+        ]
+      },
+      "quality_indicators": {
+        "defect_density_per_1k_loc": 0,
+        "vulnerability_density_per_1k_loc": 0,
+        "code_smell_density_per_1k_loc": 0,
+        "comment_ratio_percentage": 0,
+        "technical_debt_per_loc": 0,
+        "coverage_category": "none",
+        "complexity_category": "none",
+        "complexity_per_line": 0,
+        "quality_gate_status": "NONE",
+        "quality_gate_passed": false,
+        "maintainability_rating": "A",
+        "reliability_rating": "B",
+        "security_rating": "E",
+        "has_tests": false,
+        "test_count": 0
+      }
+    },
+    {
+      "key": "chatapp-llama-message",
+      "name": "Chat App - llama-message",
+      "qualifier": "TRK",
+      "visibility": "public",
+      "last_analysis_date": "2025-08-05T16:32:34+0000",
+      "metrics": {
+        "coverage": 0.0,
+        "reliability_rating": 2.0,
+        "code_smells": 36,
+        "security_rating": 5.0,
+        "sqale_debt_ratio": 0.5,
+        "security_hotspots": 1,
+        "sqale_index": 176,
+        "sqale_rating": 1.0,
+        "lines_to_cover": 375,
+        "uncovered_lines": 375,
+        "vulnerabilities": 4,
+        "line_coverage": 0.0,
+        "minor_violations": 1,
+        "new_vulnerabilities": null,
+        "new_coverage": null,
+        "new_bugs": null,
+        "critical_violations": 0,
+        "new_code_smells": null,
+        "new_duplicated_lines": null,
+        "blocker_violations": 4,
+        "info_violations": 0,
+        "major_violations": 36,
+        "new_uncovered_lines": null,
+        "new_lines_to_cover": null,
+        "new_duplicated_lines_density": null
+      },
+      "issues_analysis": {
+        "by_severity": {
+          "blocker": {
+            "count": 4,
+            "debt_minutes": 120
+          },
+          "critical": {
+            "count": 0,
+            "debt_minutes": 0
+          },
+          "major": {
+            "count": 40,
+            "debt_minutes": 196
+          },
+          "minor": {
+            "count": 1,
+            "debt_minutes": 5
+          },
+          "info": {
+            "count": 0,
+            "debt_minutes": 0
+          }
+        },
+        "by_type": {
+          "bug": {
+            "count": 1,
+            "debt_minutes": 5
+          },
+          "vulnerability": {
+            "count": 4,
+            "debt_minutes": 120
+          },
+          "code_smell": {
+            "count": 40,
+            "debt_minutes": 196
+          }
+        },
+        "by_status": {},
+        "total_technical_debt_minutes": 321,
+        "summary": {
+          "total_issues": 45,
+          "total_debt_hours": 5.35
+        }
+      },
+      "file_analysis": {
+        "total_files": 46,
+        "complexity_distribution": {
+          "low": 43,
+          "medium": 3,
+          "high": 0,
+          "very_high": 0
+        },
+        "size_distribution": {
+          "small": 45,
+          "medium": 1,
+          "large": 0,
+          "very_large": 0
+        },
+        "languages": {
+          "css": 2,
+          "jsx": 18,
+          "js": 24,
+          "html": 1,
+          "sh": 1
+        },
+        "avg_complexity_per_file": 3.37,
+        "avg_lines_per_file": 26.93
+      },
+      "analysis_statistics": {
+        "total_analyses": 4,
+        "first_analysis": "2025-08-05T16:16:19+0000",
+        "last_analysis": "2025-08-05T16:32:34+0000",
+        "analysis_frequency_days": null,
+        "recent_analyses": [
+          {
+            "key": "ee545d05-de8b-4839-ac35-be50abd6a738",
+            "date": "2025-08-05T16:32:34+0000",
+            "events": [
+              {
+                "key": "10a6bf76-a452-4b18-a065-3b1f7392c5b0",
+                "category": "VERSION",
+                "name": "1.0"
+              }
+            ],
+            "projectVersion": "1.0",
+            "manualNewCodePeriodBaseline": false,
+            "revision": "e0f99eb8da50ccc96d9f9ba39a35798f8366acde",
+            "detectedCI": "undetected"
+          },
+          {
+            "key": "2cd7c0dd-1025-475f-b626-666cadb9236f",
+            "date": "2025-08-05T16:28:51+0000",
+            "events": [
+              {
+                "key": "42ab0d6f-5229-45b6-a069-6949eb2d21b0",
+                "category": "QUALITY_GATE",
+                "name": "Failed",
+                "description": "New Issues > 0, Coverage on New Code < 80"
+              }
+            ],
+            "projectVersion": "1.0",
+            "manualNewCodePeriodBaseline": false,
+            "revision": "e0f99eb8da50ccc96d9f9ba39a35798f8366acde",
+            "detectedCI": "undetected"
+          },
+          {
+            "key": "7542794e-42f7-419e-b455-fab97f85fb75",
+            "date": "2025-08-05T16:28:24+0000",
+            "events": [],
+            "projectVersion": "1.0",
+            "manualNewCodePeriodBaseline": false,
+            "revision": "6fd4c6ef4337ccc1ba5e5efcee42c96cbe30e019",
+            "detectedCI": "undetected"
+          },
+          {
+            "key": "0ef377fb-b71e-40f4-bb81-8ca7601cbe53",
+            "date": "2025-08-05T16:16:19+0000",
+            "events": [
+              {
+                "key": "645ab085-9a30-47a7-a3ba-70a1746c3877",
+                "category": "SQ_UPGRADE",
+                "name": "25.7.0.110598"
+              }
+            ],
+            "projectVersion": "1.0",
+            "manualNewCodePeriodBaseline": false,
+            "revision": "ff87605524291fbae6f2c50d047ff0ef7ed5b825",
+            "detectedCI": "undetected"
+          }
+        ]
+      },
+      "quality_indicators": {
+        "defect_density_per_1k_loc": 0,
+        "vulnerability_density_per_1k_loc": 0,
+        "code_smell_density_per_1k_loc": 0,
+        "comment_ratio_percentage": 0,
+        "technical_debt_per_loc": 0,
+        "coverage_category": "none",
+        "complexity_category": "none",
+        "complexity_per_line": 0,
+        "quality_gate_status": "NONE",
+        "quality_gate_passed": false,
+        "maintainability_rating": "A",
+        "reliability_rating": "B",
+        "security_rating": "E",
+        "has_tests": false,
+        "test_count": 0
+      }
+    },
+    {
+      "key": "chatapp-llama-messagecontroller",
+      "name": "Chat App - llama-messagecontroller",
+      "qualifier": "TRK",
+      "visibility": "public",
+      "last_analysis_date": "2025-08-05T16:32:51+0000",
+      "metrics": {
+        "coverage": 0.0,
+        "reliability_rating": 3.0,
+        "code_smells": 38,
+        "security_rating": 5.0,
+        "sqale_debt_ratio": 0.8,
+        "security_hotspots": 1,
+        "sqale_index": 292,
+        "sqale_rating": 1.0,
+        "lines_to_cover": 375,
+        "uncovered_lines": 375,
+        "vulnerabilities": 4,
+        "line_coverage": 0.0,
+        "minor_violations": 4,
+        "new_vulnerabilities": null,
+        "new_coverage": null,
+        "new_bugs": null,
+        "critical_violations": 0,
+        "new_code_smells": null,
+        "new_duplicated_lines": null,
+        "blocker_violations": 4,
+        "info_violations": 0,
+        "major_violations": 36,
+        "new_uncovered_lines": null,
+        "new_lines_to_cover": null,
+        "new_duplicated_lines_density": null
+      },
+      "issues_analysis": {
+        "by_severity": {
+          "blocker": {
+            "count": 4,
+            "debt_minutes": 120
+          },
+          "critical": {
+            "count": 0,
+            "debt_minutes": 0
+          },
+          "major": {
+            "count": 37,
+            "debt_minutes": 191
+          },
+          "minor": {
+            "count": 4,
+            "debt_minutes": 126
+          },
+          "info": {
+            "count": 0,
+            "debt_minutes": 0
+          }
+        },
+        "by_type": {
+          "bug": {
+            "count": 2,
+            "debt_minutes": 20
+          },
+          "vulnerability": {
+            "count": 4,
+            "debt_minutes": 120
+          },
+          "code_smell": {
+            "count": 39,
+            "debt_minutes": 297
+          }
+        },
+        "by_status": {},
+        "total_technical_debt_minutes": 437,
+        "summary": {
+          "total_issues": 45,
+          "total_debt_hours": 7.28
+        }
+      },
+      "file_analysis": {
+        "total_files": 46,
+        "complexity_distribution": {
+          "low": 43,
+          "medium": 3,
+          "high": 0,
+          "very_high": 0
+        },
+        "size_distribution": {
+          "small": 45,
+          "medium": 1,
+          "large": 0,
+          "very_large": 0
+        },
+        "languages": {
+          "css": 2,
+          "jsx": 18,
+          "js": 24,
+          "html": 1,
+          "sh": 1
+        },
+        "avg_complexity_per_file": 3.26,
+        "avg_lines_per_file": 26.41
+      },
+      "analysis_statistics": {
+        "total_analyses": 4,
+        "first_analysis": "2025-08-05T16:16:51+0000",
+        "last_analysis": "2025-08-05T16:32:51+0000",
+        "analysis_frequency_days": null,
+        "recent_analyses": [
+          {
+            "key": "b5160174-7fd3-4038-a9dc-dcd1ff250241",
+            "date": "2025-08-05T16:32:51+0000",
+            "events": [
+              {
+                "key": "7acd01c6-2cbe-4bb2-8e3e-3b7ee01e32f7",
+                "category": "VERSION",
+                "name": "1.0"
+              }
+            ],
+            "projectVersion": "1.0",
+            "manualNewCodePeriodBaseline": false,
+            "revision": "5349016dc43ceb9718556ae1411077d4339b5bb5",
+            "detectedCI": "undetected"
+          },
+          {
+            "key": "99ffe885-d1df-414e-bfce-f43ee3fd843f",
+            "date": "2025-08-05T16:29:10+0000",
+            "events": [],
+            "projectVersion": "1.0",
+            "manualNewCodePeriodBaseline": false,
+            "revision": "5349016dc43ceb9718556ae1411077d4339b5bb5",
+            "detectedCI": "undetected"
+          },
+          {
+            "key": "59df3f47-529c-4b73-880c-7db602d8659e",
+            "date": "2025-08-05T16:18:26+0000",
+            "events": [
+              {
+                "key": "51b0082e-251c-4df8-993c-53d94684020b",
+                "category": "QUALITY_GATE",
+                "name": "Failed",
+                "description": "New Issues > 0, Coverage on New Code < 80"
+              }
+            ],
+            "projectVersion": "1.0",
+            "manualNewCodePeriodBaseline": false,
+            "revision": "7c58b184bc156a2329f1bc05ac64afab8aa160d3",
+            "detectedCI": "undetected"
+          },
+          {
+            "key": "08857901-cdc7-47fa-8999-be37e6a14540",
+            "date": "2025-08-05T16:16:51+0000",
+            "events": [
+              {
+                "key": "7e27fc5d-750d-4433-bf71-962a79cfd079",
+                "category": "SQ_UPGRADE",
+                "name": "25.7.0.110598"
+              }
+            ],
+            "projectVersion": "1.0",
+            "manualNewCodePeriodBaseline": false,
+            "revision": "ff87605524291fbae6f2c50d047ff0ef7ed5b825",
+            "detectedCI": "undetected"
+          }
+        ]
+      },
+      "quality_indicators": {
+        "defect_density_per_1k_loc": 0,
+        "vulnerability_density_per_1k_loc": 0,
+        "code_smell_density_per_1k_loc": 0,
+        "comment_ratio_percentage": 0,
+        "technical_debt_per_loc": 0,
+        "coverage_category": "none",
+        "complexity_category": "none",
+        "complexity_per_line": 0,
+        "quality_gate_status": "NONE",
+        "quality_gate_passed": false,
+        "maintainability_rating": "A",
+        "reliability_rating": "C",
+        "security_rating": "E",
+        "has_tests": false,
+        "test_count": 0
+      }
+    },
+    {
+      "key": "chatapp-llama-usercontroller",
+      "name": "Chat App - llama-usercontroller",
+      "qualifier": "TRK",
+      "visibility": "public",
+      "last_analysis_date": "2025-08-05T16:30:00+0000",
+      "metrics": {
+        "coverage": 0.0,
+        "reliability_rating": 2.0,
+        "code_smells": 36,
+        "security_rating": 5.0,
+        "sqale_debt_ratio": 0.5,
+        "security_hotspots": 1,
+        "sqale_index": 176,
+        "sqale_rating": 1.0,
+        "lines_to_cover": 378,
+        "uncovered_lines": 378,
+        "vulnerabilities": 4,
+        "line_coverage": 0.0,
+        "minor_violations": 1,
+        "new_vulnerabilities": null,
+        "new_coverage": null,
+        "new_bugs": null,
+        "critical_violations": 0,
+        "new_code_smells": null,
+        "new_duplicated_lines": null,
+        "blocker_violations": 4,
+        "info_violations": 0,
+        "major_violations": 36,
+        "new_uncovered_lines": null,
+        "new_lines_to_cover": null,
+        "new_duplicated_lines_density": null
+      },
+      "issues_analysis": {
+        "by_severity": {
+          "blocker": {
+            "count": 4,
+            "debt_minutes": 120
+          },
+          "critical": {
+            "count": 0,
+            "debt_minutes": 0
+          },
+          "major": {
+            "count": 36,
+            "debt_minutes": 176
+          },
+          "minor": {
+            "count": 1,
+            "debt_minutes": 5
+          },
+          "info": {
+            "count": 0,
+            "debt_minutes": 0
+          }
+        },
+        "by_type": {
+          "bug": {
+            "count": 1,
+            "debt_minutes": 5
+          },
+          "vulnerability": {
+            "count": 4,
+            "debt_minutes": 120
+          },
+          "code_smell": {
+            "count": 36,
+            "debt_minutes": 176
+          }
+        },
+        "by_status": {},
+        "total_technical_debt_minutes": 301,
+        "summary": {
+          "total_issues": 41,
+          "total_debt_hours": 5.02
+        }
+      },
+      "file_analysis": {
+        "total_files": 46,
+        "complexity_distribution": {
+          "low": 43,
+          "medium": 3,
+          "high": 0,
+          "very_high": 0
+        },
+        "size_distribution": {
+          "small": 45,
+          "medium": 1,
+          "large": 0,
+          "very_large": 0
+        },
+        "languages": {
+          "css": 2,
+          "jsx": 18,
+          "js": 24,
+          "html": 1,
+          "sh": 1
+        },
+        "avg_complexity_per_file": 3.3,
+        "avg_lines_per_file": 26.5
+      },
+      "analysis_statistics": {
+        "total_analyses": 3,
+        "first_analysis": "2025-08-05T16:09:22+0000",
+        "last_analysis": "2025-08-05T16:30:00+0000",
+        "analysis_frequency_days": null,
+        "recent_analyses": [
+          {
+            "key": "5f118811-68ef-4752-bbe0-d9ae3e0ed45f",
+            "date": "2025-08-05T16:30:00+0000",
+            "events": [
+              {
+                "key": "8990efd1-8d88-4845-ab4c-3490aa9bd51e",
+                "category": "VERSION",
+                "name": "1.0"
+              }
+            ],
+            "projectVersion": "1.0",
+            "manualNewCodePeriodBaseline": false,
+            "revision": "8eca434079797f03202ad416cba0d60110fc9867",
+            "detectedCI": "undetected"
+          },
+          {
+            "key": "4a8b6b14-0197-400e-94b5-f5b395376e3b",
+            "date": "2025-08-05T16:29:36+0000",
+            "events": [],
+            "projectVersion": "1.0",
+            "manualNewCodePeriodBaseline": false,
+            "revision": "6fd4c6ef4337ccc1ba5e5efcee42c96cbe30e019",
+            "detectedCI": "undetected"
+          },
+          {
+            "key": "41a21b2c-0099-4e24-b302-f8768222a3d6",
+            "date": "2025-08-05T16:09:22+0000",
+            "events": [
+              {
+                "key": "e92c3c68-fa61-4e58-9bed-6f4c1e931562",
+                "category": "SQ_UPGRADE",
+                "name": "25.7.0.110598"
+              }
+            ],
+            "projectVersion": "1.0",
+            "manualNewCodePeriodBaseline": false,
+            "revision": "cfd35d7a09c7082a2f25eb337a1e9ad7eebf5458",
+            "detectedCI": "undetected"
+          }
+        ]
+      },
+      "quality_indicators": {
+        "defect_density_per_1k_loc": 0,
+        "vulnerability_density_per_1k_loc": 0,
+        "code_smell_density_per_1k_loc": 0,
+        "comment_ratio_percentage": 0,
+        "technical_debt_per_loc": 0,
+        "coverage_category": "none",
+        "complexity_category": "none",
+        "complexity_per_line": 0,
+        "quality_gate_status": "NONE",
+        "quality_gate_passed": false,
+        "maintainability_rating": "A",
+        "reliability_rating": "B",
+        "security_rating": "E",
+        "has_tests": false,
+        "test_count": 0
+      }
+    },
+    {
+      "key": "chatapp-phi-authcontroller",
+      "name": "Chat App - phi-authcontroller",
+      "qualifier": "TRK",
+      "visibility": "public",
+      "last_analysis_date": "2025-08-05T16:41:45+0000",
+      "metrics": {
+        "coverage": 0.0,
+        "reliability_rating": 2.0,
+        "code_smells": 36,
+        "security_rating": 5.0,
+        "sqale_debt_ratio": 0.5,
+        "security_hotspots": 1,
+        "sqale_index": 176,
+        "sqale_rating": 1.0,
+        "lines_to_cover": 385,
+        "uncovered_lines": 385,
+        "vulnerabilities": 4,
+        "line_coverage": 0.0,
+        "minor_violations": 1,
+        "new_vulnerabilities": null,
+        "new_coverage": null,
+        "new_bugs": null,
+        "critical_violations": 0,
+        "new_code_smells": null,
+        "new_duplicated_lines": null,
+        "blocker_violations": 4,
+        "info_violations": 0,
+        "major_violations": 36,
+        "new_uncovered_lines": null,
+        "new_lines_to_cover": null,
+        "new_duplicated_lines_density": null
+      },
+      "issues_analysis": {
+        "by_severity": {
+          "blocker": {
+            "count": 4,
+            "debt_minutes": 120
+          },
+          "critical": {
+            "count": 0,
+            "debt_minutes": 0
+          },
+          "major": {
+            "count": 36,
+            "debt_minutes": 176
+          },
+          "minor": {
+            "count": 1,
+            "debt_minutes": 5
+          },
+          "info": {
+            "count": 0,
+            "debt_minutes": 0
+          }
+        },
+        "by_type": {
+          "bug": {
+            "count": 1,
+            "debt_minutes": 5
+          },
+          "vulnerability": {
+            "count": 4,
+            "debt_minutes": 120
+          },
+          "code_smell": {
+            "count": 36,
+            "debt_minutes": 176
+          }
+        },
+        "by_status": {},
+        "total_technical_debt_minutes": 301,
+        "summary": {
+          "total_issues": 41,
+          "total_debt_hours": 5.02
+        }
+      },
+      "file_analysis": {
+        "total_files": 46,
+        "complexity_distribution": {
+          "low": 43,
+          "medium": 3,
+          "high": 0,
+          "very_high": 0
+        },
+        "size_distribution": {
+          "small": 45,
+          "medium": 1,
+          "large": 0,
+          "very_large": 0
+        },
+        "languages": {
+          "css": 2,
+          "jsx": 18,
+          "js": 24,
+          "html": 1,
+          "sh": 1
+        },
+        "avg_complexity_per_file": 3.41,
+        "avg_lines_per_file": 26.46
+      },
+      "analysis_statistics": {
+        "total_analyses": 4,
+        "first_analysis": "2025-08-05T16:14:12+0000",
+        "last_analysis": "2025-08-05T16:41:45+0000",
+        "analysis_frequency_days": null,
+        "recent_analyses": [
+          {
+            "key": "257a468b-f041-42a8-97a6-09467725d8ca",
+            "date": "2025-08-05T16:41:45+0000",
+            "events": [
+              {
+                "key": "eacd11ee-2117-43cb-bc88-5495e98a794d",
+                "category": "VERSION",
+                "name": "1.0"
+              }
+            ],
+            "projectVersion": "1.0",
+            "manualNewCodePeriodBaseline": false,
+            "revision": "0b84773cfd48ebd67a63a85d0d0c02254fed3c7f",
+            "detectedCI": "undetected"
+          },
+          {
+            "key": "962bea6d-c2d1-4213-b332-00fc1efd7fd1",
+            "date": "2025-08-05T16:34:34+0000",
+            "events": [
+              {
+                "key": "74bc8e46-be65-415f-b392-f9ead62dc943",
+                "category": "QUALITY_GATE",
+                "name": "Failed",
+                "description": "Coverage on New Code < 80"
+              }
+            ],
+            "projectVersion": "1.0",
+            "manualNewCodePeriodBaseline": false,
+            "revision": "0b84773cfd48ebd67a63a85d0d0c02254fed3c7f",
+            "detectedCI": "undetected"
+          },
+          {
+            "key": "b6247a1e-6f93-413c-8bad-1c7e80185e9e",
+            "date": "2025-08-05T16:34:06+0000",
+            "events": [],
+            "projectVersion": "1.0",
+            "manualNewCodePeriodBaseline": false,
+            "revision": "6fd4c6ef4337ccc1ba5e5efcee42c96cbe30e019",
+            "detectedCI": "undetected"
+          },
+          {
+            "key": "ced60c68-8056-424a-ae8c-c374c70206ba",
+            "date": "2025-08-05T16:14:12+0000",
+            "events": [
+              {
+                "key": "31179e09-fc01-43ee-bec7-af7152fc1b3a",
+                "category": "SQ_UPGRADE",
+                "name": "25.7.0.110598"
+              }
+            ],
+            "projectVersion": "1.0",
+            "manualNewCodePeriodBaseline": false,
+            "revision": "ff87605524291fbae6f2c50d047ff0ef7ed5b825",
+            "detectedCI": "undetected"
+          }
+        ]
+      },
+      "quality_indicators": {
+        "defect_density_per_1k_loc": 0,
+        "vulnerability_density_per_1k_loc": 0,
+        "code_smell_density_per_1k_loc": 0,
+        "comment_ratio_percentage": 0,
+        "technical_debt_per_loc": 0,
+        "coverage_category": "none",
+        "complexity_category": "none",
+        "complexity_per_line": 0,
+        "quality_gate_status": "NONE",
+        "quality_gate_passed": false,
+        "maintainability_rating": "A",
+        "reliability_rating": "B",
+        "security_rating": "E",
+        "has_tests": false,
+        "test_count": 0
+      }
+    },
+    {
+      "key": "chatapp-phi-conversation",
+      "name": "Chat App - phi-conversation",
+      "qualifier": "TRK",
+      "visibility": "public",
+      "last_analysis_date": "2025-08-05T16:35:39+0000",
+      "metrics": {
+        "coverage": 0.0,
+        "reliability_rating": 2.0,
+        "code_smells": 36,
+        "security_rating": 5.0,
+        "sqale_debt_ratio": 0.5,
+        "security_hotspots": 1,
+        "sqale_index": 176,
+        "sqale_rating": 1.0,
+        "lines_to_cover": 379,
+        "uncovered_lines": 379,
+        "vulnerabilities": 4,
+        "line_coverage": 0.0,
+        "minor_violations": 1,
+        "new_vulnerabilities": null,
+        "new_coverage": null,
+        "new_bugs": null,
+        "critical_violations": 0,
+        "new_code_smells": null,
+        "new_duplicated_lines": null,
+        "blocker_violations": 4,
+        "info_violations": 0,
+        "major_violations": 36,
+        "new_uncovered_lines": null,
+        "new_lines_to_cover": null,
+        "new_duplicated_lines_density": null
+      },
+      "issues_analysis": {
+        "by_severity": {
+          "blocker": {
+            "count": 4,
+            "debt_minutes": 120
+          },
+          "critical": {
+            "count": 0,
+            "debt_minutes": 0
+          },
+          "major": {
+            "count": 40,
+            "debt_minutes": 196
+          },
+          "minor": {
+            "count": 1,
+            "debt_minutes": 5
+          },
+          "info": {
+            "count": 0,
+            "debt_minutes": 0
+          }
+        },
+        "by_type": {
+          "bug": {
+            "count": 1,
+            "debt_minutes": 5
+          },
+          "vulnerability": {
+            "count": 4,
+            "debt_minutes": 120
+          },
+          "code_smell": {
+            "count": 40,
+            "debt_minutes": 196
+          }
+        },
+        "by_status": {},
+        "total_technical_debt_minutes": 321,
+        "summary": {
+          "total_issues": 45,
+          "total_debt_hours": 5.35
+        }
+      },
+      "file_analysis": {
+        "total_files": 46,
+        "complexity_distribution": {
+          "low": 43,
+          "medium": 3,
+          "high": 0,
+          "very_high": 0
+        },
+        "size_distribution": {
+          "small": 45,
+          "medium": 1,
+          "large": 0,
+          "very_large": 0
+        },
+        "languages": {
+          "css": 2,
+          "jsx": 18,
+          "js": 24,
+          "html": 1,
+          "sh": 1
+        },
+        "avg_complexity_per_file": 3.3,
+        "avg_lines_per_file": 26.39
+      },
+      "analysis_statistics": {
+        "total_analyses": 2,
+        "first_analysis": "2025-08-05T16:11:17+0000",
+        "last_analysis": "2025-08-05T16:35:39+0000",
+        "analysis_frequency_days": null,
+        "recent_analyses": [
+          {
+            "key": "22a28489-5510-41b0-bc55-8de087009c0d",
+            "date": "2025-08-05T16:35:39+0000",
+            "events": [
+              {
+                "key": "c21b7200-efd5-4cca-9cb5-0f5cb12d2015",
+                "category": "QUALITY_GATE",
+                "name": "Failed",
+                "description": "New Issues > 0, Coverage on New Code < 80"
+              },
+              {
+                "key": "90653465-3771-485a-8b9f-0034f076ebfc",
+                "category": "VERSION",
+                "name": "1.0"
+              }
+            ],
+            "projectVersion": "1.0",
+            "manualNewCodePeriodBaseline": false,
+            "revision": "6386db05f25cb6bafdf1a0388a8a3ebbcb355a9a",
+            "detectedCI": "undetected"
+          },
+          {
+            "key": "38ed7867-9ae6-43f5-b76b-554651a279ba",
+            "date": "2025-08-05T16:11:17+0000",
+            "events": [
+              {
+                "key": "4d817424-0d9f-41cf-a021-983f7c551cc9",
+                "category": "SQ_UPGRADE",
+                "name": "25.7.0.110598"
+              }
+            ],
+            "projectVersion": "1.0",
+            "manualNewCodePeriodBaseline": false,
+            "revision": "ff87605524291fbae6f2c50d047ff0ef7ed5b825",
+            "detectedCI": "undetected"
+          }
+        ]
+      },
+      "quality_indicators": {
+        "defect_density_per_1k_loc": 0,
+        "vulnerability_density_per_1k_loc": 0,
+        "code_smell_density_per_1k_loc": 0,
+        "comment_ratio_percentage": 0,
+        "technical_debt_per_loc": 0,
+        "coverage_category": "none",
+        "complexity_category": "none",
+        "complexity_per_line": 0,
+        "quality_gate_status": "NONE",
+        "quality_gate_passed": false,
+        "maintainability_rating": "A",
+        "reliability_rating": "B",
+        "security_rating": "E",
+        "has_tests": false,
+        "test_count": 0
+      }
+    },
+    {
+      "key": "chatapp-phi-message",
+      "name": "Chat App - phi-message",
+      "qualifier": "TRK",
+      "visibility": "public",
+      "last_analysis_date": "2025-08-05T16:36:57+0000",
+      "metrics": {
+        "coverage": 0.0,
+        "reliability_rating": 2.0,
+        "code_smells": 35,
+        "security_rating": 5.0,
+        "sqale_debt_ratio": 0.5,
+        "security_hotspots": 1,
+        "sqale_index": 171,
+        "sqale_rating": 1.0,
+        "lines_to_cover": 371,
+        "uncovered_lines": 371,
+        "vulnerabilities": 4,
+        "line_coverage": 0.0,
+        "minor_violations": 1,
+        "new_vulnerabilities": null,
+        "new_bugs": null,
+        "critical_violations": 0,
+        "new_code_smells": null,
+        "new_duplicated_lines": null,
+        "blocker_violations": 4,
+        "info_violations": 0,
+        "major_violations": 35,
+        "new_uncovered_lines": null,
+        "new_lines_to_cover": null,
+        "new_duplicated_lines_density": null
+      },
+      "issues_analysis": {
+        "by_severity": {
+          "blocker": {
+            "count": 4,
+            "debt_minutes": 120
+          },
+          "critical": {
+            "count": 0,
+            "debt_minutes": 0
+          },
+          "major": {
+            "count": 39,
+            "debt_minutes": 191
+          },
+          "minor": {
+            "count": 1,
+            "debt_minutes": 5
+          },
+          "info": {
+            "count": 0,
+            "debt_minutes": 0
+          }
+        },
+        "by_type": {
+          "bug": {
+            "count": 1,
+            "debt_minutes": 5
+          },
+          "vulnerability": {
+            "count": 4,
+            "debt_minutes": 120
+          },
+          "code_smell": {
+            "count": 39,
+            "debt_minutes": 191
+          }
+        },
+        "by_status": {},
+        "total_technical_debt_minutes": 316,
+        "summary": {
+          "total_issues": 44,
+          "total_debt_hours": 5.27
+        }
+      },
+      "file_analysis": {
+        "total_files": 46,
+        "complexity_distribution": {
+          "low": 43,
+          "medium": 3,
+          "high": 0,
+          "very_high": 0
+        },
+        "size_distribution": {
+          "small": 45,
+          "medium": 1,
+          "large": 0,
+          "very_large": 0
+        },
+        "languages": {
+          "css": 2,
+          "jsx": 18,
+          "js": 24,
+          "html": 1,
+          "sh": 1
+        },
+        "avg_complexity_per_file": 3.24,
+        "avg_lines_per_file": 26.3
+      },
+      "analysis_statistics": {
+        "total_analyses": 4,
+        "first_analysis": "2025-08-05T16:08:19+0000",
+        "last_analysis": "2025-08-05T16:36:57+0000",
+        "analysis_frequency_days": null,
+        "recent_analyses": [
+          {
+            "key": "a14e03ff-389e-4945-9080-fa75acbf95b6",
+            "date": "2025-08-05T16:36:57+0000",
+            "events": [
+              {
+                "key": "8b5d6f26-caea-4761-b4b2-ee772eaffc8d",
+                "category": "QUALITY_GATE",
+                "name": "Failed",
+                "description": "New Issues > 0"
+              },
+              {
+                "key": "12855481-3033-4b1f-8097-190477b6c593",
+                "category": "VERSION",
+                "name": "1.0"
+              }
+            ],
+            "projectVersion": "1.0",
+            "manualNewCodePeriodBaseline": false,
+            "revision": "bf4799074943c3ee298473ac49cd866952652cdc",
+            "detectedCI": "undetected"
+          },
+          {
+            "key": "a6716e58-c1b1-42b7-8129-e5b7fe8839cd",
+            "date": "2025-08-05T16:36:28+0000",
+            "events": [],
+            "projectVersion": "1.0",
+            "manualNewCodePeriodBaseline": false,
+            "revision": "6fd4c6ef4337ccc1ba5e5efcee42c96cbe30e019",
+            "detectedCI": "undetected"
+          },
+          {
+            "key": "df219ae0-f6d1-4c07-8b5e-528745291031",
+            "date": "2025-08-05T16:10:46+0000",
+            "events": [],
+            "projectVersion": "1.0",
+            "manualNewCodePeriodBaseline": false,
+            "revision": "ff87605524291fbae6f2c50d047ff0ef7ed5b825",
+            "detectedCI": "undetected"
+          },
+          {
+            "key": "17935451-a5e0-4499-9545-c1ccb5f03b93",
+            "date": "2025-08-05T16:08:19+0000",
+            "events": [
+              {
+                "key": "1c5bfe52-16e5-4937-bb5e-aa02fcbcf68f",
+                "category": "SQ_UPGRADE",
+                "name": "25.7.0.110598"
+              }
+            ],
+            "projectVersion": "1.0",
+            "manualNewCodePeriodBaseline": false,
+            "revision": "6a837947539cc629b540c8ad38952b6346be970e",
+            "detectedCI": "undetected"
+          }
+        ]
+      },
+      "quality_indicators": {
+        "defect_density_per_1k_loc": 0,
+        "vulnerability_density_per_1k_loc": 0,
+        "code_smell_density_per_1k_loc": 0,
+        "comment_ratio_percentage": 0,
+        "technical_debt_per_loc": 0,
+        "coverage_category": "none",
+        "complexity_category": "none",
+        "complexity_per_line": 0,
+        "quality_gate_status": "NONE",
+        "quality_gate_passed": false,
+        "maintainability_rating": "A",
+        "reliability_rating": "B",
+        "security_rating": "E",
+        "has_tests": false,
+        "test_count": 0
+      }
+    },
+    {
+      "key": "chatapp-phi-messagecontroller",
+      "name": "Chat App - phi-messagecontroller",
+      "qualifier": "TRK",
+      "visibility": "public",
+      "last_analysis_date": "2025-08-05T16:36:15+0000",
+      "metrics": {
+        "coverage": 0.0,
+        "reliability_rating": 2.0,
+        "code_smells": 35,
+        "security_rating": 5.0,
+        "sqale_debt_ratio": 0.5,
+        "security_hotspots": 1,
+        "sqale_index": 171,
+        "sqale_rating": 1.0,
+        "lines_to_cover": 383,
+        "uncovered_lines": 383,
+        "vulnerabilities": 4,
+        "line_coverage": 0.0,
+        "minor_violations": 1,
+        "new_vulnerabilities": null,
+        "new_coverage": null,
+        "new_bugs": null,
+        "critical_violations": 0,
+        "new_code_smells": null,
+        "new_duplicated_lines": null,
+        "blocker_violations": 4,
+        "info_violations": 0,
+        "major_violations": 35,
+        "new_uncovered_lines": null,
+        "new_lines_to_cover": null,
+        "new_duplicated_lines_density": null
+      },
+      "issues_analysis": {
+        "by_severity": {
+          "blocker": {
+            "count": 4,
+            "debt_minutes": 120
+          },
+          "critical": {
+            "count": 0,
+            "debt_minutes": 0
+          },
+          "major": {
+            "count": 36,
+            "debt_minutes": 176
+          },
+          "minor": {
+            "count": 1,
+            "debt_minutes": 5
+          },
+          "info": {
+            "count": 0,
+            "debt_minutes": 0
+          }
+        },
+        "by_type": {
+          "bug": {
+            "count": 1,
+            "debt_minutes": 5
+          },
+          "vulnerability": {
+            "count": 4,
+            "debt_minutes": 120
+          },
+          "code_smell": {
+            "count": 36,
+            "debt_minutes": 176
+          }
+        },
+        "by_status": {},
+        "total_technical_debt_minutes": 301,
+        "summary": {
+          "total_issues": 41,
+          "total_debt_hours": 5.02
+        }
+      },
+      "file_analysis": {
+        "total_files": 46,
+        "complexity_distribution": {
+          "low": 43,
+          "medium": 3,
+          "high": 0,
+          "very_high": 0
+        },
+        "size_distribution": {
+          "small": 45,
+          "medium": 1,
+          "large": 0,
+          "very_large": 0
+        },
+        "languages": {
+          "css": 2,
+          "jsx": 18,
+          "js": 24,
+          "html": 1,
+          "sh": 1
+        },
+        "avg_complexity_per_file": 3.37,
+        "avg_lines_per_file": 26.57
+      },
+      "analysis_statistics": {
+        "total_analyses": 3,
+        "first_analysis": "2025-08-05T16:13:49+0000",
+        "last_analysis": "2025-08-05T16:36:15+0000",
+        "analysis_frequency_days": null,
+        "recent_analyses": [
+          {
+            "key": "4decc6e8-b994-437e-9d47-cafb411797fc",
+            "date": "2025-08-05T16:36:15+0000",
+            "events": [
+              {
+                "key": "2a3b3954-c22a-4eda-9570-d18a0ab632b9",
+                "category": "QUALITY_GATE",
+                "name": "Failed",
+                "description": "Coverage on New Code < 80"
+              },
+              {
+                "key": "ac75cc9d-d6a2-40c3-a5d6-5f49acbbdad1",
+                "category": "VERSION",
+                "name": "1.0"
+              }
+            ],
+            "projectVersion": "1.0",
+            "manualNewCodePeriodBaseline": false,
+            "revision": "73a72f2772c164be2fcaf9edcfacb46c2846d733",
+            "detectedCI": "undetected"
+          },
+          {
+            "key": "d776d71d-09fd-422e-8b66-c0ae9db6b2eb",
+            "date": "2025-08-05T16:35:55+0000",
+            "events": [],
+            "projectVersion": "1.0",
+            "manualNewCodePeriodBaseline": false,
+            "revision": "6fd4c6ef4337ccc1ba5e5efcee42c96cbe30e019",
+            "detectedCI": "undetected"
+          },
+          {
+            "key": "49507a8b-9b0e-4a2d-a764-5436dc4c8a1f",
+            "date": "2025-08-05T16:13:49+0000",
+            "events": [
+              {
+                "key": "8ecad8f3-a19a-4d30-bce4-f496acb5d37a",
+                "category": "SQ_UPGRADE",
+                "name": "25.7.0.110598"
+              }
+            ],
+            "projectVersion": "1.0",
+            "manualNewCodePeriodBaseline": false,
+            "revision": "ff87605524291fbae6f2c50d047ff0ef7ed5b825",
+            "detectedCI": "undetected"
+          }
+        ]
+      },
+      "quality_indicators": {
+        "defect_density_per_1k_loc": 0,
+        "vulnerability_density_per_1k_loc": 0,
+        "code_smell_density_per_1k_loc": 0,
+        "comment_ratio_percentage": 0,
+        "technical_debt_per_loc": 0,
+        "coverage_category": "none",
+        "complexity_category": "none",
+        "complexity_per_line": 0,
+        "quality_gate_status": "NONE",
+        "quality_gate_passed": false,
+        "maintainability_rating": "A",
+        "reliability_rating": "B",
+        "security_rating": "E",
+        "has_tests": false,
+        "test_count": 0
+      }
+    },
+    {
+      "key": "chatapp-phi-usercontroller",
+      "name": "Chat App - phi-usercontroller",
+      "qualifier": "TRK",
+      "visibility": "public",
+      "last_analysis_date": "2025-08-05T16:37:27+0000",
+      "metrics": {
+        "coverage": 0.0,
+        "reliability_rating": 2.0,
+        "code_smells": 37,
+        "security_rating": 5.0,
+        "sqale_debt_ratio": 0.5,
+        "security_hotspots": 1,
+        "sqale_index": 181,
+        "sqale_rating": 1.0,
+        "lines_to_cover": 380,
+        "uncovered_lines": 380,
+        "vulnerabilities": 4,
+        "line_coverage": 0.0,
+        "minor_violations": 1,
+        "new_vulnerabilities": null,
+        "new_coverage": null,
+        "new_bugs": null,
+        "critical_violations": 0,
+        "new_code_smells": null,
+        "new_duplicated_lines": null,
+        "blocker_violations": 4,
+        "info_violations": 0,
+        "major_violations": 37,
+        "new_uncovered_lines": null,
+        "new_lines_to_cover": null,
+        "new_duplicated_lines_density": null
+      },
+      "issues_analysis": {
+        "by_severity": {
+          "blocker": {
+            "count": 4,
+            "debt_minutes": 120
+          },
+          "critical": {
+            "count": 0,
+            "debt_minutes": 0
+          },
+          "major": {
+            "count": 37,
+            "debt_minutes": 181
+          },
+          "minor": {
+            "count": 1,
+            "debt_minutes": 5
+          },
+          "info": {
+            "count": 0,
+            "debt_minutes": 0
+          }
+        },
+        "by_type": {
+          "bug": {
+            "count": 1,
+            "debt_minutes": 5
+          },
+          "vulnerability": {
+            "count": 4,
+            "debt_minutes": 120
+          },
+          "code_smell": {
+            "count": 37,
+            "debt_minutes": 181
+          }
+        },
+        "by_status": {},
+        "total_technical_debt_minutes": 306,
+        "summary": {
+          "total_issues": 42,
+          "total_debt_hours": 5.1
+        }
+      },
+      "file_analysis": {
+        "total_files": 46,
+        "complexity_distribution": {
+          "low": 43,
+          "medium": 3,
+          "high": 0,
+          "very_high": 0
+        },
+        "size_distribution": {
+          "small": 45,
+          "medium": 1,
+          "large": 0,
+          "very_large": 0
+        },
+        "languages": {
+          "css": 2,
+          "jsx": 18,
+          "js": 24,
+          "html": 1,
+          "sh": 1
+        },
+        "avg_complexity_per_file": 3.33,
+        "avg_lines_per_file": 26.54
+      },
+      "analysis_statistics": {
+        "total_analyses": 4,
+        "first_analysis": "2025-08-05T16:12:17+0000",
+        "last_analysis": "2025-08-05T16:37:27+0000",
+        "analysis_frequency_days": null,
+        "recent_analyses": [
+          {
+            "key": "9e50810b-e52f-4dfb-80fa-e64019a32b5a",
+            "date": "2025-08-05T16:37:27+0000",
+            "events": [
+              {
+                "key": "ce9d8232-e145-4eac-a394-984e51797cc1",
+                "category": "QUALITY_GATE",
+                "name": "Failed",
+                "description": "New Issues > 0"
+              },
+              {
+                "key": "6958de52-0eb2-45f8-a5cc-8255c63283ac",
+                "category": "VERSION",
+                "name": "1.0"
+              }
+            ],
+            "projectVersion": "1.0",
+            "manualNewCodePeriodBaseline": false,
+            "revision": "3c02bd001b39c44d6d8f100a74e60be4b6f8dfe3",
+            "detectedCI": "undetected"
+          },
+          {
+            "key": "c5ccc1bc-5ee9-40bc-973d-c574752731b4",
+            "date": "2025-08-05T16:37:11+0000",
+            "events": [],
+            "projectVersion": "1.0",
+            "manualNewCodePeriodBaseline": false,
+            "revision": "6fd4c6ef4337ccc1ba5e5efcee42c96cbe30e019",
+            "detectedCI": "undetected"
+          },
+          {
+            "key": "6ba453fe-f849-4656-ab9b-8ceb099b9e86",
+            "date": "2025-08-05T16:12:25+0000",
+            "events": [],
+            "projectVersion": "1.0",
+            "manualNewCodePeriodBaseline": false,
+            "revision": "ff87605524291fbae6f2c50d047ff0ef7ed5b825",
+            "detectedCI": "undetected"
+          },
+          {
+            "key": "c8b134bd-6983-44ac-9b4f-2a8d8128b091",
+            "date": "2025-08-05T16:12:17+0000",
+            "events": [
+              {
+                "key": "12b01222-4b0e-40ca-98f4-bbf37bc3ebee",
+                "category": "SQ_UPGRADE",
+                "name": "25.7.0.110598"
+              }
+            ],
+            "projectVersion": "1.0",
+            "manualNewCodePeriodBaseline": false,
+            "revision": "ff87605524291fbae6f2c50d047ff0ef7ed5b825",
+            "detectedCI": "undetected"
+          }
+        ]
+      },
+      "quality_indicators": {
+        "defect_density_per_1k_loc": 0,
+        "vulnerability_density_per_1k_loc": 0,
+        "code_smell_density_per_1k_loc": 0,
+        "comment_ratio_percentage": 0,
+        "technical_debt_per_loc": 0,
+        "coverage_category": "none",
+        "complexity_category": "none",
+        "complexity_per_line": 0,
+        "quality_gate_status": "NONE",
+        "quality_gate_passed": false,
+        "maintainability_rating": "A",
+        "reliability_rating": "B",
+        "security_rating": "E",
+        "has_tests": false,
+        "test_count": 0
+      }
+    },
+    {
+      "key": "chatapp",
+      "name": "MERN Chat App",
+      "qualifier": "TRK",
+      "visibility": "public",
+      "last_analysis_date": "2025-08-05T19:55:59+0000",
+      "metrics": {
+        "coverage": 0.0,
+        "reliability_rating": 2.0,
+        "code_smells": 36,
+        "security_rating": 5.0,
+        "sqale_debt_ratio": 0.5,
+        "security_hotspots": 1,
+        "sqale_index": 176,
+        "sqale_rating": 1.0,
+        "lines_to_cover": 379,
+        "uncovered_lines": 379,
+        "vulnerabilities": 4,
+        "line_coverage": 0.0,
+        "minor_violations": 1,
+        "new_vulnerabilities": null,
+        "new_bugs": null,
+        "critical_violations": 0,
+        "new_code_smells": null,
+        "new_duplicated_lines": null,
+        "blocker_violations": 4,
+        "info_violations": 0,
+        "major_violations": 36,
+        "new_uncovered_lines": null,
+        "new_lines_to_cover": null,
+        "new_duplicated_lines_density": null
+      },
+      "issues_analysis": {
+        "by_severity": {
+          "blocker": {
+            "count": 5,
+            "debt_minutes": 150
+          },
+          "critical": {
+            "count": 0,
+            "debt_minutes": 0
+          },
+          "major": {
+            "count": 36,
+            "debt_minutes": 176
+          },
+          "minor": {
+            "count": 1,
+            "debt_minutes": 5
+          },
+          "info": {
+            "count": 0,
+            "debt_minutes": 0
+          }
+        },
+        "by_type": {
+          "bug": {
+            "count": 1,
+            "debt_minutes": 5
+          },
+          "vulnerability": {
+            "count": 5,
+            "debt_minutes": 150
+          },
+          "code_smell": {
+            "count": 36,
+            "debt_minutes": 176
+          }
+        },
+        "by_status": {},
+        "total_technical_debt_minutes": 331,
+        "summary": {
+          "total_issues": 42,
+          "total_debt_hours": 5.52
+        }
+      },
+      "file_analysis": {
+        "total_files": 47,
+        "complexity_distribution": {
+          "low": 44,
+          "medium": 3,
+          "high": 0,
+          "very_high": 0
+        },
+        "size_distribution": {
+          "small": 46,
+          "medium": 1,
+          "large": 0,
+          "very_large": 0
+        },
+        "languages": {
+          "css": 2,
+          "jsx": 18,
+          "js": 24,
+          "py": 1,
+          "html": 1,
+          "sh": 1
+        },
+        "avg_complexity_per_file": 3.23,
+        "avg_lines_per_file": 25.96
+      },
+      "analysis_statistics": {
+        "total_analyses": 7,
+        "first_analysis": "2025-08-05T16:03:50+0000",
+        "last_analysis": "2025-08-05T19:55:59+0000",
+        "analysis_frequency_days": null,
+        "recent_analyses": [
+          {
+            "key": "8434f780-14f8-484c-8bbb-79bf516319dc",
+            "date": "2025-08-05T19:55:59+0000",
+            "events": [
+              {
+                "key": "357a407d-9d63-4851-b2f5-ed7858d50a0e",
+                "category": "QUALITY_PROFILE",
+                "name": "Use \"Sonar way\" (py)",
+                "qualityProfile": {}
+              },
+              {
+                "key": "e76d1472-4c0f-4403-a42e-9115eea3bede",
+                "category": "VERSION",
+                "name": "1.0"
+              }
+            ],
+            "projectVersion": "1.0",
+            "manualNewCodePeriodBaseline": false,
+            "revision": "e9a427b116fbd7773d3f64c404179f506fac60b7",
+            "detectedCI": "undetected"
+          },
+          {
+            "key": "128d2d7c-d35b-4cb9-9199-48bb53ce3eb7",
+            "date": "2025-08-05T16:49:47+0000",
+            "events": [],
+            "projectVersion": "1.0",
+            "manualNewCodePeriodBaseline": false,
+            "revision": "e9a427b116fbd7773d3f64c404179f506fac60b7",
+            "detectedCI": "undetected"
+          },
+          {
+            "key": "b74bf778-7631-40d3-8c49-51376483041b",
+            "date": "2025-08-05T16:22:45+0000",
+            "events": [],
+            "projectVersion": "1.0",
+            "manualNewCodePeriodBaseline": false,
+            "revision": "6fd4c6ef4337ccc1ba5e5efcee42c96cbe30e019",
+            "detectedCI": "undetected"
+          },
+          {
+            "key": "cd6eb4cc-302e-4c9f-bd97-0fc8ab51a22c",
+            "date": "2025-08-05T16:22:12+0000",
+            "events": [],
+            "projectVersion": "1.0",
+            "manualNewCodePeriodBaseline": false,
+            "revision": "ff87605524291fbae6f2c50d047ff0ef7ed5b825",
+            "detectedCI": "undetected"
+          },
+          {
+            "key": "8aab795e-6f20-4864-88ee-8bc253c13256",
+            "date": "2025-08-05T16:10:53+0000",
+            "events": [],
+            "projectVersion": "1.0",
+            "manualNewCodePeriodBaseline": false,
+            "revision": "ff87605524291fbae6f2c50d047ff0ef7ed5b825",
+            "detectedCI": "undetected"
+          },
+          {
+            "key": "d9d99610-1a95-43a5-a764-7e93e8379303",
+            "date": "2025-08-05T16:10:22+0000",
+            "events": [
+              {
+                "key": "9cfd182d-a29f-4bdc-9b52-ff977d580aa2",
+                "category": "QUALITY_GATE",
+                "name": "Passed",
+                "description": ""
+              }
+            ],
+            "projectVersion": "1.0",
+            "manualNewCodePeriodBaseline": false,
+            "revision": "ff87605524291fbae6f2c50d047ff0ef7ed5b825",
+            "detectedCI": "undetected"
+          },
+          {
+            "key": "729557c1-b4c1-488d-9a4f-aa0410c3bc6a",
+            "date": "2025-08-05T16:03:50+0000",
+            "events": [
+              {
+                "key": "b49130a5-6f9f-4e0f-a30e-aee9e9f4c903",
+                "category": "SQ_UPGRADE",
+                "name": "25.7.0.110598"
+              },
+              {
+                "key": "9ce8928d-8f70-4ef3-98bd-df927679e461",
+                "category": "QUALITY_GATE",
+                "name": "Failed",
+                "description": "New Issues > 0"
+              }
+            ],
+            "projectVersion": "1.0",
+            "manualNewCodePeriodBaseline": false,
+            "revision": "7aa507582ceaa3560a2cba564edfdb698d9e1f55",
+            "detectedCI": "undetected"
+          }
+        ]
+      },
+      "quality_indicators": {
+        "defect_density_per_1k_loc": 0,
+        "vulnerability_density_per_1k_loc": 0,
+        "code_smell_density_per_1k_loc": 0,
+        "comment_ratio_percentage": 0,
+        "technical_debt_per_loc": 0,
+        "coverage_category": "none",
+        "complexity_category": "none",
+        "complexity_per_line": 0,
+        "quality_gate_status": "NONE",
+        "quality_gate_passed": false,
+        "maintainability_rating": "A",
+        "reliability_rating": "B",
+        "security_rating": "E",
+        "has_tests": false,
+        "test_count": 0
+      }
+    }
+  ],
+  "summary_statistics": {
+    "total_lines_of_code": 0,
+    "total_bugs": 0,
+    "total_vulnerabilities": 44,
+    "total_code_smells": 398,
+    "total_security_hotspots": 11,
+    "total_technical_debt_minutes": 3558,
+    "total_technical_debt_hours": 59.3,
+    "projects_with_tests": 0,
+    "projects_with_coverage": 0,
+    "average_complexity_per_project": 0.0,
+    "average_coverage_percentage": 0,
+    "languages_detected": [
+      "css",
+      "html",
+      "js",
+      "jsx",
+      "py",
+      "sh"
+    ],
+    "complexity_distribution": {
+      "low_complexity_projects": 0,
+      "medium_complexity_projects": 0,
+      "high_complexity_projects": 0,
+      "very_high_complexity_projects": 0
+    },
+    "coverage_distribution": {
+      "excellent_coverage_projects": 0,
+      "good_coverage_projects": 0,
+      "fair_coverage_projects": 0,
+      "poor_coverage_projects": 0,
+      "no_coverage_projects": 0
+    }
+  }
+}

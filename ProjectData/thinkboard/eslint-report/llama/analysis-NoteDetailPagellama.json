@@ -1,0 +1,74 @@
+{
+  "metadata": {
+    "timestamp": "2025-08-07T08:21:44.916Z",
+    "filePath": "/Users/latos/Desktop/static-analyzer/codebase/NoteDetailPage.jsx",
+    "analyzer": "codebase-analyzer-v1.0",
+    "standards": [
+      "IEEE-1061-1998",
+      "ISO-25010-2011",
+      "McCabe-1976",
+      "Halstead-1977",
+      "ESLint-8.x"
+    ]
+  },
+  "sizeMetrics": {
+    "totalLines": 50,
+    "sourceLines": 41,
+    "commentLines": 0,
+    "blankLines": 9,
+    "logicalLinesOfCode": 37
+  },
+  "structuralComplexity": {
+    "totalFunctions": 3,
+    "namedFunctions": 0,
+    "anonymousFunctions": 0,
+    "arrowFunctions": 3,
+    "methods": 0,
+    "classes": 0,
+    "variables": 0,
+    "constants": 6,
+    "imports": 5,
+    "exports": 1,
+    "conditionals": 1,
+    "loops": 0,
+    "astNodes": 196
+  },
+  "cyclomaticComplexity": {
+    "complexity": 3,
+    "decisionPoints": 2,
+    "maxNestingDepth": 9,
+    "averageComplexity": 1,
+    "riskLevel": "Low"
+  },
+  "halsteadMetrics": {
+    "uniqueOperators": 2,
+    "uniqueOperands": 37,
+    "totalOperators": 16,
+    "totalOperands": 59,
+    "vocabulary": 39,
+    "length": 75,
+    "calculatedLength": 194.75,
+    "volume": 396.41,
+    "difficulty": 1.59,
+    "effort": 632.11,
+    "timeToProgram": 35.12,
+    "deliveredBugs": 0.1321,
+    "_rawVolume": 396.40516641466866,
+    "_rawDifficulty": 1.5945945945945945,
+    "_rawEffort": 632.1055356342014
+  },
+  "staticAnalysis": {
+    "totalIssues": 1,
+    "errors": 0,
+    "warnings": 1,
+    "issues": [
+      {
+        "line": 2,
+        "column": 8,
+        "rule": "no-unused-vars",
+        "severity": "warning",
+        "message": "'Navbar' is defined but never used."
+      }
+    ]
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "metadata": {
+    "timestamp": "2025-08-06T18:11:58.179Z",
+    "filePath": "/Users/latos/Desktop/static-analyzer/codebase/user.controller.js",
+    "analyzer": "codebase-analyzer-v1.0",
+    "standards": [
+      "IEEE-1061-1998",
+      "ISO-25010-2011",
+      "McCabe-1976",
+      "Halstead-1977",
+      "ESLint-8.x"
+    ]
+  },
+  "sizeMetrics": {
+    "totalLines": 15,
+    "sourceLines": 14,
+    "commentLines": 2,
+    "blankLines": 1,
+    "logicalLinesOfCode": 10
+  },
+  "structuralComplexity": {
+    "totalFunctions": 2,
+    "namedFunctions": 0,
+    "anonymousFunctions": 0,
+    "arrowFunctions": 2,
+    "methods": 0,
+    "classes": 0,
+    "variables": 0,
+    "constants": 4,
+    "imports": 1,
+    "exports": 1,
+    "conditionals": 0,
+    "loops": 0,
+    "astNodes": 92
+  },
+  "cyclomaticComplexity": {
+    "complexity": 2,
+    "decisionPoints": 1,
+    "maxNestingDepth": 5,
+    "averageComplexity": 1,
+    "riskLevel": "Low"
+  },
+  "halsteadMetrics": {
+    "uniqueOperators": 2,
+    "uniqueOperands": 27,
+    "totalOperators": 21,
+    "totalOperands": 42,
+    "vocabulary": 29,
+    "length": 63,
+    "calculatedLength": 130.38,
+    "volume": 306.05,
+    "difficulty": 1.56,
+    "effort": 476.08,
+    "timeToProgram": 26.45,
+    "deliveredBugs": 0.102,
+    "_rawVolume": 306.05280269303705,
+    "_rawDifficulty": 1.5555555555555556,
+    "_rawEffort": 476.0821375225021
+  },
+  "staticAnalysis": {
+    "totalIssues": 0,
+    "errors": 0,
+    "warnings": 0,
+    "issues": []
+  }
+}

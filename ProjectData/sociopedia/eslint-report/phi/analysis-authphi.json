@@ -1,0 +1,66 @@
+{
+  "metadata": {
+    "timestamp": "2025-08-06T18:18:05.323Z",
+    "filePath": "/Users/latos/Desktop/static-analyzer/codebase/auth.js",
+    "analyzer": "codebase-analyzer-v1.0",
+    "standards": [
+      "IEEE-1061-1998",
+      "ISO-25010-2011",
+      "McCabe-1976",
+      "Halstead-1977",
+      "ESLint-8.x"
+    ]
+  },
+  "sizeMetrics": {
+    "totalLines": 82,
+    "sourceLines": 72,
+    "commentLines": 10,
+    "blankLines": 10,
+    "logicalLinesOfCode": 55
+  },
+  "structuralComplexity": {
+    "totalFunctions": 2,
+    "namedFunctions": 0,
+    "anonymousFunctions": 0,
+    "arrowFunctions": 2,
+    "methods": 0,
+    "classes": 0,
+    "variables": 0,
+    "constants": 10,
+    "imports": 3,
+    "exports": 2,
+    "conditionals": 3,
+    "loops": 0,
+    "astNodes": 371
+  },
+  "cyclomaticComplexity": {
+    "complexity": 8,
+    "decisionPoints": 7,
+    "maxNestingDepth": 6,
+    "averageComplexity": 4,
+    "riskLevel": "Low"
+  },
+  "halsteadMetrics": {
+    "uniqueOperators": 3,
+    "uniqueOperands": 47,
+    "totalOperators": 86,
+    "totalOperands": 178,
+    "vocabulary": 50,
+    "length": 264,
+    "calculatedLength": 265.82,
+    "volume": 1489.98,
+    "difficulty": 5.68,
+    "effort": 8464.34,
+    "timeToProgram": 470.24,
+    "deliveredBugs": 0.4967,
+    "_rawVolume": 1489.9780341005273,
+    "_rawDifficulty": 5.680851063829787,
+    "_rawEffort": 8464.343300102995
+  },
+  "staticAnalysis": {
+    "totalIssues": 0,
+    "errors": 0,
+    "warnings": 0,
+    "issues": []
+  }
+}

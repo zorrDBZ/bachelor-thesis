@@ -1,0 +1,1557 @@
+{
+  "export_timestamp": "2025-08-07T11:17:43.911897",
+  "sonarqube_url": "http://localhost:9001",
+  "total_projects_discovered": 11,
+  "total_projects_processed": 11,
+  "tool_name": "SonarQube Comprehensive Data Exporter",
+  "tool_version": "2.0.0",
+  "export_purpose": "Statistical Analysis and Quality Assessment",
+  "data_format_version": "1.0",
+  "data_completeness": {
+    "metrics": true,
+    "issues_breakdown": true,
+    "file_analysis": true,
+    "analysis_history": true,
+    "quality_indicators": true
+  },
+  "projects": [
+    {
+      "key": "thinkboard",
+      "name": "MERN ThinkBoard",
+      "qualifier": "TRK",
+      "visibility": "public",
+      "last_analysis_date": "2025-08-07T08:08:07+0000",
+      "metrics": {
+        "coverage": 0.0,
+        "reliability_rating": 1.0,
+        "code_smells": 16,
+        "security_rating": 1.0,
+        "sqale_debt_ratio": 0.4,
+        "security_hotspots": 1,
+        "sqale_index": 64,
+        "sqale_rating": 1.0,
+        "lines_to_cover": 172,
+        "uncovered_lines": 172,
+        "vulnerabilities": 0,
+        "line_coverage": 0.0,
+        "minor_violations": 4,
+        "critical_violations": 0,
+        "blocker_violations": 0,
+        "info_violations": 0,
+        "major_violations": 12
+      },
+      "issues_analysis": {
+        "by_severity": {
+          "blocker": {
+            "count": 0,
+            "debt_minutes": 0
+          },
+          "critical": {
+            "count": 0,
+            "debt_minutes": 0
+          },
+          "major": {
+            "count": 12,
+            "debt_minutes": 60
+          },
+          "minor": {
+            "count": 4,
+            "debt_minutes": 4
+          },
+          "info": {
+            "count": 0,
+            "debt_minutes": 0
+          }
+        },
+        "by_type": {
+          "bug": {
+            "count": 0,
+            "debt_minutes": 0
+          },
+          "vulnerability": {
+            "count": 0,
+            "debt_minutes": 0
+          },
+          "code_smell": {
+            "count": 16,
+            "debt_minutes": 64
+          }
+        },
+        "by_status": {},
+        "total_technical_debt_minutes": 64,
+        "summary": {
+          "total_issues": 16,
+          "total_debt_hours": 1.07
+        }
+      },
+      "file_analysis": {
+        "total_files": 19,
+        "complexity_distribution": {
+          "low": 17,
+          "medium": 2,
+          "high": 0,
+          "very_high": 0
+        },
+        "size_distribution": {
+          "small": 18,
+          "medium": 1,
+          "large": 0,
+          "very_large": 0
+        },
+        "languages": {
+          "jsx": 9,
+          "js": 9,
+          "css": 1
+        },
+        "avg_complexity_per_file": 3.16,
+        "avg_lines_per_file": 30.21
+      },
+      "analysis_statistics": {
+        "total_analyses": 1,
+        "first_analysis": "2025-08-07T08:08:07+0000",
+        "last_analysis": "2025-08-07T08:08:07+0000",
+        "analysis_frequency_days": null,
+        "recent_analyses": [
+          {
+            "key": "3626db75-2d2c-405c-a66c-413f6b8d7949",
+            "date": "2025-08-07T08:08:07+0000",
+            "events": [
+              {
+                "key": "07e25e60-a1bc-45e4-8405-47c465680574",
+                "category": "SQ_UPGRADE",
+                "name": "25.7.0.110598"
+              },
+              {
+                "key": "c1887c43-c043-4655-8394-78df74b0821f",
+                "category": "VERSION",
+                "name": "1.0.0"
+              }
+            ],
+            "projectVersion": "1.0.0",
+            "manualNewCodePeriodBaseline": false,
+            "revision": "97c5173a76cd70f8ca4fe082f6143b8e0cb564d8",
+            "detectedCI": "undetected"
+          }
+        ]
+      },
+      "quality_indicators": {
+        "defect_density_per_1k_loc": 0,
+        "vulnerability_density_per_1k_loc": 0,
+        "code_smell_density_per_1k_loc": 0,
+        "comment_ratio_percentage": 0,
+        "technical_debt_per_loc": 0,
+        "coverage_category": "none",
+        "complexity_category": "none",
+        "complexity_per_line": 0,
+        "quality_gate_status": "NONE",
+        "quality_gate_passed": false,
+        "maintainability_rating": "A",
+        "reliability_rating": "A",
+        "security_rating": "A",
+        "has_tests": false,
+        "test_count": 0
+      }
+    },
+    {
+      "key": "thinkboard-llama-createpage",
+      "name": "MERN ThinkBoard - llama-createpage",
+      "qualifier": "TRK",
+      "visibility": "public",
+      "last_analysis_date": "2025-08-07T08:05:25+0000",
+      "metrics": {
+        "coverage": 0.0,
+        "reliability_rating": 1.0,
+        "code_smells": 16,
+        "security_rating": 1.0,
+        "sqale_debt_ratio": 0.4,
+        "security_hotspots": 1,
+        "sqale_index": 64,
+        "sqale_rating": 1.0,
+        "lines_to_cover": 169,
+        "uncovered_lines": 169,
+        "vulnerabilities": 0,
+        "line_coverage": 0.0,
+        "minor_violations": 4,
+        "critical_violations": 0,
+        "blocker_violations": 0,
+        "info_violations": 0,
+        "major_violations": 12
+      },
+      "issues_analysis": {
+        "by_severity": {
+          "blocker": {
+            "count": 0,
+            "debt_minutes": 0
+          },
+          "critical": {
+            "count": 0,
+            "debt_minutes": 0
+          },
+          "major": {
+            "count": 12,
+            "debt_minutes": 60
+          },
+          "minor": {
+            "count": 4,
+            "debt_minutes": 4
+          },
+          "info": {
+            "count": 0,
+            "debt_minutes": 0
+          }
+        },
+        "by_type": {
+          "bug": {
+            "count": 0,
+            "debt_minutes": 0
+          },
+          "vulnerability": {
+            "count": 0,
+            "debt_minutes": 0
+          },
+          "code_smell": {
+            "count": 16,
+            "debt_minutes": 64
+          }
+        },
+        "by_status": {},
+        "total_technical_debt_minutes": 64,
+        "summary": {
+          "total_issues": 16,
+          "total_debt_hours": 1.07
+        }
+      },
+      "file_analysis": {
+        "total_files": 19,
+        "complexity_distribution": {
+          "low": 17,
+          "medium": 2,
+          "high": 0,
+          "very_high": 0
+        },
+        "size_distribution": {
+          "small": 18,
+          "medium": 1,
+          "large": 0,
+          "very_large": 0
+        },
+        "languages": {
+          "jsx": 9,
+          "js": 9,
+          "css": 1
+        },
+        "avg_complexity_per_file": 3.11,
+        "avg_lines_per_file": 29.58
+      },
+      "analysis_statistics": {
+        "total_analyses": 1,
+        "first_analysis": "2025-08-07T08:05:25+0000",
+        "last_analysis": "2025-08-07T08:05:25+0000",
+        "analysis_frequency_days": null,
+        "recent_analyses": [
+          {
+            "key": "998a645f-985f-4f5b-b33b-747654736bd1",
+            "date": "2025-08-07T08:05:25+0000",
+            "events": [
+              {
+                "key": "82dc2c4c-3f9a-4d17-a580-9a98a6e4d576",
+                "category": "SQ_UPGRADE",
+                "name": "25.7.0.110598"
+              },
+              {
+                "key": "3a0d360e-bc5e-45b7-a01c-b08bff0b099b",
+                "category": "VERSION",
+                "name": "1.0.0"
+              }
+            ],
+            "projectVersion": "1.0.0",
+            "manualNewCodePeriodBaseline": false,
+            "revision": "97c5173a76cd70f8ca4fe082f6143b8e0cb564d8",
+            "detectedCI": "undetected"
+          }
+        ]
+      },
+      "quality_indicators": {
+        "defect_density_per_1k_loc": 0,
+        "vulnerability_density_per_1k_loc": 0,
+        "code_smell_density_per_1k_loc": 0,
+        "comment_ratio_percentage": 0,
+        "technical_debt_per_loc": 0,
+        "coverage_category": "none",
+        "complexity_category": "none",
+        "complexity_per_line": 0,
+        "quality_gate_status": "NONE",
+        "quality_gate_passed": false,
+        "maintainability_rating": "A",
+        "reliability_rating": "A",
+        "security_rating": "A",
+        "has_tests": false,
+        "test_count": 0
+      }
+    },
+    {
+      "key": "thinkboard-llama-note",
+      "name": "MERN ThinkBoard - llama-note",
+      "qualifier": "TRK",
+      "visibility": "public",
+      "last_analysis_date": "2025-08-07T08:06:10+0000",
+      "metrics": {
+        "coverage": 0.0,
+        "reliability_rating": 1.0,
+        "code_smells": 16,
+        "security_rating": 1.0,
+        "sqale_debt_ratio": 0.4,
+        "security_hotspots": 1,
+        "sqale_index": 64,
+        "sqale_rating": 1.0,
+        "lines_to_cover": 172,
+        "uncovered_lines": 172,
+        "vulnerabilities": 0,
+        "line_coverage": 0.0,
+        "minor_violations": 4,
+        "critical_violations": 0,
+        "blocker_violations": 0,
+        "info_violations": 0,
+        "major_violations": 12
+      },
+      "issues_analysis": {
+        "by_severity": {
+          "blocker": {
+            "count": 0,
+            "debt_minutes": 0
+          },
+          "critical": {
+            "count": 0,
+            "debt_minutes": 0
+          },
+          "major": {
+            "count": 12,
+            "debt_minutes": 60
+          },
+          "minor": {
+            "count": 4,
+            "debt_minutes": 4
+          },
+          "info": {
+            "count": 0,
+            "debt_minutes": 0
+          }
+        },
+        "by_type": {
+          "bug": {
+            "count": 0,
+            "debt_minutes": 0
+          },
+          "vulnerability": {
+            "count": 0,
+            "debt_minutes": 0
+          },
+          "code_smell": {
+            "count": 16,
+            "debt_minutes": 64
+          }
+        },
+        "by_status": {},
+        "total_technical_debt_minutes": 64,
+        "summary": {
+          "total_issues": 16,
+          "total_debt_hours": 1.07
+        }
+      },
+      "file_analysis": {
+        "total_files": 19,
+        "complexity_distribution": {
+          "low": 17,
+          "medium": 2,
+          "high": 0,
+          "very_high": 0
+        },
+        "size_distribution": {
+          "small": 18,
+          "medium": 1,
+          "large": 0,
+          "very_large": 0
+        },
+        "languages": {
+          "jsx": 9,
+          "js": 9,
+          "css": 1
+        },
+        "avg_complexity_per_file": 3.16,
+        "avg_lines_per_file": 30.26
+      },
+      "analysis_statistics": {
+        "total_analyses": 1,
+        "first_analysis": "2025-08-07T08:06:10+0000",
+        "last_analysis": "2025-08-07T08:06:10+0000",
+        "analysis_frequency_days": null,
+        "recent_analyses": [
+          {
+            "key": "a2eefb00-0a6a-4f09-a70b-b5253ea0a4b5",
+            "date": "2025-08-07T08:06:10+0000",
+            "events": [
+              {
+                "key": "dbefe5fb-3fd8-4d66-a522-818e05be5866",
+                "category": "SQ_UPGRADE",
+                "name": "25.7.0.110598"
+              },
+              {
+                "key": "23ee79ea-bfb1-4750-a1f8-9a94550d2bd4",
+                "category": "VERSION",
+                "name": "1.0.0"
+              }
+            ],
+            "projectVersion": "1.0.0",
+            "manualNewCodePeriodBaseline": false,
+            "revision": "97c5173a76cd70f8ca4fe082f6143b8e0cb564d8",
+            "detectedCI": "undetected"
+          }
+        ]
+      },
+      "quality_indicators": {
+        "defect_density_per_1k_loc": 0,
+        "vulnerability_density_per_1k_loc": 0,
+        "code_smell_density_per_1k_loc": 0,
+        "comment_ratio_percentage": 0,
+        "technical_debt_per_loc": 0,
+        "coverage_category": "none",
+        "complexity_category": "none",
+        "complexity_per_line": 0,
+        "quality_gate_status": "NONE",
+        "quality_gate_passed": false,
+        "maintainability_rating": "A",
+        "reliability_rating": "A",
+        "security_rating": "A",
+        "has_tests": false,
+        "test_count": 0
+      }
+    },
+    {
+      "key": "thinkboard-llama-notecard",
+      "name": "MERN ThinkBoard - llama-notecard",
+      "qualifier": "TRK",
+      "visibility": "public",
+      "last_analysis_date": "2025-08-07T08:06:37+0000",
+      "metrics": {
+        "coverage": 0.0,
+        "reliability_rating": 1.0,
+        "code_smells": 16,
+        "security_rating": 1.0,
+        "sqale_debt_ratio": 0.4,
+        "security_hotspots": 1,
+        "sqale_index": 64,
+        "sqale_rating": 1.0,
+        "lines_to_cover": 171,
+        "uncovered_lines": 171,
+        "vulnerabilities": 0,
+        "line_coverage": 0.0,
+        "minor_violations": 4,
+        "critical_violations": 0,
+        "blocker_violations": 0,
+        "info_violations": 0,
+        "major_violations": 12
+      },
+      "issues_analysis": {
+        "by_severity": {
+          "blocker": {
+            "count": 0,
+            "debt_minutes": 0
+          },
+          "critical": {
+            "count": 0,
+            "debt_minutes": 0
+          },
+          "major": {
+            "count": 12,
+            "debt_minutes": 60
+          },
+          "minor": {
+            "count": 4,
+            "debt_minutes": 4
+          },
+          "info": {
+            "count": 0,
+            "debt_minutes": 0
+          }
+        },
+        "by_type": {
+          "bug": {
+            "count": 0,
+            "debt_minutes": 0
+          },
+          "vulnerability": {
+            "count": 0,
+            "debt_minutes": 0
+          },
+          "code_smell": {
+            "count": 16,
+            "debt_minutes": 64
+          }
+        },
+        "by_status": {},
+        "total_technical_debt_minutes": 64,
+        "summary": {
+          "total_issues": 16,
+          "total_debt_hours": 1.07
+        }
+      },
+      "file_analysis": {
+        "total_files": 19,
+        "complexity_distribution": {
+          "low": 17,
+          "medium": 2,
+          "high": 0,
+          "very_high": 0
+        },
+        "size_distribution": {
+          "small": 18,
+          "medium": 1,
+          "large": 0,
+          "very_large": 0
+        },
+        "languages": {
+          "jsx": 9,
+          "js": 9,
+          "css": 1
+        },
+        "avg_complexity_per_file": 3.11,
+        "avg_lines_per_file": 29.79
+      },
+      "analysis_statistics": {
+        "total_analyses": 1,
+        "first_analysis": "2025-08-07T08:06:37+0000",
+        "last_analysis": "2025-08-07T08:06:37+0000",
+        "analysis_frequency_days": null,
+        "recent_analyses": [
+          {
+            "key": "1f16d505-1ab6-4044-8f24-66ed76fa1517",
+            "date": "2025-08-07T08:06:37+0000",
+            "events": [
+              {
+                "key": "b67af20c-aae7-483a-b3b7-0187b78febf3",
+                "category": "SQ_UPGRADE",
+                "name": "25.7.0.110598"
+              },
+              {
+                "key": "cf9716c9-6c15-4dc4-a576-08c7db6d5898",
+                "category": "VERSION",
+                "name": "1.0.0"
+              }
+            ],
+            "projectVersion": "1.0.0",
+            "manualNewCodePeriodBaseline": false,
+            "revision": "97c5173a76cd70f8ca4fe082f6143b8e0cb564d8",
+            "detectedCI": "undetected"
+          }
+        ]
+      },
+      "quality_indicators": {
+        "defect_density_per_1k_loc": 0,
+        "vulnerability_density_per_1k_loc": 0,
+        "code_smell_density_per_1k_loc": 0,
+        "comment_ratio_percentage": 0,
+        "technical_debt_per_loc": 0,
+        "coverage_category": "none",
+        "complexity_category": "none",
+        "complexity_per_line": 0,
+        "quality_gate_status": "NONE",
+        "quality_gate_passed": false,
+        "maintainability_rating": "A",
+        "reliability_rating": "A",
+        "security_rating": "A",
+        "has_tests": false,
+        "test_count": 0
+      }
+    },
+    {
+      "key": "thinkboard-llama-notecontroller",
+      "name": "MERN ThinkBoard - llama-notecontroller",
+      "qualifier": "TRK",
+      "visibility": "public",
+      "last_analysis_date": "2025-08-07T08:07:00+0000",
+      "metrics": {
+        "coverage": 0.0,
+        "reliability_rating": 1.0,
+        "code_smells": 21,
+        "security_rating": 1.0,
+        "sqale_debt_ratio": 2.1,
+        "security_hotspots": 1,
+        "sqale_index": 364,
+        "sqale_rating": 1.0,
+        "lines_to_cover": 171,
+        "uncovered_lines": 171,
+        "vulnerabilities": 0,
+        "line_coverage": 0.0,
+        "minor_violations": 9,
+        "critical_violations": 0,
+        "blocker_violations": 0,
+        "info_violations": 0,
+        "major_violations": 12
+      },
+      "issues_analysis": {
+        "by_severity": {
+          "blocker": {
+            "count": 0,
+            "debt_minutes": 0
+          },
+          "critical": {
+            "count": 0,
+            "debt_minutes": 0
+          },
+          "major": {
+            "count": 12,
+            "debt_minutes": 60
+          },
+          "minor": {
+            "count": 9,
+            "debt_minutes": 304
+          },
+          "info": {
+            "count": 0,
+            "debt_minutes": 0
+          }
+        },
+        "by_type": {
+          "bug": {
+            "count": 0,
+            "debt_minutes": 0
+          },
+          "vulnerability": {
+            "count": 0,
+            "debt_minutes": 0
+          },
+          "code_smell": {
+            "count": 21,
+            "debt_minutes": 364
+          }
+        },
+        "by_status": {},
+        "total_technical_debt_minutes": 364,
+        "summary": {
+          "total_issues": 21,
+          "total_debt_hours": 6.07
+        }
+      },
+      "file_analysis": {
+        "total_files": 19,
+        "complexity_distribution": {
+          "low": 17,
+          "medium": 2,
+          "high": 0,
+          "very_high": 0
+        },
+        "size_distribution": {
+          "small": 18,
+          "medium": 1,
+          "large": 0,
+          "very_large": 0
+        },
+        "languages": {
+          "jsx": 9,
+          "js": 9,
+          "css": 1
+        },
+        "avg_complexity_per_file": 3.11,
+        "avg_lines_per_file": 29.79
+      },
+      "analysis_statistics": {
+        "total_analyses": 1,
+        "first_analysis": "2025-08-07T08:07:00+0000",
+        "last_analysis": "2025-08-07T08:07:00+0000",
+        "analysis_frequency_days": null,
+        "recent_analyses": [
+          {
+            "key": "564bc4bb-b06f-4af7-bdec-c7918eda4f2e",
+            "date": "2025-08-07T08:07:00+0000",
+            "events": [
+              {
+                "key": "9605c3dc-8dc6-4b12-90f6-5bf62c5d79f1",
+                "category": "SQ_UPGRADE",
+                "name": "25.7.0.110598"
+              },
+              {
+                "key": "f82fc453-6194-40eb-a0f4-feca8a9559f5",
+                "category": "VERSION",
+                "name": "1.0.0"
+              }
+            ],
+            "projectVersion": "1.0.0",
+            "manualNewCodePeriodBaseline": false,
+            "revision": "97c5173a76cd70f8ca4fe082f6143b8e0cb564d8",
+            "detectedCI": "undetected"
+          }
+        ]
+      },
+      "quality_indicators": {
+        "defect_density_per_1k_loc": 0,
+        "vulnerability_density_per_1k_loc": 0,
+        "code_smell_density_per_1k_loc": 0,
+        "comment_ratio_percentage": 0,
+        "technical_debt_per_loc": 0,
+        "coverage_category": "none",
+        "complexity_category": "none",
+        "complexity_per_line": 0,
+        "quality_gate_status": "NONE",
+        "quality_gate_passed": false,
+        "maintainability_rating": "A",
+        "reliability_rating": "A",
+        "security_rating": "A",
+        "has_tests": false,
+        "test_count": 0
+      }
+    },
+    {
+      "key": "thinkboard-llama-notedetail",
+      "name": "MERN ThinkBoard - llama-notedetail",
+      "qualifier": "TRK",
+      "visibility": "public",
+      "last_analysis_date": "2025-08-07T08:07:21+0000",
+      "metrics": {
+        "coverage": 0.0,
+        "reliability_rating": 1.0,
+        "code_smells": 12,
+        "security_rating": 1.0,
+        "sqale_debt_ratio": 0.3,
+        "security_hotspots": 1,
+        "sqale_index": 52,
+        "sqale_rating": 1.0,
+        "lines_to_cover": 150,
+        "uncovered_lines": 150,
+        "vulnerabilities": 0,
+        "line_coverage": 0.0,
+        "minor_violations": 2,
+        "critical_violations": 0,
+        "blocker_violations": 0,
+        "info_violations": 0,
+        "major_violations": 10
+      },
+      "issues_analysis": {
+        "by_severity": {
+          "blocker": {
+            "count": 0,
+            "debt_minutes": 0
+          },
+          "critical": {
+            "count": 0,
+            "debt_minutes": 0
+          },
+          "major": {
+            "count": 10,
+            "debt_minutes": 50
+          },
+          "minor": {
+            "count": 2,
+            "debt_minutes": 2
+          },
+          "info": {
+            "count": 0,
+            "debt_minutes": 0
+          }
+        },
+        "by_type": {
+          "bug": {
+            "count": 0,
+            "debt_minutes": 0
+          },
+          "vulnerability": {
+            "count": 0,
+            "debt_minutes": 0
+          },
+          "code_smell": {
+            "count": 12,
+            "debt_minutes": 52
+          }
+        },
+        "by_status": {},
+        "total_technical_debt_minutes": 52,
+        "summary": {
+          "total_issues": 12,
+          "total_debt_hours": 0.87
+        }
+      },
+      "file_analysis": {
+        "total_files": 19,
+        "complexity_distribution": {
+          "low": 18,
+          "medium": 1,
+          "high": 0,
+          "very_high": 0
+        },
+        "size_distribution": {
+          "small": 19,
+          "medium": 0,
+          "large": 0,
+          "very_large": 0
+        },
+        "languages": {
+          "jsx": 9,
+          "js": 9,
+          "css": 1
+        },
+        "avg_complexity_per_file": 2.74,
+        "avg_lines_per_file": 26.32
+      },
+      "analysis_statistics": {
+        "total_analyses": 1,
+        "first_analysis": "2025-08-07T08:07:21+0000",
+        "last_analysis": "2025-08-07T08:07:21+0000",
+        "analysis_frequency_days": null,
+        "recent_analyses": [
+          {
+            "key": "c76d8a3a-7e72-436d-95e5-fda9e1ba8ebe",
+            "date": "2025-08-07T08:07:21+0000",
+            "events": [
+              {
+                "key": "88a8980f-1e77-402d-8064-c7fe64ec47d3",
+                "category": "SQ_UPGRADE",
+                "name": "25.7.0.110598"
+              },
+              {
+                "key": "d8bdf55e-f221-4d43-8b6d-bcabcc7d0162",
+                "category": "VERSION",
+                "name": "1.0.0"
+              }
+            ],
+            "projectVersion": "1.0.0",
+            "manualNewCodePeriodBaseline": false,
+            "revision": "97c5173a76cd70f8ca4fe082f6143b8e0cb564d8",
+            "detectedCI": "undetected"
+          }
+        ]
+      },
+      "quality_indicators": {
+        "defect_density_per_1k_loc": 0,
+        "vulnerability_density_per_1k_loc": 0,
+        "code_smell_density_per_1k_loc": 0,
+        "comment_ratio_percentage": 0,
+        "technical_debt_per_loc": 0,
+        "coverage_category": "none",
+        "complexity_category": "none",
+        "complexity_per_line": 0,
+        "quality_gate_status": "NONE",
+        "quality_gate_passed": false,
+        "maintainability_rating": "A",
+        "reliability_rating": "A",
+        "security_rating": "A",
+        "has_tests": false,
+        "test_count": 0
+      }
+    },
+    {
+      "key": "thinkboard-phi-createpage",
+      "name": "MERN ThinkBoard - phi-createpage",
+      "qualifier": "TRK",
+      "visibility": "public",
+      "last_analysis_date": "2025-08-07T08:08:32+0000",
+      "metrics": {
+        "coverage": 0.0,
+        "reliability_rating": 1.0,
+        "code_smells": 16,
+        "security_rating": 1.0,
+        "sqale_debt_ratio": 0.4,
+        "security_hotspots": 1,
+        "sqale_index": 64,
+        "sqale_rating": 1.0,
+        "lines_to_cover": 170,
+        "uncovered_lines": 170,
+        "vulnerabilities": 0,
+        "line_coverage": 0.0,
+        "minor_violations": 4,
+        "critical_violations": 0,
+        "blocker_violations": 0,
+        "info_violations": 0,
+        "major_violations": 12
+      },
+      "issues_analysis": {
+        "by_severity": {
+          "blocker": {
+            "count": 0,
+            "debt_minutes": 0
+          },
+          "critical": {
+            "count": 0,
+            "debt_minutes": 0
+          },
+          "major": {
+            "count": 12,
+            "debt_minutes": 60
+          },
+          "minor": {
+            "count": 4,
+            "debt_minutes": 4
+          },
+          "info": {
+            "count": 0,
+            "debt_minutes": 0
+          }
+        },
+        "by_type": {
+          "bug": {
+            "count": 0,
+            "debt_minutes": 0
+          },
+          "vulnerability": {
+            "count": 0,
+            "debt_minutes": 0
+          },
+          "code_smell": {
+            "count": 16,
+            "debt_minutes": 64
+          }
+        },
+        "by_status": {},
+        "total_technical_debt_minutes": 64,
+        "summary": {
+          "total_issues": 16,
+          "total_debt_hours": 1.07
+        }
+      },
+      "file_analysis": {
+        "total_files": 19,
+        "complexity_distribution": {
+          "low": 17,
+          "medium": 2,
+          "high": 0,
+          "very_high": 0
+        },
+        "size_distribution": {
+          "small": 18,
+          "medium": 1,
+          "large": 0,
+          "very_large": 0
+        },
+        "languages": {
+          "jsx": 9,
+          "js": 9,
+          "css": 1
+        },
+        "avg_complexity_per_file": 3.16,
+        "avg_lines_per_file": 29.95
+      },
+      "analysis_statistics": {
+        "total_analyses": 1,
+        "first_analysis": "2025-08-07T08:08:32+0000",
+        "last_analysis": "2025-08-07T08:08:32+0000",
+        "analysis_frequency_days": null,
+        "recent_analyses": [
+          {
+            "key": "197af3f7-cff3-4208-a568-e75ada7a03ba",
+            "date": "2025-08-07T08:08:32+0000",
+            "events": [
+              {
+                "key": "8454eb7b-56a3-4bec-b3ff-15fefd3f734c",
+                "category": "SQ_UPGRADE",
+                "name": "25.7.0.110598"
+              },
+              {
+                "key": "58015904-dd64-4f8f-8074-d761f4b4ea99",
+                "category": "VERSION",
+                "name": "1.0.0"
+              }
+            ],
+            "projectVersion": "1.0.0",
+            "manualNewCodePeriodBaseline": false,
+            "revision": "97c5173a76cd70f8ca4fe082f6143b8e0cb564d8",
+            "detectedCI": "undetected"
+          }
+        ]
+      },
+      "quality_indicators": {
+        "defect_density_per_1k_loc": 0,
+        "vulnerability_density_per_1k_loc": 0,
+        "code_smell_density_per_1k_loc": 0,
+        "comment_ratio_percentage": 0,
+        "technical_debt_per_loc": 0,
+        "coverage_category": "none",
+        "complexity_category": "none",
+        "complexity_per_line": 0,
+        "quality_gate_status": "NONE",
+        "quality_gate_passed": false,
+        "maintainability_rating": "A",
+        "reliability_rating": "A",
+        "security_rating": "A",
+        "has_tests": false,
+        "test_count": 0
+      }
+    },
+    {
+      "key": "thinkboard-phi-note",
+      "name": "MERN ThinkBoard - phi-note",
+      "qualifier": "TRK",
+      "visibility": "public",
+      "last_analysis_date": "2025-08-07T08:08:53+0000",
+      "metrics": {
+        "coverage": 0.0,
+        "reliability_rating": 1.0,
+        "code_smells": 16,
+        "security_rating": 1.0,
+        "sqale_debt_ratio": 0.4,
+        "security_hotspots": 1,
+        "sqale_index": 64,
+        "sqale_rating": 1.0,
+        "lines_to_cover": 171,
+        "uncovered_lines": 171,
+        "vulnerabilities": 0,
+        "line_coverage": 0.0,
+        "minor_violations": 4,
+        "critical_violations": 0,
+        "blocker_violations": 0,
+        "info_violations": 0,
+        "major_violations": 12
+      },
+      "issues_analysis": {
+        "by_severity": {
+          "blocker": {
+            "count": 0,
+            "debt_minutes": 0
+          },
+          "critical": {
+            "count": 0,
+            "debt_minutes": 0
+          },
+          "major": {
+            "count": 12,
+            "debt_minutes": 60
+          },
+          "minor": {
+            "count": 4,
+            "debt_minutes": 4
+          },
+          "info": {
+            "count": 0,
+            "debt_minutes": 0
+          }
+        },
+        "by_type": {
+          "bug": {
+            "count": 0,
+            "debt_minutes": 0
+          },
+          "vulnerability": {
+            "count": 0,
+            "debt_minutes": 0
+          },
+          "code_smell": {
+            "count": 16,
+            "debt_minutes": 64
+          }
+        },
+        "by_status": {},
+        "total_technical_debt_minutes": 64,
+        "summary": {
+          "total_issues": 16,
+          "total_debt_hours": 1.07
+        }
+      },
+      "file_analysis": {
+        "total_files": 19,
+        "complexity_distribution": {
+          "low": 17,
+          "medium": 2,
+          "high": 0,
+          "very_high": 0
+        },
+        "size_distribution": {
+          "small": 18,
+          "medium": 1,
+          "large": 0,
+          "very_large": 0
+        },
+        "languages": {
+          "jsx": 9,
+          "js": 9,
+          "css": 1
+        },
+        "avg_complexity_per_file": 3.16,
+        "avg_lines_per_file": 30.16
+      },
+      "analysis_statistics": {
+        "total_analyses": 1,
+        "first_analysis": "2025-08-07T08:08:53+0000",
+        "last_analysis": "2025-08-07T08:08:53+0000",
+        "analysis_frequency_days": null,
+        "recent_analyses": [
+          {
+            "key": "b3e7ffa2-f63e-4ce1-a2ab-d5b287827f40",
+            "date": "2025-08-07T08:08:53+0000",
+            "events": [
+              {
+                "key": "a793150e-e7c0-49b3-a453-00fa27f53d98",
+                "category": "SQ_UPGRADE",
+                "name": "25.7.0.110598"
+              },
+              {
+                "key": "b35fc876-7cfd-4bbf-926c-5067653b5df6",
+                "category": "VERSION",
+                "name": "1.0.0"
+              }
+            ],
+            "projectVersion": "1.0.0",
+            "manualNewCodePeriodBaseline": false,
+            "revision": "97c5173a76cd70f8ca4fe082f6143b8e0cb564d8",
+            "detectedCI": "undetected"
+          }
+        ]
+      },
+      "quality_indicators": {
+        "defect_density_per_1k_loc": 0,
+        "vulnerability_density_per_1k_loc": 0,
+        "code_smell_density_per_1k_loc": 0,
+        "comment_ratio_percentage": 0,
+        "technical_debt_per_loc": 0,
+        "coverage_category": "none",
+        "complexity_category": "none",
+        "complexity_per_line": 0,
+        "quality_gate_status": "NONE",
+        "quality_gate_passed": false,
+        "maintainability_rating": "A",
+        "reliability_rating": "A",
+        "security_rating": "A",
+        "has_tests": false,
+        "test_count": 0
+      }
+    },
+    {
+      "key": "thinkboard-phi-notecard",
+      "name": "MERN ThinkBoard - phi-notecard",
+      "qualifier": "TRK",
+      "visibility": "public",
+      "last_analysis_date": "2025-08-07T08:09:17+0000",
+      "metrics": {
+        "coverage": 0.0,
+        "reliability_rating": 1.0,
+        "code_smells": 20,
+        "security_rating": 1.0,
+        "sqale_debt_ratio": 0.5,
+        "security_hotspots": 1,
+        "sqale_index": 84,
+        "sqale_rating": 1.0,
+        "lines_to_cover": 174,
+        "uncovered_lines": 174,
+        "vulnerabilities": 0,
+        "line_coverage": 0.0,
+        "minor_violations": 4,
+        "critical_violations": 0,
+        "blocker_violations": 0,
+        "info_violations": 0,
+        "major_violations": 16
+      },
+      "issues_analysis": {
+        "by_severity": {
+          "blocker": {
+            "count": 0,
+            "debt_minutes": 0
+          },
+          "critical": {
+            "count": 0,
+            "debt_minutes": 0
+          },
+          "major": {
+            "count": 16,
+            "debt_minutes": 80
+          },
+          "minor": {
+            "count": 4,
+            "debt_minutes": 4
+          },
+          "info": {
+            "count": 0,
+            "debt_minutes": 0
+          }
+        },
+        "by_type": {
+          "bug": {
+            "count": 0,
+            "debt_minutes": 0
+          },
+          "vulnerability": {
+            "count": 0,
+            "debt_minutes": 0
+          },
+          "code_smell": {
+            "count": 20,
+            "debt_minutes": 84
+          }
+        },
+        "by_status": {},
+        "total_technical_debt_minutes": 84,
+        "summary": {
+          "total_issues": 20,
+          "total_debt_hours": 1.4
+        }
+      },
+      "file_analysis": {
+        "total_files": 19,
+        "complexity_distribution": {
+          "low": 17,
+          "medium": 2,
+          "high": 0,
+          "very_high": 0
+        },
+        "size_distribution": {
+          "small": 18,
+          "medium": 1,
+          "large": 0,
+          "very_large": 0
+        },
+        "languages": {
+          "jsx": 9,
+          "js": 9,
+          "css": 1
+        },
+        "avg_complexity_per_file": 3.21,
+        "avg_lines_per_file": 29.89
+      },
+      "analysis_statistics": {
+        "total_analyses": 1,
+        "first_analysis": "2025-08-07T08:09:17+0000",
+        "last_analysis": "2025-08-07T08:09:17+0000",
+        "analysis_frequency_days": null,
+        "recent_analyses": [
+          {
+            "key": "e94050bb-98d9-496f-bcf0-74f289bc83aa",
+            "date": "2025-08-07T08:09:17+0000",
+            "events": [
+              {
+                "key": "2010172b-fbcc-4250-b6b1-d4689ecb2741",
+                "category": "SQ_UPGRADE",
+                "name": "25.7.0.110598"
+              },
+              {
+                "key": "c8dd85b2-0f9e-4eea-95da-3590e22aeb68",
+                "category": "VERSION",
+                "name": "1.0.0"
+              }
+            ],
+            "projectVersion": "1.0.0",
+            "manualNewCodePeriodBaseline": false,
+            "revision": "97c5173a76cd70f8ca4fe082f6143b8e0cb564d8",
+            "detectedCI": "undetected"
+          }
+        ]
+      },
+      "quality_indicators": {
+        "defect_density_per_1k_loc": 0,
+        "vulnerability_density_per_1k_loc": 0,
+        "code_smell_density_per_1k_loc": 0,
+        "comment_ratio_percentage": 0,
+        "technical_debt_per_loc": 0,
+        "coverage_category": "none",
+        "complexity_category": "none",
+        "complexity_per_line": 0,
+        "quality_gate_status": "NONE",
+        "quality_gate_passed": false,
+        "maintainability_rating": "A",
+        "reliability_rating": "A",
+        "security_rating": "A",
+        "has_tests": false,
+        "test_count": 0
+      }
+    },
+    {
+      "key": "thinkboard-phi-notecontroller",
+      "name": "MERN ThinkBoard - phi-notecontroller",
+      "qualifier": "TRK",
+      "visibility": "public",
+      "last_analysis_date": "2025-08-07T08:09:39+0000",
+      "metrics": {
+        "coverage": 0.0,
+        "reliability_rating": 1.0,
+        "code_smells": 16,
+        "security_rating": 1.0,
+        "sqale_debt_ratio": 0.3,
+        "security_hotspots": 1,
+        "sqale_index": 64,
+        "sqale_rating": 1.0,
+        "lines_to_cover": 182,
+        "uncovered_lines": 182,
+        "vulnerabilities": 0,
+        "line_coverage": 0.0,
+        "minor_violations": 4,
+        "critical_violations": 0,
+        "blocker_violations": 0,
+        "info_violations": 0,
+        "major_violations": 12
+      },
+      "issues_analysis": {
+        "by_severity": {
+          "blocker": {
+            "count": 0,
+            "debt_minutes": 0
+          },
+          "critical": {
+            "count": 0,
+            "debt_minutes": 0
+          },
+          "major": {
+            "count": 12,
+            "debt_minutes": 60
+          },
+          "minor": {
+            "count": 4,
+            "debt_minutes": 4
+          },
+          "info": {
+            "count": 0,
+            "debt_minutes": 0
+          }
+        },
+        "by_type": {
+          "bug": {
+            "count": 0,
+            "debt_minutes": 0
+          },
+          "vulnerability": {
+            "count": 0,
+            "debt_minutes": 0
+          },
+          "code_smell": {
+            "count": 16,
+            "debt_minutes": 64
+          }
+        },
+        "by_status": {},
+        "total_technical_debt_minutes": 64,
+        "summary": {
+          "total_issues": 16,
+          "total_debt_hours": 1.07
+        }
+      },
+      "file_analysis": {
+        "total_files": 19,
+        "complexity_distribution": {
+          "low": 16,
+          "medium": 3,
+          "high": 0,
+          "very_high": 0
+        },
+        "size_distribution": {
+          "small": 18,
+          "medium": 1,
+          "large": 0,
+          "very_large": 0
+        },
+        "languages": {
+          "jsx": 9,
+          "js": 9,
+          "css": 1
+        },
+        "avg_complexity_per_file": 3.37,
+        "avg_lines_per_file": 32.21
+      },
+      "analysis_statistics": {
+        "total_analyses": 1,
+        "first_analysis": "2025-08-07T08:09:39+0000",
+        "last_analysis": "2025-08-07T08:09:39+0000",
+        "analysis_frequency_days": null,
+        "recent_analyses": [
+          {
+            "key": "57e27b38-2e91-400f-92e7-86d1e94a306b",
+            "date": "2025-08-07T08:09:39+0000",
+            "events": [
+              {
+                "key": "067115d4-cd22-46e3-a0e7-478377e0f1b3",
+                "category": "SQ_UPGRADE",
+                "name": "25.7.0.110598"
+              },
+              {
+                "key": "f95e4d40-1d66-4270-9b55-b539e837d9ee",
+                "category": "VERSION",
+                "name": "1.0.0"
+              }
+            ],
+            "projectVersion": "1.0.0",
+            "manualNewCodePeriodBaseline": false,
+            "revision": "97c5173a76cd70f8ca4fe082f6143b8e0cb564d8",
+            "detectedCI": "undetected"
+          }
+        ]
+      },
+      "quality_indicators": {
+        "defect_density_per_1k_loc": 0,
+        "vulnerability_density_per_1k_loc": 0,
+        "code_smell_density_per_1k_loc": 0,
+        "comment_ratio_percentage": 0,
+        "technical_debt_per_loc": 0,
+        "coverage_category": "none",
+        "complexity_category": "none",
+        "complexity_per_line": 0,
+        "quality_gate_status": "NONE",
+        "quality_gate_passed": false,
+        "maintainability_rating": "A",
+        "reliability_rating": "A",
+        "security_rating": "A",
+        "has_tests": false,
+        "test_count": 0
+      }
+    },
+    {
+      "key": "thinkboard-phi-notedetail",
+      "name": "MERN ThinkBoard - phi-notedetail",
+      "qualifier": "TRK",
+      "visibility": "public",
+      "last_analysis_date": "2025-08-07T08:10:01+0000",
+      "metrics": {
+        "coverage": 0.0,
+        "reliability_rating": 1.0,
+        "code_smells": 12,
+        "security_rating": 1.0,
+        "sqale_debt_ratio": 0.3,
+        "security_hotspots": 1,
+        "sqale_index": 52,
+        "sqale_rating": 1.0,
+        "lines_to_cover": 154,
+        "uncovered_lines": 154,
+        "vulnerabilities": 0,
+        "line_coverage": 0.0,
+        "minor_violations": 2,
+        "critical_violations": 0,
+        "blocker_violations": 0,
+        "info_violations": 0,
+        "major_violations": 10
+      },
+      "issues_analysis": {
+        "by_severity": {
+          "blocker": {
+            "count": 0,
+            "debt_minutes": 0
+          },
+          "critical": {
+            "count": 0,
+            "debt_minutes": 0
+          },
+          "major": {
+            "count": 10,
+            "debt_minutes": 50
+          },
+          "minor": {
+            "count": 2,
+            "debt_minutes": 2
+          },
+          "info": {
+            "count": 0,
+            "debt_minutes": 0
+          }
+        },
+        "by_type": {
+          "bug": {
+            "count": 0,
+            "debt_minutes": 0
+          },
+          "vulnerability": {
+            "count": 0,
+            "debt_minutes": 0
+          },
+          "code_smell": {
+            "count": 12,
+            "debt_minutes": 52
+          }
+        },
+        "by_status": {},
+        "total_technical_debt_minutes": 52,
+        "summary": {
+          "total_issues": 12,
+          "total_debt_hours": 0.87
+        }
+      },
+      "file_analysis": {
+        "total_files": 19,
+        "complexity_distribution": {
+          "low": 18,
+          "medium": 1,
+          "high": 0,
+          "very_high": 0
+        },
+        "size_distribution": {
+          "small": 19,
+          "medium": 0,
+          "large": 0,
+          "very_large": 0
+        },
+        "languages": {
+          "jsx": 9,
+          "js": 9,
+          "css": 1
+        },
+        "avg_complexity_per_file": 2.89,
+        "avg_lines_per_file": 27.74
+      },
+      "analysis_statistics": {
+        "total_analyses": 1,
+        "first_analysis": "2025-08-07T08:10:01+0000",
+        "last_analysis": "2025-08-07T08:10:01+0000",
+        "analysis_frequency_days": null,
+        "recent_analyses": [
+          {
+            "key": "f0d6132b-333b-4899-b047-4446b0da522c",
+            "date": "2025-08-07T08:10:01+0000",
+            "events": [
+              {
+                "key": "95a3ced1-1ebc-42de-98a2-dfcda5fed860",
+                "category": "SQ_UPGRADE",
+                "name": "25.7.0.110598"
+              },
+              {
+                "key": "30ac221b-16b8-4215-912c-a7fc1eac04fe",
+                "category": "VERSION",
+                "name": "1.0.0"
+              }
+            ],
+            "projectVersion": "1.0.0",
+            "manualNewCodePeriodBaseline": false,
+            "revision": "97c5173a76cd70f8ca4fe082f6143b8e0cb564d8",
+            "detectedCI": "undetected"
+          }
+        ]
+      },
+      "quality_indicators": {
+        "defect_density_per_1k_loc": 0,
+        "vulnerability_density_per_1k_loc": 0,
+        "code_smell_density_per_1k_loc": 0,
+        "comment_ratio_percentage": 0,
+        "technical_debt_per_loc": 0,
+        "coverage_category": "none",
+        "complexity_category": "none",
+        "complexity_per_line": 0,
+        "quality_gate_status": "NONE",
+        "quality_gate_passed": false,
+        "maintainability_rating": "A",
+        "reliability_rating": "A",
+        "security_rating": "A",
+        "has_tests": false,
+        "test_count": 0
+      }
+    }
+  ],
+  "summary_statistics": {
+    "total_lines_of_code": 0,
+    "total_bugs": 0,
+    "total_vulnerabilities": 0,
+    "total_code_smells": 177,
+    "total_security_hotspots": 11,
+    "total_technical_debt_minutes": 1000,
+    "total_technical_debt_hours": 16.67,
+    "projects_with_tests": 0,
+    "projects_with_coverage": 0,
+    "average_complexity_per_project": 0.0,
+    "average_coverage_percentage": 0,
+    "languages_detected": [
+      "css",
+      "js",
+      "jsx"
+    ],
+    "complexity_distribution": {
+      "low_complexity_projects": 0,
+      "medium_complexity_projects": 0,
+      "high_complexity_projects": 0,
+      "very_high_complexity_projects": 0
+    },
+    "coverage_distribution": {
+      "excellent_coverage_projects": 0,
+      "good_coverage_projects": 0,
+      "fair_coverage_projects": 0,
+      "poor_coverage_projects": 0,
+      "no_coverage_projects": 0
+    }
+  }
+}
