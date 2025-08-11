@@ -76,7 +76,9 @@ Our research follows a **controlled experimental design**:
 ```
 ├── ProjectData/           # Data entry folder per project
 ├ └── *ProjectName*/
-├     └── cli-gen-logs     # Generation logs and output files          
+├     └── cli-gen-logs/    # Generation logs and output files      
+├     └── eslint-report/   # Contains all .json report output files and a .csv that includes them all
+├     └── sonarqube/       # Contains an exported in .json version of the SonarQube project and a .csv with our selected metrics
 └── README.md              # This file
 ```
 
