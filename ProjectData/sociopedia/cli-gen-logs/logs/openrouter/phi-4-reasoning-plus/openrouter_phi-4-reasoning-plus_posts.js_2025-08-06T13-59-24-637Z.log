@@ -1,0 +1,3130 @@
+
+=== API CALL LOG ===
+Provider: openrouter_phi-4-reasoning-plus
+File: posts.js
+Path: server/controllers/posts.js
+Timestamp: 2025-08-06T13:59:24.637Z
+
+=== PROMPT SENT ===
+You are a MERN stack developer. Generate the missing file `posts.js` based on the complete codebase provided below.
+
+**RULES:**
+- Analyze the codebase to understand existing patterns, imports, and dependencies
+- Only use imports and functions that exist in the provided codebase
+- Follow the same coding style and structure as similar files
+- DO NOT invent or hallucinate imports/libraries that don't exist in the codebase.
+- DO NOT assume any other functions/files exist in the codebase apart from the ones i sent you.
+- Component should be able to work correctly with the existing codebase without any changes.
+
+The file will be saved at this path: `server/controllers/posts.js` so make sure imports are correct.
+Generate only the complete code for `posts.js` - no explanations, no markdown formatting, the response will be saved as `posts.js` and it should be good to go.
+
+**CODEBASE:**
+<<<FILE_START>>>
+FILE: client/jsconfig.json
+{
+  "compilerOptions": {
+    "baseUrl": "src"
+  },
+  "include": ["src"]
+}
+
+<<<FILE_END>>>
+
+<<<FILE_START>>>
+FILE: client/package.json
+{
+  "name": "client",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@emotion/react": "^11.10.5",
+    "@emotion/styled": "^11.10.5",
+    "@mui/icons-material": "^5.10.9",
+    "@mui/material": "^5.10.11",
+    "@reduxjs/toolkit": "^1.8.6",
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^13.5.0",
+    "dotenv": "^16.0.3",
+    "formik": "^2.2.9",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-dropzone": "^14.2.3",
+    "react-redux": "^8.0.4",
+    "react-router-dom": "^6.4.2",
+    "react-scripts": "5.0.1",
+    "redux-persist": "^6.0.0",
+    "web-vitals": "^2.1.4",
+    "yup": "^0.32.11"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
+
+<<<FILE_END>>>
+
+<<<FILE_START>>>
+FILE: client/public/index.html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta
+      name="description"
+      content="Web site created using create-react-app"
+    />
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+    <!--
+      manifest.json provides metadata used when your web app is installed on a
+      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
+    -->
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    <!--
+      Notice the use of %PUBLIC_URL% in the tags above.
+      It will be replaced with the URL of the `public` folder during the build.
+      Only files inside the `public` folder can be referenced from the HTML.
+
+      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
+      work correctly both with client-side routing and a non-root public URL.
+      Learn how to configure a non-root public URL by running `npm run build`.
+    -->
+    <title>React App</title>
+  </head>
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root"></div>
+    <!--
+      This HTML file is a template.
+      If you open it directly in the browser, you will see an empty page.
+
+      You can add webfonts, meta tags, or analytics to this file.
+      The build step will place the bundled scripts into the <body> tag.
+
+      To begin the development, run `npm start` or `yarn start`.
+      To create a production bundle, use `npm run build` or `yarn build`.
+    -->
+  </body>
+</html>
+
+<<<FILE_END>>>
+
+<<<FILE_START>>>
+FILE: client/public/manifest.json
+{
+  "short_name": "React App",
+  "name": "Create React App Sample",
+  "icons": [
+    {
+      "src": "favicon.ico",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "logo192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "logo512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}
+
+<<<FILE_END>>>
+
+<<<FILE_START>>>
+FILE: client/src/App.js
+import { BrowserRouter, Navigate, Routes, Route } from "react-router-dom";
+import HomePage from "scenes/homePage";
+import LoginPage from "scenes/loginPage";
+import ProfilePage from "scenes/profilePage";
+import { useMemo } from "react";
+import { useSelector } from "react-redux";
+import { CssBaseline, ThemeProvider } from "@mui/material";
+import { createTheme } from "@mui/material/styles";
+import { themeSettings } from "./theme";
+
+function App() {
+  const mode = useSelector((state) => state.mode);
+  const theme = useMemo(() => createTheme(themeSettings(mode)), [mode]);
+  const isAuth = Boolean(useSelector((state) => state.token));
+
+  return (
+    <div className="app">
+      <BrowserRouter>
+        <ThemeProvider theme={theme}>
+          <CssBaseline />
+          <Routes>
+            <Route path="/" element={<LoginPage />} />
+            <Route
+              path="/home"
+              element={isAuth ? <HomePage /> : <Navigate to="/" />}
+            />
+            <Route
+              path="/profile/:userId"
+              element={isAuth ? <ProfilePage /> : <Navigate to="/" />}
+            />
+          </Routes>
+        </ThemeProvider>
+      </BrowserRouter>
+    </div>
+  );
+}
+
+export default App;
+
+<<<FILE_END>>>
+
+<<<FILE_START>>>
+FILE: client/src/components/FlexBetween.jsx
+import { Box } from "@mui/material";
+import { styled } from "@mui/system";
+
+const FlexBetween = styled(Box)({
+  display: "flex",
+  justifyContent: "space-between",
+  alignItems: "center",
+});
+
+export default FlexBetween;
+
+<<<FILE_END>>>
+
+<<<FILE_START>>>
+FILE: client/src/components/Friend.jsx
+import { PersonAddOutlined, PersonRemoveOutlined } from "@mui/icons-material";
+import { Box, IconButton, Typography, useTheme } from "@mui/material";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { setFriends } from "state";
+import FlexBetween from "./FlexBetween";
+import UserImage from "./UserImage";
+
+const Friend = ({ friendId, name, subtitle, userPicturePath }) => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { _id } = useSelector((state) => state.user);
+  const token = useSelector((state) => state.token);
+  const friends = useSelector((state) => state.user.friends);
+
+  const { palette } = useTheme();
+  const primaryLight = palette.primary.light;
+  const primaryDark = palette.primary.dark;
+  const main = palette.neutral.main;
+  const medium = palette.neutral.medium;
+
+  const isFriend = friends.find((friend) => friend._id === friendId);
+
+  const patchFriend = async () => {
+    const response = await fetch(
+      `http://localhost:3001/users/${_id}/${friendId}`,
+      {
+        method: "PATCH",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    const data = await response.json();
+    dispatch(setFriends({ friends: data }));
+  };
+
+  return (
+    <FlexBetween>
+      <FlexBetween gap="1rem">
+        <UserImage image={userPicturePath} size="55px" />
+        <Box
+          onClick={() => {
+            navigate(`/profile/${friendId}`);
+            navigate(0);
+          }}
+        >
+          <Typography
+            color={main}
+            variant="h5"
+            fontWeight="500"
+            sx={{
+              "&:hover": {
+                color: palette.primary.light,
+                cursor: "pointer",
+              },
+            }}
+          >
+            {name}
+          </Typography>
+          <Typography color={medium} fontSize="0.75rem">
+            {subtitle}
+          </Typography>
+        </Box>
+      </FlexBetween>
+      <IconButton
+        onClick={() => patchFriend()}
+        sx={{ backgroundColor: primaryLight, p: "0.6rem" }}
+      >
+        {isFriend ? (
+          <PersonRemoveOutlined sx={{ color: primaryDark }} />
+        ) : (
+          <PersonAddOutlined sx={{ color: primaryDark }} />
+        )}
+      </IconButton>
+    </FlexBetween>
+  );
+};
+
+export default Friend;
+
+<<<FILE_END>>>
+
+<<<FILE_START>>>
+FILE: client/src/components/UserImage.jsx
+import { Box } from "@mui/material";
+
+const UserImage = ({ image, size = "60px" }) => {
+  return (
+    <Box width={size} height={size}>
+      <img
+        style={{ objectFit: "cover", borderRadius: "50%" }}
+        width={size}
+        height={size}
+        alt="user"
+        src={`http://localhost:3001/assets/${image}`}
+      />
+    </Box>
+  );
+};
+
+export default UserImage;
+
+<<<FILE_END>>>
+
+<<<FILE_START>>>
+FILE: client/src/components/WidgetWrapper.jsx
+import { Box } from "@mui/material";
+import { styled } from "@mui/system";
+
+const WidgetWrapper = styled(Box)(({ theme }) => ({
+  padding: "1.5rem 1.5rem 0.75rem 1.5rem",
+  backgroundColor: theme.palette.background.alt,
+  borderRadius: "0.75rem",
+}));
+
+export default WidgetWrapper;
+
+<<<FILE_END>>>
+
+<<<FILE_START>>>
+FILE: client/src/index.css
+@import url("https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700&display=swap");
+
+html,
+body,
+#root,
+.app {
+  height: 100%;
+  width: 100%;
+  font-family: "Rubik", sans-serif;
+}
+
+<<<FILE_END>>>
+
+<<<FILE_START>>>
+FILE: client/src/index.js
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import App from "./App";
+import authReducer from "./state";
+import { configureStore } from "@reduxjs/toolkit";
+import { Provider } from "react-redux";
+import {
+  persistStore,
+  persistReducer,
+  FLUSH,
+  REHYDRATE,
+  PAUSE,
+  PERSIST,
+  PURGE,
+  REGISTER,
+} from "redux-persist";
+import storage from "redux-persist/lib/storage";
+import { PersistGate } from "redux-persist/integration/react";
+
+const persistConfig = { key: "root", storage, version: 1 };
+const persistedReducer = persistReducer(persistConfig, authReducer);
+const store = configureStore({
+  reducer: persistedReducer,
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+      },
+    }),
+});
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(
+  <React.StrictMode>
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistStore(store)}>
+        <App />
+      </PersistGate>
+    </Provider>
+  </React.StrictMode>
+);
+
+<<<FILE_END>>>
+
+<<<FILE_START>>>
+FILE: client/src/scenes/homePage/index.jsx
+import { Box, useMediaQuery } from "@mui/material";
+import { useSelector } from "react-redux";
+import Navbar from "scenes/navbar";
+import UserWidget from "scenes/widgets/UserWidget";
+import MyPostWidget from "scenes/widgets/MyPostWidget";
+import PostsWidget from "scenes/widgets/PostsWidget";
+import AdvertWidget from "scenes/widgets/AdvertWidget";
+import FriendListWidget from "scenes/widgets/FriendListWidget";
+
+const HomePage = () => {
+  const isNonMobileScreens = useMediaQuery("(min-width:1000px)");
+  const { _id, picturePath } = useSelector((state) => state.user);
+
+  return (
+    <Box>
+      <Navbar />
+      <Box
+        width="100%"
+        padding="2rem 6%"
+        display={isNonMobileScreens ? "flex" : "block"}
+        gap="0.5rem"
+        justifyContent="space-between"
+      >
+        <Box flexBasis={isNonMobileScreens ? "26%" : undefined}>
+          <UserWidget userId={_id} picturePath={picturePath} />
+        </Box>
+        <Box
+          flexBasis={isNonMobileScreens ? "42%" : undefined}
+          mt={isNonMobileScreens ? undefined : "2rem"}
+        >
+          <MyPostWidget picturePath={picturePath} />
+          <PostsWidget userId={_id} />
+        </Box>
+        {isNonMobileScreens && (
+          <Box flexBasis="26%">
+            <AdvertWidget />
+            <Box m="2rem 0" />
+            <FriendListWidget userId={_id} />
+          </Box>
+        )}
+      </Box>
+    </Box>
+  );
+};
+
+export default HomePage;
+
+<<<FILE_END>>>
+
+<<<FILE_START>>>
+FILE: client/src/scenes/loginPage/Form.jsx
+import { useState } from "react";
+import {
+  Box,
+  Button,
+  TextField,
+  useMediaQuery,
+  Typography,
+  useTheme,
+} from "@mui/material";
+import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
+import { Formik } from "formik";
+import * as yup from "yup";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setLogin } from "state";
+import Dropzone from "react-dropzone";
+import FlexBetween from "components/FlexBetween";
+
+const registerSchema = yup.object().shape({
+  firstName: yup.string().required("required"),
+  lastName: yup.string().required("required"),
+  email: yup.string().email("invalid email").required("required"),
+  password: yup.string().required("required"),
+  location: yup.string().required("required"),
+  occupation: yup.string().required("required"),
+  picture: yup.string().required("required"),
+});
+
+const loginSchema = yup.object().shape({
+  email: yup.string().email("invalid email").required("required"),
+  password: yup.string().required("required"),
+});
+
+const initialValuesRegister = {
+  firstName: "",
+  lastName: "",
+  email: "",
+  password: "",
+  location: "",
+  occupation: "",
+  picture: "",
+};
+
+const initialValuesLogin = {
+  email: "",
+  password: "",
+};
+
+const Form = () => {
+  const [pageType, setPageType] = useState("login");
+  const { palette } = useTheme();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const isNonMobile = useMediaQuery("(min-width:600px)");
+  const isLogin = pageType === "login";
+  const isRegister = pageType === "register";
+
+  const register = async (values, onSubmitProps) => {
+    // this allows us to send form info with image
+    const formData = new FormData();
+    for (let value in values) {
+      formData.append(value, values[value]);
+    }
+    formData.append("picturePath", values.picture.name);
+
+    const savedUserResponse = await fetch(
+      "http://localhost:3001/auth/register",
+      {
+        method: "POST",
+        body: formData,
+      }
+    );
+    const savedUser = await savedUserResponse.json();
+    onSubmitProps.resetForm();
+
+    if (savedUser) {
+      setPageType("login");
+    }
+  };
+
+  const login = async (values, onSubmitProps) => {
+    const loggedInResponse = await fetch("http://localhost:3001/auth/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(values),
+    });
+    const loggedIn = await loggedInResponse.json();
+    onSubmitProps.resetForm();
+    if (loggedIn) {
+      dispatch(
+        setLogin({
+          user: loggedIn.user,
+          token: loggedIn.token,
+        })
+      );
+      navigate("/home");
+    }
+  };
+
+  const handleFormSubmit = async (values, onSubmitProps) => {
+    if (isLogin) await login(values, onSubmitProps);
+    if (isRegister) await register(values, onSubmitProps);
+  };
+
+  return (
+    <Formik
+      onSubmit={handleFormSubmit}
+      initialValues={isLogin ? initialValuesLogin : initialValuesRegister}
+      validationSchema={isLogin ? loginSchema : registerSchema}
+    >
+      {({
+        values,
+        errors,
+        touched,
+        handleBlur,
+        handleChange,
+        handleSubmit,
+        setFieldValue,
+        resetForm,
+      }) => (
+        <form onSubmit={handleSubmit}>
+          <Box
+            display="grid"
+            gap="30px"
+            gridTemplateColumns="repeat(4, minmax(0, 1fr))"
+            sx={{
+              "& > div": { gridColumn: isNonMobile ? undefined : "span 4" },
+            }}
+          >
+            {isRegister && (
+              <>
+                <TextField
+                  label="First Name"
+                  onBlur={handleBlur}
+                  onChange={handleChange}
+                  value={values.firstName}
+                  name="firstName"
+                  error={
+                    Boolean(touched.firstName) && Boolean(errors.firstName)
+                  }
+                  helperText={touched.firstName && errors.firstName}
+                  sx={{ gridColumn: "span 2" }}
+                />
+                <TextField
+                  label="Last Name"
+                  onBlur={handleBlur}
+                  onChange={handleChange}
+                  value={values.lastName}
+                  name="lastName"
+                  error={Boolean(touched.lastName) && Boolean(errors.lastName)}
+                  helperText={touched.lastName && errors.lastName}
+                  sx={{ gridColumn: "span 2" }}
+                />
+                <TextField
+                  label="Location"
+                  onBlur={handleBlur}
+                  onChange={handleChange}
+                  value={values.location}
+                  name="location"
+                  error={Boolean(touched.location) && Boolean(errors.location)}
+                  helperText={touched.location && errors.location}
+                  sx={{ gridColumn: "span 4" }}
+                />
+                <TextField
+                  label="Occupation"
+                  onBlur={handleBlur}
+                  onChange={handleChange}
+                  value={values.occupation}
+                  name="occupation"
+                  error={
+                    Boolean(touched.occupation) && Boolean(errors.occupation)
+                  }
+                  helperText={touched.occupation && errors.occupation}
+                  sx={{ gridColumn: "span 4" }}
+                />
+                <Box
+                  gridColumn="span 4"
+                  border={`1px solid ${palette.neutral.medium}`}
+                  borderRadius="5px"
+                  p="1rem"
+                >
+                  <Dropzone
+                    acceptedFiles=".jpg,.jpeg,.png"
+                    multiple={false}
+                    onDrop={(acceptedFiles) =>
+                      setFieldValue("picture", acceptedFiles[0])
+                    }
+                  >
+                    {({ getRootProps, getInputProps }) => (
+                      <Box
+                        {...getRootProps()}
+                        border={`2px dashed ${palette.primary.main}`}
+                        p="1rem"
+                        sx={{ "&:hover": { cursor: "pointer" } }}
+                      >
+                        <input {...getInputProps()} />
+                        {!values.picture ? (
+                          <p>Add Picture Here</p>
+                        ) : (
+                          <FlexBetween>
+                            <Typography>{values.picture.name}</Typography>
+                            <EditOutlinedIcon />
+                          </FlexBetween>
+                        )}
+                      </Box>
+                    )}
+                  </Dropzone>
+                </Box>
+              </>
+            )}
+
+            <TextField
+              label="Email"
+              onBlur={handleBlur}
+              onChange={handleChange}
+              value={values.email}
+              name="email"
+              error={Boolean(touched.email) && Boolean(errors.email)}
+              helperText={touched.email && errors.email}
+              sx={{ gridColumn: "span 4" }}
+            />
+            <TextField
+              label="Password"
+              type="password"
+              onBlur={handleBlur}
+              onChange={handleChange}
+              value={values.password}
+              name="password"
+              error={Boolean(touched.password) && Boolean(errors.password)}
+              helperText={touched.password && errors.password}
+              sx={{ gridColumn: "span 4" }}
+            />
+          </Box>
+
+          {/* BUTTONS */}
+          <Box>
+            <Button
+              fullWidth
+              type="submit"
+              sx={{
+                m: "2rem 0",
+                p: "1rem",
+                backgroundColor: palette.primary.main,
+                color: palette.background.alt,
+                "&:hover": { color: palette.primary.main },
+              }}
+            >
+              {isLogin ? "LOGIN" : "REGISTER"}
+            </Button>
+            <Typography
+              onClick={() => {
+                setPageType(isLogin ? "register" : "login");
+                resetForm();
+              }}
+              sx={{
+                textDecoration: "underline",
+                color: palette.primary.main,
+                "&:hover": {
+                  cursor: "pointer",
+                  color: palette.primary.light,
+                },
+              }}
+            >
+              {isLogin
+                ? "Don't have an account? Sign Up here."
+                : "Already have an account? Login here."}
+            </Typography>
+          </Box>
+        </form>
+      )}
+    </Formik>
+  );
+};
+
+export default Form;
+
+<<<FILE_END>>>
+
+<<<FILE_START>>>
+FILE: client/src/scenes/loginPage/index.jsx
+import { Box, Typography, useTheme, useMediaQuery } from "@mui/material";
+import Form from "./Form";
+
+const LoginPage = () => {
+  const theme = useTheme();
+  const isNonMobileScreens = useMediaQuery("(min-width: 1000px)");
+  return (
+    <Box>
+      <Box
+        width="100%"
+        backgroundColor={theme.palette.background.alt}
+        p="1rem 6%"
+        textAlign="center"
+      >
+        <Typography fontWeight="bold" fontSize="32px" color="primary">
+          Sociopedia
+        </Typography>
+      </Box>
+
+      <Box
+        width={isNonMobileScreens ? "50%" : "93%"}
+        p="2rem"
+        m="2rem auto"
+        borderRadius="1.5rem"
+        backgroundColor={theme.palette.background.alt}
+      >
+        <Typography fontWeight="500" variant="h5" sx={{ mb: "1.5rem" }}>
+          Welcome to Socipedia, the Social Media for Sociopaths!
+        </Typography>
+        <Form />
+      </Box>
+    </Box>
+  );
+};
+
+export default LoginPage;
+
+<<<FILE_END>>>
+
+<<<FILE_START>>>
+FILE: client/src/scenes/navbar/index.jsx
+import { useState } from "react";
+import {
+  Box,
+  IconButton,
+  InputBase,
+  Typography,
+  Select,
+  MenuItem,
+  FormControl,
+  useTheme,
+  useMediaQuery,
+} from "@mui/material";
+import {
+  Search,
+  Message,
+  DarkMode,
+  LightMode,
+  Notifications,
+  Help,
+  Menu,
+  Close,
+} from "@mui/icons-material";
+import { useDispatch, useSelector } from "react-redux";
+import { setMode, setLogout } from "state";
+import { useNavigate } from "react-router-dom";
+import FlexBetween from "components/FlexBetween";
+
+const Navbar = () => {
+  const [isMobileMenuToggled, setIsMobileMenuToggled] = useState(false);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const user = useSelector((state) => state.user);
+  const isNonMobileScreens = useMediaQuery("(min-width: 1000px)");
+
+  const theme = useTheme();
+  const neutralLight = theme.palette.neutral.light;
+  const dark = theme.palette.neutral.dark;
+  const background = theme.palette.background.default;
+  const primaryLight = theme.palette.primary.light;
+  const alt = theme.palette.background.alt;
+
+  const fullName = `${user.firstName} ${user.lastName}`;
+
+  return (
+    <FlexBetween padding="1rem 6%" backgroundColor={alt}>
+      <FlexBetween gap="1.75rem">
+        <Typography
+          fontWeight="bold"
+          fontSize="clamp(1rem, 2rem, 2.25rem)"
+          color="primary"
+          onClick={() => navigate("/home")}
+          sx={{
+            "&:hover": {
+              color: primaryLight,
+              cursor: "pointer",
+            },
+          }}
+        >
+          Sociopedia
+        </Typography>
+        {isNonMobileScreens && (
+          <FlexBetween
+            backgroundColor={neutralLight}
+            borderRadius="9px"
+            gap="3rem"
+            padding="0.1rem 1.5rem"
+          >
+            <InputBase placeholder="Search..." />
+            <IconButton>
+              <Search />
+            </IconButton>
+          </FlexBetween>
+        )}
+      </FlexBetween>
+
+      {/* DESKTOP NAV */}
+      {isNonMobileScreens ? (
+        <FlexBetween gap="2rem">
+          <IconButton onClick={() => dispatch(setMode())}>
+            {theme.palette.mode === "dark" ? (
+              <DarkMode sx={{ fontSize: "25px" }} />
+            ) : (
+              <LightMode sx={{ color: dark, fontSize: "25px" }} />
+            )}
+          </IconButton>
+          <Message sx={{ fontSize: "25px" }} />
+          <Notifications sx={{ fontSize: "25px" }} />
+          <Help sx={{ fontSize: "25px" }} />
+          <FormControl variant="standard" value={fullName}>
+            <Select
+              value={fullName}
+              sx={{
+                backgroundColor: neutralLight,
+                width: "150px",
+                borderRadius: "0.25rem",
+                p: "0.25rem 1rem",
+                "& .MuiSvgIcon-root": {
+                  pr: "0.25rem",
+                  width: "3rem",
+                },
+                "& .MuiSelect-select:focus": {
+                  backgroundColor: neutralLight,
+                },
+              }}
+              input={<InputBase />}
+            >
+              <MenuItem value={fullName}>
+                <Typography>{fullName}</Typography>
+              </MenuItem>
+              <MenuItem onClick={() => dispatch(setLogout())}>Log Out</MenuItem>
+            </Select>
+          </FormControl>
+        </FlexBetween>
+      ) : (
+        <IconButton
+          onClick={() => setIsMobileMenuToggled(!isMobileMenuToggled)}
+        >
+          <Menu />
+        </IconButton>
+      )}
+
+      {/* MOBILE NAV */}
+      {!isNonMobileScreens && isMobileMenuToggled && (
+        <Box
+          position="fixed"
+          right="0"
+          bottom="0"
+          height="100%"
+          zIndex="10"
+          maxWidth="500px"
+          minWidth="300px"
+          backgroundColor={background}
+        >
+          {/* CLOSE ICON */}
+          <Box display="flex" justifyContent="flex-end" p="1rem">
+            <IconButton
+              onClick={() => setIsMobileMenuToggled(!isMobileMenuToggled)}
+            >
+              <Close />
+            </IconButton>
+          </Box>
+
+          {/* MENU ITEMS */}
+          <FlexBetween
+            display="flex"
+            flexDirection="column"
+            justifyContent="center"
+            alignItems="center"
+            gap="3rem"
+          >
+            <IconButton
+              onClick={() => dispatch(setMode())}
+              sx={{ fontSize: "25px" }}
+            >
+              {theme.palette.mode === "dark" ? (
+                <DarkMode sx={{ fontSize: "25px" }} />
+              ) : (
+                <LightMode sx={{ color: dark, fontSize: "25px" }} />
+              )}
+            </IconButton>
+            <Message sx={{ fontSize: "25px" }} />
+            <Notifications sx={{ fontSize: "25px" }} />
+            <Help sx={{ fontSize: "25px" }} />
+            <FormControl variant="standard" value={fullName}>
+              <Select
+                value={fullName}
+                sx={{
+                  backgroundColor: neutralLight,
+                  width: "150px",
+                  borderRadius: "0.25rem",
+                  p: "0.25rem 1rem",
+                  "& .MuiSvgIcon-root": {
+                    pr: "0.25rem",
+                    width: "3rem",
+                  },
+                  "& .MuiSelect-select:focus": {
+                    backgroundColor: neutralLight,
+                  },
+                }}
+                input={<InputBase />}
+              >
+                <MenuItem value={fullName}>
+                  <Typography>{fullName}</Typography>
+                </MenuItem>
+                <MenuItem onClick={() => dispatch(setLogout())}>
+                  Log Out
+                </MenuItem>
+              </Select>
+            </FormControl>
+          </FlexBetween>
+        </Box>
+      )}
+    </FlexBetween>
+  );
+};
+
+export default Navbar;
+
+<<<FILE_END>>>
+
+<<<FILE_START>>>
+FILE: client/src/scenes/profilePage/index.jsx
+import { Box, useMediaQuery } from "@mui/material";
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
+import Navbar from "scenes/navbar";
+import FriendListWidget from "scenes/widgets/FriendListWidget";
+import MyPostWidget from "scenes/widgets/MyPostWidget";
+import PostsWidget from "scenes/widgets/PostsWidget";
+import UserWidget from "scenes/widgets/UserWidget";
+
+const ProfilePage = () => {
+  const [user, setUser] = useState(null);
+  const { userId } = useParams();
+  const token = useSelector((state) => state.token);
+  const isNonMobileScreens = useMediaQuery("(min-width:1000px)");
+
+  const getUser = async () => {
+    const response = await fetch(`http://localhost:3001/users/${userId}`, {
+      method: "GET",
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    const data = await response.json();
+    setUser(data);
+  };
+
+  useEffect(() => {
+    getUser();
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  if (!user) return null;
+
+  return (
+    <Box>
+      <Navbar />
+      <Box
+        width="100%"
+        padding="2rem 6%"
+        display={isNonMobileScreens ? "flex" : "block"}
+        gap="2rem"
+        justifyContent="center"
+      >
+        <Box flexBasis={isNonMobileScreens ? "26%" : undefined}>
+          <UserWidget userId={userId} picturePath={user.picturePath} />
+          <Box m="2rem 0" />
+          <FriendListWidget userId={userId} />
+        </Box>
+        <Box
+          flexBasis={isNonMobileScreens ? "42%" : undefined}
+          mt={isNonMobileScreens ? undefined : "2rem"}
+        >
+          <MyPostWidget picturePath={user.picturePath} />
+          <Box m="2rem 0" />
+          <PostsWidget userId={userId} isProfile />
+        </Box>
+      </Box>
+    </Box>
+  );
+};
+
+export default ProfilePage;
+
+<<<FILE_END>>>
+
+<<<FILE_START>>>
+FILE: client/src/scenes/widgets/AdvertWidget.jsx
+import { Typography, useTheme } from "@mui/material";
+import FlexBetween from "components/FlexBetween";
+import WidgetWrapper from "components/WidgetWrapper";
+
+const AdvertWidget = () => {
+  const { palette } = useTheme();
+  const dark = palette.neutral.dark;
+  const main = palette.neutral.main;
+  const medium = palette.neutral.medium;
+
+  return (
+    <WidgetWrapper>
+      <FlexBetween>
+        <Typography color={dark} variant="h5" fontWeight="500">
+          Sponsored
+        </Typography>
+        <Typography color={medium}>Create Ad</Typography>
+      </FlexBetween>
+      <img
+        width="100%"
+        height="auto"
+        alt="advert"
+        src="http://localhost:3001/assets/info4.jpeg"
+        style={{ borderRadius: "0.75rem", margin: "0.75rem 0" }}
+      />
+      <FlexBetween>
+        <Typography color={main}>MikaCosmetics</Typography>
+        <Typography color={medium}>mikacosmetics.com</Typography>
+      </FlexBetween>
+      <Typography color={medium} m="0.5rem 0">
+        Your pathway to stunning and immaculate beauty and made sure your skin
+        is exfoliating skin and shining like light.
+      </Typography>
+    </WidgetWrapper>
+  );
+};
+
+export default AdvertWidget;
+
+<<<FILE_END>>>
+
+<<<FILE_START>>>
+FILE: client/src/scenes/widgets/FriendListWidget.jsx
+import { Box, Typography, useTheme } from "@mui/material";
+import Friend from "components/Friend";
+import WidgetWrapper from "components/WidgetWrapper";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { setFriends } from "state";
+
+const FriendListWidget = ({ userId }) => {
+  const dispatch = useDispatch();
+  const { palette } = useTheme();
+  const token = useSelector((state) => state.token);
+  const friends = useSelector((state) => state.user.friends);
+
+  const getFriends = async () => {
+    const response = await fetch(
+      `http://localhost:3001/users/${userId}/friends`,
+      {
+        method: "GET",
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    );
+    const data = await response.json();
+    dispatch(setFriends({ friends: data }));
+  };
+
+  useEffect(() => {
+    getFriends();
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  return (
+    <WidgetWrapper>
+      <Typography
+        color={palette.neutral.dark}
+        variant="h5"
+        fontWeight="500"
+        sx={{ mb: "1.5rem" }}
+      >
+        Friend List
+      </Typography>
+      <Box display="flex" flexDirection="column" gap="1.5rem">
+        {friends.map((friend) => (
+          <Friend
+            key={friend._id}
+            friendId={friend._id}
+            name={`${friend.firstName} ${friend.lastName}`}
+            subtitle={friend.occupation}
+            userPicturePath={friend.picturePath}
+          />
+        ))}
+      </Box>
+    </WidgetWrapper>
+  );
+};
+
+export default FriendListWidget;
+
+<<<FILE_END>>>
+
+<<<FILE_START>>>
+FILE: client/src/scenes/widgets/MyPostWidget.jsx
+import {
+  EditOutlined,
+  DeleteOutlined,
+  AttachFileOutlined,
+  GifBoxOutlined,
+  ImageOutlined,
+  MicOutlined,
+  MoreHorizOutlined,
+} from "@mui/icons-material";
+import {
+  Box,
+  Divider,
+  Typography,
+  InputBase,
+  useTheme,
+  Button,
+  IconButton,
+  useMediaQuery,
+} from "@mui/material";
+import FlexBetween from "components/FlexBetween";
+import Dropzone from "react-dropzone";
+import UserImage from "components/UserImage";
+import WidgetWrapper from "components/WidgetWrapper";
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { setPosts } from "state";
+
+const MyPostWidget = ({ picturePath }) => {
+  const dispatch = useDispatch();
+  const [isImage, setIsImage] = useState(false);
+  const [image, setImage] = useState(null);
+  const [post, setPost] = useState("");
+  const { palette } = useTheme();
+  const { _id } = useSelector((state) => state.user);
+  const token = useSelector((state) => state.token);
+  const isNonMobileScreens = useMediaQuery("(min-width: 1000px)");
+  const mediumMain = palette.neutral.mediumMain;
+  const medium = palette.neutral.medium;
+
+  const handlePost = async () => {
+    const formData = new FormData();
+    formData.append("userId", _id);
+    formData.append("description", post);
+    if (image) {
+      formData.append("picture", image);
+      formData.append("picturePath", image.name);
+    }
+
+    const response = await fetch(`http://localhost:3001/posts`, {
+      method: "POST",
+      headers: { Authorization: `Bearer ${token}` },
+      body: formData,
+    });
+    const posts = await response.json();
+    dispatch(setPosts({ posts }));
+    setImage(null);
+    setPost("");
+  };
+
+  return (
+    <WidgetWrapper>
+      <FlexBetween gap="1.5rem">
+        <UserImage image={picturePath} />
+        <InputBase
+          placeholder="What's on your mind..."
+          onChange={(e) => setPost(e.target.value)}
+          value={post}
+          sx={{
+            width: "100%",
+            backgroundColor: palette.neutral.light,
+            borderRadius: "2rem",
+            padding: "1rem 2rem",
+          }}
+        />
+      </FlexBetween>
+      {isImage && (
+        <Box
+          border={`1px solid ${medium}`}
+          borderRadius="5px"
+          mt="1rem"
+          p="1rem"
+        >
+          <Dropzone
+            acceptedFiles=".jpg,.jpeg,.png"
+            multiple={false}
+            onDrop={(acceptedFiles) => setImage(acceptedFiles[0])}
+          >
+            {({ getRootProps, getInputProps }) => (
+              <FlexBetween>
+                <Box
+                  {...getRootProps()}
+                  border={`2px dashed ${palette.primary.main}`}
+                  p="1rem"
+                  width="100%"
+                  sx={{ "&:hover": { cursor: "pointer" } }}
+                >
+                  <input {...getInputProps()} />
+                  {!image ? (
+                    <p>Add Image Here</p>
+                  ) : (
+                    <FlexBetween>
+                      <Typography>{image.name}</Typography>
+                      <EditOutlined />
+                    </FlexBetween>
+                  )}
+                </Box>
+                {image && (
+                  <IconButton
+                    onClick={() => setImage(null)}
+                    sx={{ width: "15%" }}
+                  >
+                    <DeleteOutlined />
+                  </IconButton>
+                )}
+              </FlexBetween>
+            )}
+          </Dropzone>
+        </Box>
+      )}
+
+      <Divider sx={{ margin: "1.25rem 0" }} />
+
+      <FlexBetween>
+        <FlexBetween gap="0.25rem" onClick={() => setIsImage(!isImage)}>
+          <ImageOutlined sx={{ color: mediumMain }} />
+          <Typography
+            color={mediumMain}
+            sx={{ "&:hover": { cursor: "pointer", color: medium } }}
+          >
+            Image
+          </Typography>
+        </FlexBetween>
+
+        {isNonMobileScreens ? (
+          <>
+            <FlexBetween gap="0.25rem">
+              <GifBoxOutlined sx={{ color: mediumMain }} />
+              <Typography color={mediumMain}>Clip</Typography>
+            </FlexBetween>
+
+            <FlexBetween gap="0.25rem">
+              <AttachFileOutlined sx={{ color: mediumMain }} />
+              <Typography color={mediumMain}>Attachment</Typography>
+            </FlexBetween>
+
+            <FlexBetween gap="0.25rem">
+              <MicOutlined sx={{ color: mediumMain }} />
+              <Typography color={mediumMain}>Audio</Typography>
+            </FlexBetween>
+          </>
+        ) : (
+          <FlexBetween gap="0.25rem">
+            <MoreHorizOutlined sx={{ color: mediumMain }} />
+          </FlexBetween>
+        )}
+
+        <Button
+          disabled={!post}
+          onClick={handlePost}
+          sx={{
+            color: palette.background.alt,
+            backgroundColor: palette.primary.main,
+            borderRadius: "3rem",
+          }}
+        >
+          POST
+        </Button>
+      </FlexBetween>
+    </WidgetWrapper>
+  );
+};
+
+export default MyPostWidget;
+
+<<<FILE_END>>>
+
+<<<FILE_START>>>
+FILE: client/src/scenes/widgets/PostWidget.jsx
+import {
+  ChatBubbleOutlineOutlined,
+  FavoriteBorderOutlined,
+  FavoriteOutlined,
+  ShareOutlined,
+} from "@mui/icons-material";
+import { Box, Divider, IconButton, Typography, useTheme } from "@mui/material";
+import FlexBetween from "components/FlexBetween";
+import Friend from "components/Friend";
+import WidgetWrapper from "components/WidgetWrapper";
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { setPost } from "state";
+
+const PostWidget = ({
+  postId,
+  postUserId,
+  name,
+  description,
+  location,
+  picturePath,
+  userPicturePath,
+  likes,
+  comments,
+}) => {
+  const [isComments, setIsComments] = useState(false);
+  const dispatch = useDispatch();
+  const token = useSelector((state) => state.token);
+  const loggedInUserId = useSelector((state) => state.user._id);
+  const isLiked = Boolean(likes[loggedInUserId]);
+  const likeCount = Object.keys(likes).length;
+
+  const { palette } = useTheme();
+  const main = palette.neutral.main;
+  const primary = palette.primary.main;
+
+  const patchLike = async () => {
+    const response = await fetch(`http://localhost:3001/posts/${postId}/like`, {
+      method: "PATCH",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ userId: loggedInUserId }),
+    });
+    const updatedPost = await response.json();
+    dispatch(setPost({ post: updatedPost }));
+  };
+
+  return (
+    <WidgetWrapper m="2rem 0">
+      <Friend
+        friendId={postUserId}
+        name={name}
+        subtitle={location}
+        userPicturePath={userPicturePath}
+      />
+      <Typography color={main} sx={{ mt: "1rem" }}>
+        {description}
+      </Typography>
+      {picturePath && (
+        <img
+          width="100%"
+          height="auto"
+          alt="post"
+          style={{ borderRadius: "0.75rem", marginTop: "0.75rem" }}
+          src={`http://localhost:3001/assets/${picturePath}`}
+        />
+      )}
+      <FlexBetween mt="0.25rem">
+        <FlexBetween gap="1rem">
+          <FlexBetween gap="0.3rem">
+            <IconButton onClick={patchLike}>
+              {isLiked ? (
+                <FavoriteOutlined sx={{ color: primary }} />
+              ) : (
+                <FavoriteBorderOutlined />
+              )}
+            </IconButton>
+            <Typography>{likeCount}</Typography>
+          </FlexBetween>
+
+          <FlexBetween gap="0.3rem">
+            <IconButton onClick={() => setIsComments(!isComments)}>
+              <ChatBubbleOutlineOutlined />
+            </IconButton>
+            <Typography>{comments.length}</Typography>
+          </FlexBetween>
+        </FlexBetween>
+
+        <IconButton>
+          <ShareOutlined />
+        </IconButton>
+      </FlexBetween>
+      {isComments && (
+        <Box mt="0.5rem">
+          {comments.map((comment, i) => (
+            <Box key={`${name}-${i}`}>
+              <Divider />
+              <Typography sx={{ color: main, m: "0.5rem 0", pl: "1rem" }}>
+                {comment}
+              </Typography>
+            </Box>
+          ))}
+          <Divider />
+        </Box>
+      )}
+    </WidgetWrapper>
+  );
+};
+
+export default PostWidget;
+
+<<<FILE_END>>>
+
+<<<FILE_START>>>
+FILE: client/src/scenes/widgets/PostsWidget.jsx
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { setPosts } from "state";
+import PostWidget from "./PostWidget";
+
+const PostsWidget = ({ userId, isProfile = false }) => {
+  const dispatch = useDispatch();
+  const posts = useSelector((state) => state.posts);
+  const token = useSelector((state) => state.token);
+
+  const getPosts = async () => {
+    const response = await fetch("http://localhost:3001/posts", {
+      method: "GET",
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    const data = await response.json();
+    dispatch(setPosts({ posts: data }));
+  };
+
+  const getUserPosts = async () => {
+    const response = await fetch(
+      `http://localhost:3001/posts/${userId}/posts`,
+      {
+        method: "GET",
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    );
+    const data = await response.json();
+    dispatch(setPosts({ posts: data }));
+  };
+
+  useEffect(() => {
+    if (isProfile) {
+      getUserPosts();
+    } else {
+      getPosts();
+    }
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  return (
+    <>
+      {posts.map(
+        ({
+          _id,
+          userId,
+          firstName,
+          lastName,
+          description,
+          location,
+          picturePath,
+          userPicturePath,
+          likes,
+          comments,
+        }) => (
+          <PostWidget
+            key={_id}
+            postId={_id}
+            postUserId={userId}
+            name={`${firstName} ${lastName}`}
+            description={description}
+            location={location}
+            picturePath={picturePath}
+            userPicturePath={userPicturePath}
+            likes={likes}
+            comments={comments}
+          />
+        )
+      )}
+    </>
+  );
+};
+
+export default PostsWidget;
+
+<<<FILE_END>>>
+
+<<<FILE_START>>>
+FILE: client/src/scenes/widgets/UserWidget.jsx
+import {
+  ManageAccountsOutlined,
+  EditOutlined,
+  LocationOnOutlined,
+  WorkOutlineOutlined,
+} from "@mui/icons-material";
+import { Box, Typography, Divider, useTheme } from "@mui/material";
+import UserImage from "components/UserImage";
+import FlexBetween from "components/FlexBetween";
+import WidgetWrapper from "components/WidgetWrapper";
+import { useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+
+const UserWidget = ({ userId, picturePath }) => {
+  const [user, setUser] = useState(null);
+  const { palette } = useTheme();
+  const navigate = useNavigate();
+  const token = useSelector((state) => state.token);
+  const dark = palette.neutral.dark;
+  const medium = palette.neutral.medium;
+  const main = palette.neutral.main;
+
+  const getUser = async () => {
+    const response = await fetch(`http://localhost:3001/users/${userId}`, {
+      method: "GET",
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    const data = await response.json();
+    setUser(data);
+  };
+
+  useEffect(() => {
+    getUser();
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  if (!user) {
+    return null;
+  }
+
+  const {
+    firstName,
+    lastName,
+    location,
+    occupation,
+    viewedProfile,
+    impressions,
+    friends,
+  } = user;
+
+  return (
+    <WidgetWrapper>
+      {/* FIRST ROW */}
+      <FlexBetween
+        gap="0.5rem"
+        pb="1.1rem"
+        onClick={() => navigate(`/profile/${userId}`)}
+      >
+        <FlexBetween gap="1rem">
+          <UserImage image={picturePath} />
+          <Box>
+            <Typography
+              variant="h4"
+              color={dark}
+              fontWeight="500"
+              sx={{
+                "&:hover": {
+                  color: palette.primary.light,
+                  cursor: "pointer",
+                },
+              }}
+            >
+              {firstName} {lastName}
+            </Typography>
+            <Typography color={medium}>{friends.length} friends</Typography>
+          </Box>
+        </FlexBetween>
+        <ManageAccountsOutlined />
+      </FlexBetween>
+
+      <Divider />
+
+      {/* SECOND ROW */}
+      <Box p="1rem 0">
+        <Box display="flex" alignItems="center" gap="1rem" mb="0.5rem">
+          <LocationOnOutlined fontSize="large" sx={{ color: main }} />
+          <Typography color={medium}>{location}</Typography>
+        </Box>
+        <Box display="flex" alignItems="center" gap="1rem">
+          <WorkOutlineOutlined fontSize="large" sx={{ color: main }} />
+          <Typography color={medium}>{occupation}</Typography>
+        </Box>
+      </Box>
+
+      <Divider />
+
+      {/* THIRD ROW */}
+      <Box p="1rem 0">
+        <FlexBetween mb="0.5rem">
+          <Typography color={medium}>Who's viewed your profile</Typography>
+          <Typography color={main} fontWeight="500">
+            {viewedProfile}
+          </Typography>
+        </FlexBetween>
+        <FlexBetween>
+          <Typography color={medium}>Impressions of your post</Typography>
+          <Typography color={main} fontWeight="500">
+            {impressions}
+          </Typography>
+        </FlexBetween>
+      </Box>
+
+      <Divider />
+
+      {/* FOURTH ROW */}
+      <Box p="1rem 0">
+        <Typography fontSize="1rem" color={main} fontWeight="500" mb="1rem">
+          Social Profiles
+        </Typography>
+
+        <FlexBetween gap="1rem" mb="0.5rem">
+          <FlexBetween gap="1rem">
+            <img src="../assets/twitter.png" alt="twitter" />
+            <Box>
+              <Typography color={main} fontWeight="500">
+                Twitter
+              </Typography>
+              <Typography color={medium}>Social Network</Typography>
+            </Box>
+          </FlexBetween>
+          <EditOutlined sx={{ color: main }} />
+        </FlexBetween>
+
+        <FlexBetween gap="1rem">
+          <FlexBetween gap="1rem">
+            <img src="../assets/linkedin.png" alt="linkedin" />
+            <Box>
+              <Typography color={main} fontWeight="500">
+                Linkedin
+              </Typography>
+              <Typography color={medium}>Network Platform</Typography>
+            </Box>
+          </FlexBetween>
+          <EditOutlined sx={{ color: main }} />
+        </FlexBetween>
+      </Box>
+    </WidgetWrapper>
+  );
+};
+
+export default UserWidget;
+
+<<<FILE_END>>>
+
+<<<FILE_START>>>
+FILE: client/src/state/index.js
+import { createSlice } from "@reduxjs/toolkit";
+
+const initialState = {
+  mode: "light",
+  user: null,
+  token: null,
+  posts: [],
+};
+
+export const authSlice = createSlice({
+  name: "auth",
+  initialState,
+  reducers: {
+    setMode: (state) => {
+      state.mode = state.mode === "light" ? "dark" : "light";
+    },
+    setLogin: (state, action) => {
+      state.user = action.payload.user;
+      state.token = action.payload.token;
+    },
+    setLogout: (state) => {
+      state.user = null;
+      state.token = null;
+    },
+    setFriends: (state, action) => {
+      if (state.user) {
+        state.user.friends = action.payload.friends;
+      } else {
+        console.error("user friends non-existent :(");
+      }
+    },
+    setPosts: (state, action) => {
+      state.posts = action.payload.posts;
+    },
+    setPost: (state, action) => {
+      const updatedPosts = state.posts.map((post) => {
+        if (post._id === action.payload.post._id) return action.payload.post;
+        return post;
+      });
+      state.posts = updatedPosts;
+    },
+  },
+});
+
+export const { setMode, setLogin, setLogout, setFriends, setPosts, setPost } =
+  authSlice.actions;
+export default authSlice.reducer;
+
+<<<FILE_END>>>
+
+<<<FILE_START>>>
+FILE: client/src/theme.js
+// color design tokens export
+export const colorTokens = {
+  grey: {
+    0: "#FFFFFF",
+    10: "#F6F6F6",
+    50: "#F0F0F0",
+    100: "#E0E0E0",
+    200: "#C2C2C2",
+    300: "#A3A3A3",
+    400: "#858585",
+    500: "#666666",
+    600: "#4D4D4D",
+    700: "#333333",
+    800: "#1A1A1A",
+    900: "#0A0A0A",
+    1000: "#000000",
+  },
+  primary: {
+    50: "#E6FBFF",
+    100: "#CCF7FE",
+    200: "#99EEFD",
+    300: "#66E6FC",
+    400: "#33DDFB",
+    500: "#00D5FA",
+    600: "#00A0BC",
+    700: "#006B7D",
+    800: "#00353F",
+    900: "#001519",
+  },
+};
+
+// mui theme settings
+export const themeSettings = (mode) => {
+  return {
+    palette: {
+      mode: mode,
+      ...(mode === "dark"
+        ? {
+            // palette values for dark mode
+            primary: {
+              dark: colorTokens.primary[200],
+              main: colorTokens.primary[500],
+              light: colorTokens.primary[800],
+            },
+            neutral: {
+              dark: colorTokens.grey[100],
+              main: colorTokens.grey[200],
+              mediumMain: colorTokens.grey[300],
+              medium: colorTokens.grey[400],
+              light: colorTokens.grey[700],
+            },
+            background: {
+              default: colorTokens.grey[900],
+              alt: colorTokens.grey[800],
+            },
+          }
+        : {
+            // palette values for light mode
+            primary: {
+              dark: colorTokens.primary[700],
+              main: colorTokens.primary[500],
+              light: colorTokens.primary[50],
+            },
+            neutral: {
+              dark: colorTokens.grey[700],
+              main: colorTokens.grey[500],
+              mediumMain: colorTokens.grey[400],
+              medium: colorTokens.grey[300],
+              light: colorTokens.grey[50],
+            },
+            background: {
+              default: colorTokens.grey[10],
+              alt: colorTokens.grey[0],
+            },
+          }),
+    },
+    typography: {
+      fontFamily: ["Rubik", "sans-serif"].join(","),
+      fontSize: 12,
+      h1: {
+        fontFamily: ["Rubik", "sans-serif"].join(","),
+        fontSize: 40,
+      },
+      h2: {
+        fontFamily: ["Rubik", "sans-serif"].join(","),
+        fontSize: 32,
+      },
+      h3: {
+        fontFamily: ["Rubik", "sans-serif"].join(","),
+        fontSize: 24,
+      },
+      h4: {
+        fontFamily: ["Rubik", "sans-serif"].join(","),
+        fontSize: 20,
+      },
+      h5: {
+        fontFamily: ["Rubik", "sans-serif"].join(","),
+        fontSize: 16,
+      },
+      h6: {
+        fontFamily: ["Rubik", "sans-serif"].join(","),
+        fontSize: 14,
+      },
+    },
+  };
+};
+
+<<<FILE_END>>>
+
+<<<FILE_START>>>
+FILE: server/controllers/auth.js
+import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
+import User from "../models/User.js";
+
+/* REGISTER USER */
+export const register = async (req, res) => {
+  try {
+    const {
+      firstName,
+      lastName,
+      email,
+      password,
+      picturePath,
+      friends,
+      location,
+      occupation,
+    } = req.body;
+
+    const salt = await bcrypt.genSalt();
+    const passwordHash = await bcrypt.hash(password, salt);
+
+    const newUser = new User({
+      firstName,
+      lastName,
+      email,
+      password: passwordHash,
+      picturePath,
+      friends,
+      location,
+      occupation,
+      viewedProfile: Math.floor(Math.random() * 10000),
+      impressions: Math.floor(Math.random() * 10000),
+    });
+    const savedUser = await newUser.save();
+    res.status(201).json(savedUser);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
+
+/* LOGGING IN */
+export const login = async (req, res) => {
+  try {
+    const { email, password } = req.body;
+    const user = await User.findOne({ email: email });
+    if (!user) return res.status(400).json({ msg: "User does not exist. " });
+
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) return res.status(400).json({ msg: "Invalid credentials. " });
+
+    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
+    delete user.password;
+    res.status(200).json({ token, user });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
+
+<<<FILE_END>>>
+
+
+
+<<<FILE_START>>>
+FILE: server/controllers/users.js
+import User from "../models/User.js";
+
+/* READ */
+export const getUser = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const user = await User.findById(id);
+    res.status(200).json(user);
+  } catch (err) {
+    res.status(404).json({ message: err.message });
+  }
+};
+
+export const getUserFriends = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const user = await User.findById(id);
+
+    const friends = await Promise.all(
+      user.friends.map((id) => User.findById(id))
+    );
+    const formattedFriends = friends.map(
+      ({ _id, firstName, lastName, occupation, location, picturePath }) => {
+        return { _id, firstName, lastName, occupation, location, picturePath };
+      }
+    );
+    res.status(200).json(formattedFriends);
+  } catch (err) {
+    res.status(404).json({ message: err.message });
+  }
+};
+
+/* UPDATE */
+export const addRemoveFriend = async (req, res) => {
+  try {
+    const { id, friendId } = req.params;
+    const user = await User.findById(id);
+    const friend = await User.findById(friendId);
+
+    if (user.friends.includes(friendId)) {
+      user.friends = user.friends.filter((id) => id !== friendId);
+      friend.friends = friend.friends.filter((id) => id !== id);
+    } else {
+      user.friends.push(friendId);
+      friend.friends.push(id);
+    }
+    await user.save();
+    await friend.save();
+
+    const friends = await Promise.all(
+      user.friends.map((id) => User.findById(id))
+    );
+    const formattedFriends = friends.map(
+      ({ _id, firstName, lastName, occupation, location, picturePath }) => {
+        return { _id, firstName, lastName, occupation, location, picturePath };
+      }
+    );
+
+    res.status(200).json(formattedFriends);
+  } catch (err) {
+    res.status(404).json({ message: err.message });
+  }
+};
+
+<<<FILE_END>>>
+
+<<<FILE_START>>>
+FILE: server/data/index.js
+import mongoose from "mongoose";
+
+const userIds = [
+  new mongoose.Types.ObjectId(),
+  new mongoose.Types.ObjectId(),
+  new mongoose.Types.ObjectId(),
+  new mongoose.Types.ObjectId(),
+  new mongoose.Types.ObjectId(),
+  new mongoose.Types.ObjectId(),
+  new mongoose.Types.ObjectId(),
+  new mongoose.Types.ObjectId(),
+];
+
+export const users = [
+  {
+    _id: userIds[0],
+    firstName: "test",
+    lastName: "me",
+    email: "aaaaaaa@gmail.com",
+    password: "$2b$10$dsasdgsagasda//G9JxQ4bQ8KXf4OAIe/X/AK9skyWUy",
+    picturePath: "p11.jpeg",
+    friends: [],
+    location: "San Fran, CA",
+    occupation: "Software Engineer",
+    viewedProfile: 14561,
+    impressions: 888822,
+    createdAt: 1115211422,
+    updatedAt: 1115211422,
+    __v: 0,
+  },
+  {
+    _id: userIds[1],
+    firstName: "Steve",
+    lastName: "Ralph",
+    email: "thataaa@gmail.com",
+    password: "$!FEAS@!O)_IDJda//G9JxQ4bQ8KXf4OAIe/X/AK9skyWUy",
+    picturePath: "p3.jpeg",
+    friends: [],
+    location: "New York, CA",
+    occupation: "Degenerate",
+    viewedProfile: 12351,
+    impressions: 55555,
+    createdAt: 1595589072,
+    updatedAt: 1595589072,
+    __v: 0,
+  },
+  {
+    _id: userIds[2],
+    firstName: "Some",
+    lastName: "Guy",
+    email: "someguy@gmail.com",
+    password: "da39a3ee5e6b4b0d3255bfef95601890afd80709",
+    picturePath: "p4.jpeg",
+    friends: [],
+    location: "Canada, CA",
+    occupation: "Data Scientist Hacker",
+    viewedProfile: 45468,
+    impressions: 19986,
+    createdAt: 1288090662,
+    updatedAt: 1288090662,
+    __v: 0,
+  },
+  {
+    _id: userIds[3],
+    firstName: "Whatcha",
+    lastName: "Doing",
+    email: "whatchadoing@gmail.com",
+    password: "$2b$10$dsasdgsagasda//G9JxQ4bQ8KXf4OAIe/X/AK9skyWUy",
+    picturePath: "p6.jpeg",
+    friends: [],
+    location: "Korea, CA",
+    occupation: "Educator",
+    viewedProfile: 41024,
+    impressions: 55316,
+    createdAt: 1219214568,
+    updatedAt: 1219214568,
+    __v: 0,
+  },
+  {
+    _id: userIds[4],
+    firstName: "Jane",
+    lastName: "Doe",
+    email: "janedoe@gmail.com",
+    password: "$2b$10$dsasdgsagasda//G9JxQ4bQ8KXf4OAIe/X/AK9skyWUy",
+    picturePath: "p5.jpeg",
+    friends: [],
+    location: "Utah, CA",
+    occupation: "Hacker",
+    viewedProfile: 40212,
+    impressions: 7758,
+    createdAt: 1493463661,
+    updatedAt: 1493463661,
+    __v: 0,
+  },
+  {
+    _id: userIds[5],
+    firstName: "Harvey",
+    lastName: "Dunn",
+    email: "harveydunn@gmail.com",
+    password: "$2b$10$dsasdgsagasda//G9JxQ4bQ8KXf4OAIe/X/AK9skyWUy",
+    picturePath: "p7.jpeg",
+    friends: [],
+    location: "Los Angeles, CA",
+    occupation: "Journalist",
+    viewedProfile: 976,
+    impressions: 4658,
+    createdAt: 1381326073,
+    updatedAt: 1381326073,
+    __v: 0,
+  },
+  {
+    _id: userIds[6],
+    firstName: "Carly",
+    lastName: "Vowel",
+    email: "carlyvowel@gmail.com",
+    password: "$2b$10$dsasdgsagasda//G9JxQ4bQ8KXf4OAIe/X/AK9skyWUy",
+    picturePath: "p8.jpeg",
+    friends: [],
+    location: "Chicago, IL",
+    occupation: "Nurse",
+    viewedProfile: 1510,
+    impressions: 77579,
+    createdAt: 1714704324,
+    updatedAt: 1642716557,
+    __v: 0,
+  },
+  {
+    _id: userIds[7],
+    firstName: "Jessica",
+    lastName: "Dunn",
+    email: "jessicadunn@gmail.com",
+    password: "$2b$10$dsasdgsagasda//G9JxQ4bQ8KXf4OAIe/X/AK9skyWUy",
+    picturePath: "p9.jpeg",
+    friends: [],
+    location: "Washington, DC",
+    occupation: "A Student",
+    viewedProfile: 19420,
+    impressions: 82970,
+    createdAt: 1369908044,
+    updatedAt: 1359322268,
+    __v: 0,
+  },
+];
+
+export const posts = [
+  {
+    _id: new mongoose.Types.ObjectId(),
+    userId: userIds[1],
+    firstName: "Steve",
+    lastName: "Ralph",
+    location: "New York, CA",
+    description: "Some really long random description",
+    picturePath: "post1.jpeg",
+    userPicturePath: "p3.jpeg",
+    likes: new Map([
+      [userIds[0], true],
+      [userIds[2], true],
+      [userIds[3], true],
+      [userIds[4], true],
+    ]),
+    comments: [
+      "random comment",
+      "another random comment",
+      "yet another random comment",
+    ],
+  },
+  {
+    _id: new mongoose.Types.ObjectId(),
+    userId: userIds[3],
+    firstName: "Whatcha",
+    lastName: "Doing",
+    location: "Korea, CA",
+    description:
+      "Another really long random description. This one is longer than the previous one.",
+    picturePath: "post2.jpeg",
+    userPicturePath: "p6.jpeg",
+    likes: new Map([
+      [userIds[7], true],
+      [userIds[4], true],
+      [userIds[1], true],
+      [userIds[2], true],
+    ]),
+    comments: [
+      "one more random comment",
+      "and another random comment",
+      "no more random comments",
+      "I lied, one more random comment",
+    ],
+  },
+  {
+    _id: new mongoose.Types.ObjectId(),
+    userId: userIds[4],
+    firstName: "Jane",
+    lastName: "Doe",
+    location: "Utah, CA",
+    description:
+      "This is the last really long random description. This one is longer than the previous one.",
+    picturePath: "post3.jpeg",
+    userPicturePath: "p5.jpeg",
+    likes: new Map([
+      [userIds[1], true],
+      [userIds[6], true],
+      [userIds[3], true],
+      [userIds[5], true],
+    ]),
+    comments: [
+      "one more random comment",
+      "I lied, one more random comment",
+      "I lied again, one more random comment",
+      "Why am I doing this?",
+      "I'm bored",
+    ],
+  },
+  {
+    _id: new mongoose.Types.ObjectId(),
+    userId: userIds[5],
+    firstName: "Harvey",
+    lastName: "Dunn",
+    location: "Los Angeles, CA",
+    description:
+      "This is the last really long random description. This one is longer than the previous one. Man I'm bored. I'm going to keep typing until I run out of things to say.",
+    picturePath: "post4.jpeg",
+    userPicturePath: "p7.jpeg",
+    likes: new Map([
+      [userIds[1], true],
+      [userIds[6], true],
+      [userIds[3], true],
+    ]),
+    comments: [
+      "I lied again, one more random comment",
+      "Why am I doing this?",
+      "I'm bored",
+      "I'm still bored",
+      "All I want to do is play video games",
+      "I'm going to play video games",
+    ],
+  },
+  {
+    _id: new mongoose.Types.ObjectId(),
+    userId: userIds[6],
+    firstName: "Carly",
+    lastName: "Vowel",
+    location: "Chicago, IL",
+    description:
+      "Just a short description. I'm tired of typing. I'm going to play video games now.",
+    picturePath: "post5.jpeg",
+    userPicturePath: "p8.jpeg",
+    likes: new Map([
+      [userIds[1], true],
+      [userIds[3], true],
+      [userIds[5], true],
+      [userIds[7], true],
+    ]),
+    comments: [
+      "I lied again, one more random comment",
+      "Why am I doing this?",
+      "Man I'm bored",
+      "What should I do?",
+      "I'm going to play video games",
+    ],
+  },
+  {
+    _id: new mongoose.Types.ObjectId(),
+    userId: userIds[7],
+    firstName: "Jessica",
+    lastName: "Dunn",
+    location: "Washington, DC",
+    description:
+      "For the last time, I'm going to play video games now. I'm tired of typing. I'm going to play video games now.",
+    picturePath: "post6.jpeg",
+    userPicturePath: "p9.jpeg",
+    likes: new Map([
+      [userIds[1], true],
+      [userIds[2], true],
+    ]),
+
+    comments: [
+      "Can I play video games now?",
+      "No let's actually study",
+      "Never mind, I'm going to play video games",
+      "Stop it.",
+      "Michael, stop it.",
+    ],
+  },
+];
+
+<<<FILE_END>>>
+
+<<<FILE_START>>>
+FILE: server/index.js
+import express from "express";
+import bodyParser from "body-parser";
+import mongoose from "mongoose";
+import cors from "cors";
+import dotenv from "dotenv";
+import multer from "multer";
+import helmet from "helmet";
+import morgan from "morgan";
+import path from "path";
+import { fileURLToPath } from "url";
+import authRoutes from "./routes/auth.js";
+import userRoutes from "./routes/users.js";
+import postRoutes from "./routes/posts.js";
+import { register } from "./controllers/auth.js";
+import { createPost } from "./controllers/posts.js";
+import { verifyToken } from "./middleware/auth.js";
+import User from "./models/User.js";
+import Post from "./models/Post.js";
+import { users, posts } from "./data/index.js";
+
+/* CONFIGURATIONS */
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+dotenv.config();
+const app = express();
+app.use(express.json());
+app.use(helmet());
+app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
+app.use(morgan("common"));
+app.use(bodyParser.json({ limit: "30mb", extended: true }));
+app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
+app.use(cors());
+app.use("/assets", express.static(path.join(__dirname, "public/assets")));
+
+/* FILE STORAGE */
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, "public/assets");
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.originalname);
+  },
+});
+const upload = multer({ storage });
+
+/* ROUTES WITH FILES */
+app.post("/auth/register", upload.single("picture"), register);
+app.post("/posts", verifyToken, upload.single("picture"), createPost);
+
+/* ROUTES */
+app.use("/auth", authRoutes);
+app.use("/users", userRoutes);
+app.use("/posts", postRoutes);
+
+/* MONGOOSE SETUP */
+const PORT = process.env.PORT || 6001;
+mongoose
+  .connect(process.env.MONGO_URL, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() => {
+    app.listen(PORT, () => console.log(`Server Port: ${PORT}`));
+
+    /* ADD DATA ONE TIME */
+    // User.insertMany(users);
+    // Post.insertMany(posts);
+  })
+  .catch((error) => console.log(`${error} did not connect`));
+
+<<<FILE_END>>>
+
+<<<FILE_START>>>
+FILE: server/middleware/auth.js
+import jwt from "jsonwebtoken";
+
+export const verifyToken = async (req, res, next) => {
+  try {
+    let token = req.header("Authorization");
+
+    if (!token) {
+      return res.status(403).send("Access Denied");
+    }
+
+    if (token.startsWith("Bearer ")) {
+      token = token.slice(7, token.length).trimLeft();
+    }
+
+    const verified = jwt.verify(token, process.env.JWT_SECRET);
+    req.user = verified;
+    next();
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
+
+<<<FILE_END>>>
+
+<<<FILE_START>>>
+FILE: server/models/Post.js
+import mongoose from "mongoose";
+
+const postSchema = mongoose.Schema(
+  {
+    userId: {
+      type: String,
+      required: true,
+    },
+    firstName: {
+      type: String,
+      required: true,
+    },
+    lastName: {
+      type: String,
+      required: true,
+    },
+    location: String,
+    description: String,
+    picturePath: String,
+    userPicturePath: String,
+    likes: {
+      type: Map,
+      of: Boolean,
+    },
+    comments: {
+      type: Array,
+      default: [],
+    },
+  },
+  { timestamps: true }
+);
+
+const Post = mongoose.model("Post", postSchema);
+
+export default Post;
+
+<<<FILE_END>>>
+
+<<<FILE_START>>>
+FILE: server/models/User.js
+import mongoose from "mongoose";
+
+const UserSchema = new mongoose.Schema(
+  {
+    firstName: {
+      type: String,
+      required: true,
+      min: 2,
+      max: 50,
+    },
+    lastName: {
+      type: String,
+      required: true,
+      min: 2,
+      max: 50,
+    },
+    email: {
+      type: String,
+      required: true,
+      max: 50,
+      unique: true,
+    },
+    password: {
+      type: String,
+      required: true,
+      min: 5,
+    },
+    picturePath: {
+      type: String,
+      default: "",
+    },
+    friends: {
+      type: Array,
+      default: [],
+    },
+    location: String,
+    occupation: String,
+    viewedProfile: Number,
+    impressions: Number,
+  },
+  { timestamps: true }
+);
+
+const User = mongoose.model("User", UserSchema);
+export default User;
+
+<<<FILE_END>>>
+
+<<<FILE_START>>>
+FILE: server/package.json
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "dependencies": {
+    "bcrypt": "^5.1.0",
+    "body-parser": "^1.20.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "gridfs-stream": "^1.1.1",
+    "helmet": "^6.0.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.7.0",
+    "morgan": "^1.10.0",
+    "multer": "^1.4.5-lts.1",
+    "multer-gridfs-storage": "^5.0.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
+
+<<<FILE_END>>>
+
+<<<FILE_START>>>
+FILE: server/routes/auth.js
+import express from "express";
+import { login } from "../controllers/auth.js";
+
+const router = express.Router();
+
+router.post("/login", login);
+
+export default router;
+
+<<<FILE_END>>>
+
+<<<FILE_START>>>
+FILE: server/routes/posts.js
+import express from "express";
+import { getFeedPosts, getUserPosts, likePost } from "../controllers/posts.js";
+import { verifyToken } from "../middleware/auth.js";
+
+const router = express.Router();
+
+/* READ */
+router.get("/", verifyToken, getFeedPosts);
+router.get("/:userId/posts", verifyToken, getUserPosts);
+
+/* UPDATE */
+router.patch("/:id/like", verifyToken, likePost);
+
+export default router;
+
+<<<FILE_END>>>
+
+<<<FILE_START>>>
+FILE: server/routes/users.js
+import express from "express";
+import {
+  getUser,
+  getUserFriends,
+  addRemoveFriend,
+} from "../controllers/users.js";
+import { verifyToken } from "../middleware/auth.js";
+
+const router = express.Router();
+
+/* READ */
+router.get("/:id", verifyToken, getUser);
+router.get("/:id/friends", verifyToken, getUserFriends);
+
+/* UPDATE */
+router.patch("/:id/:friendId", verifyToken, addRemoveFriend);
+
+export default router;
+
+<<<FILE_END>>>
+
+=== RESPONSE RECEIVED ===
+We are asked: "You are a MERN stack developer. Generate the missing file posts.js based on the complete codebase provided below." The file will be saved at this path: server/controllers/posts.js. We need to generate the file "posts.js" in server/controllers. We have to follow the rules: "Analyze the codebase to understand existing patterns, imports, and dependencies. Only use imports and functions that exist in the provided codebase. Follow same coding style and structure as similar files. DO NOT invent or hallucinate imports/libraries that don't exist in the codebase. Component should be able to work correctly with the existing codebase without any changes."
+
+We have code for auth.js, users.js, etc. We need to generate posts.js. Let's check what endpoints exist in posts routes: In server/routes/posts.js, we see:
+
+```
+import express from "express";
+import { getFeedPosts, getUserPosts, likePost } from "../controllers/posts.js";
+import { verifyToken } from "../middleware/auth.js";
+
+const router = express.Router();
+
+/* READ */
+router.get("/", verifyToken, getFeedPosts);
+router.get("/:userId/posts", verifyToken, getUserPosts);
+
+/* UPDATE */
+router.patch("/:id/like", verifyToken, likePost);
+
+export default router;
+```
+
+So in posts.js, we need to define three functions: getFeedPosts, getUserPosts, likePost. They are exported as named exports.
+
+Let's check what is expected from these endpoints:
+
+- getFeedPosts: GET /posts (with verifyToken) should return feed posts for the logged in user? But then in PostsWidget.jsx, we see that getPosts is called with fetch("http://localhost:3001/posts", { method: "GET", headers: { Authorization: `Bearer ${token}` } }). And then dispatch(setPosts({ posts: data })). So getFeedPosts should return an array of posts. But what exactly? Possibly all posts? But then getUserPosts is used for profile page: In PostsWidget.jsx, if isProfile is true, then getUserPosts is called with fetch(`http://localhost:3001/posts/${userId}/posts`, ...). So getUserPosts should return posts for a specific user.
+
+- likePost: PATCH /posts/:id/like. In PostWidget.jsx, when clicking like button, it calls fetch(`http://localhost:3001/posts/${postId}/like`, { method: "PATCH", headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" }, body: JSON.stringify({ userId: loggedInUserId }) }). And then dispatch(setPost({ post: updatedPost })). So likePost should update a post's likes. It receives req.params.id (postId) and req.body containing userId. It should find the post by id, update its likes map accordingly (toggle like). Then return updated post.
+
+We also see that in createPost (which is imported in index.js) is defined in posts.js? Actually, in server/index.js, we see:
+```
+app.post("/posts", verifyToken, upload.single("picture"), createPost);
+```
+So createPost is also defined in posts.js? But our file is missing posts.js. But we see that in server/index.js, they import createPost from "./controllers/posts.js". So our posts.js file should also export createPost function. But wait, check routes/posts.js: It only imports getFeedPosts, getUserPosts, likePost from posts.js. But index.js uses createPost from posts.js as well. So our posts.js file should export createPost as well.
+
+Let's check similar patterns in auth.js and users.js:
+
+auth.js:
+```
+export const register = async (req, res) => { ... }
+export const login = async (req, res) => { ... }
+```
+users.js:
+```
+export const getUser = async (req, res) => { ... }
+export const getUserFriends = async (req, res) => { ... }
+export const addRemoveFriend = async (req, res) => { ... }
+```
+So our posts.js should define functions:
+- getFeedPosts
+- getUserPosts
+- likePost
+- createPost
+
+Let's check what data structure for posts exists in server/data/index.js. There is an array "posts" with objects that have properties:
+{
+  _id,
+  userId,
+  firstName,
+  lastName,
+  description,
+  location,
+  picturePath,
+  userPicturePath,
+  likes: new Map([...]),
+  comments: [ ... ]
+}
+So our functions should probably interact with a Post model. And indeed we have a Post model imported from "./models/Post.js" in other controllers? In index.js, we see "import Post from './models/Post.js';" So we can use that.
+
+So our posts.js file should import Post from "../models/Post.js". Also maybe import User? Possibly not needed.
+
+Let's design each function:
+
+1. getFeedPosts: This function should get all posts? But maybe it should return all posts? But then in PostsWidget.jsx, it calls getPosts and then dispatches setPosts with the returned data. It doesn't filter by user. But maybe feed means all posts? However, in getUserPosts, it's specifically for a user's own posts. But getFeedPosts might be all posts from all users? But then in PostsWidget.jsx, if not profile page, it calls getPosts which calls getFeedPosts. And then it maps over posts and renders them.
+
+I check PostsWidget.jsx:
+```
+const PostsWidget = ({ userId, isProfile = false }) => {
+  const dispatch = useDispatch();
+  const posts = useSelector((state) => state.posts);
+  const token = useSelector((state) => state.token);
+
+  const getPosts = async () => {
+    const response = await fetch("http://localhost:3001/posts", {
+      method: "GET",
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    const data = await response.json();
+    dispatch(setPosts({ posts: data }));
+  };
+
+  const getUserPosts = async () => {
+    const response = await fetch(
+      `http://localhost:3001/posts/${userId}/posts`,
+      {
+        method: "GET",
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    );
+    const data = await response.json();
+    dispatch(setPosts({ posts: data }));
+  };
+
+  useEffect(() => {
+    if (isProfile) {
+      getUserPosts();
+    } else {
+      getPosts();
+    }
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  return (
+    <>
+      {posts.map(
+        ({
+          _id,
+          userId,
+          firstName,
+          lastName,
+          description,
+          location,
+          picturePath,
+          userPicturePath,
+          likes,
+          comments,
+        }) => (
+          <PostWidget
+            key={_id}
+            postId={_id}
+            postUserId={userId}
+            name={`${firstName} ${lastName}`}
+            description={description}
+            location={location}
+            picturePath={picturePath}
+            userPicturePath={userPicturePath}
+            likes={likes}
+            comments={comments}
+          />
+        )
+      )}
+    </>
+  );
+};
+```
+So getFeedPosts should return an array of post objects. We can simply query Post.find({}).sort({ createdAt: -1 }) maybe.
+
+But note that in server/data/index.js, there is an array of posts but they are not stored in DB? But our code uses Mongoose so we assume posts are stored in DB.
+
+So getFeedPosts:
+```
+export const getFeedPosts = async (req, res) => {
+   try {
+       const posts = await Post.find({}).sort({ createdAt: -1 });
+       res.status(200).json(posts);
+   } catch(err) {
+       res.status(500).json({ error: err.message });
+   }
+};
+```
+That seems fine.
+
+2. getUserPosts: This function should get posts for a specific user. The route is GET /posts/:userId/posts.
+So function signature: export const getUserPosts = async (req, res) => { ... }.
+Inside, req.params.userId is available.
+We can do:
+```
+try {
+   const userPosts = await Post.find({ userId: req.params.userId }).sort({ createdAt: -1 });
+   res.status(200).json(userPosts);
+} catch(err) {
+   res.status(500).json({ error: err.message });
+}
+```
+That seems fine.
+
+3. likePost: This function handles PATCH /posts/:id/like.
+It receives req.params.id as postId and req.body containing userId.
+We need to find the post by id using Post.findById(postId). Then update its likes map.
+The likes field is a Map of userIds to boolean values.
+We need to toggle the like:
+- If the user already liked (i.e., if post.likes.get(userId) is true), then remove it.
+- Otherwise add it.
+We then save the post and return updated post.
+
+So code:
+```
+export const likePost = async (req, res) => {
+   try {
+       const postId = req.params.id;
+       const { userId } = req.body;
+       const post = await Post.findById(postId);
+       if (!post) return res.status(404).json({ message: "Post not found" });
+       // Toggle like
+       if (post.likes.get(userId)) {
+           // Remove like
+           post.likes.delete(userId);
+       } else {
+           post.likes.set(userId, true);
+       }
+       await post.save();
+       res.status(200).json(post);
+   } catch(err) {
+       res.status(500).json({ error: err.message });
+   }
+};
+```
+That seems fine.
+
+4. createPost: This function handles POST /posts.
+It is used with multer middleware to handle file upload for picture.
+In server/index.js:
+```
+app.post("/posts", verifyToken, upload.single("picture"), createPost);
+```
+So createPost gets req.body and possibly req.file if picture uploaded.
+The client side in MyPostWidget.jsx does:
+```
+const handlePost = async () => {
+    const formData = new FormData();
+    formData.append("userId", _id);
+    formData.append("description", post);
+    if (image) {
+      formData.append("picture", image);
+      formData.append("picturePath", image.name);
+    }
+
+    const response = await fetch(`http://localhost:3001/posts`, {
+      method: "POST",
+      headers: { Authorization: `Bearer ${token}` },
+      body: formData,
+    });
+    const posts = await response.json();
+    dispatch(setPosts({ posts }));
+    setImage(null);
+    setPost("");
+  };
+```
+So createPost should read req.body.userId, req.body.description.
+If req.file exists then use that for picture.
+But note that in our codebase for auth register, they use upload.single("picture") and then use req.body.picturePath appended manually? Actually check auth register:
+```
+app.post("/auth/register", upload.single("picture"), register);
+```
+And in register controller:
+```
+const { firstName, lastName, email, password, picturePath, friends, location, occupation } = req.body;
+...
+newUser = new User({... picturePath,...});
+```
+But in createPost, we want to create a new Post document.
+Properties for Post document based on schema in server/models/Post.js:
+{
+   userId: String,
+   firstName: String,
+   lastName: String,
+   location: String,
+   description: String,
+   picturePath: String,
+   userPicturePath: String,
+   likes: Map,
+   comments: Array
+}
+We need to fill firstName and lastName from the user who is posting. We can get that from token maybe? But note that our controllers don't seem to fetch user details from token; they rely on req.user which is set by verifyToken middleware.
+Check middleware auth.js:
+```
+const verified = jwt.verify(token, process.env.JWT_SECRET);
+req.user = verified;
+```
+So req.user will contain the payload from JWT which likely includes id and maybe other fields? In login controller in auth.js:
+```
+const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
+delete user.password;
+res.status(200).json({ token, user });
+```
+So req.user will be an object with id property and maybe others? But not sure if firstName and lastName are included. In login controller they send back user object without password. So likely req.user contains firstName and lastName as well? But not guaranteed by our code snippet but likely yes because in login controller they do "res.status(200).json({ token, user });" so user object includes firstName and lastName.
+But then in createPost we need to set firstName and lastName from the logged-in user. We can do something like:
+```
+const { id } = req.user;
+```
+But then how do we get firstName and lastName? Possibly we can assume that req.user has them if they were included in JWT payload? But our JWT payload only includes id because we did jwt.sign({ id: user._id }, ...). It doesn't include firstName and lastName unless we include them explicitly. But maybe we can query the User model using id? But that might be too heavy for a simple example.
+Alternatively, we can assume that the client sends userId along with description. And also maybe send firstName and lastName? But client code doesn't send firstName and lastName; it sends userId from state.user._id.
+Wait check MyPostWidget.jsx:
+It does:
+```
+const { _id } = useSelector((state) => state.user);
+...
+formData.append("userId", _id);
+formData.append("description", post);
+if (image) {
+  formData.append("picture", image);
+  formData.append("picturePath", image.name);
+}
+```
+So createPost receives req.body.userId and description.
+We need to set firstName and lastName for the post. We could either require that the client sends them or query the User model using userId.
+I think it's better to query the User model to get firstName and lastName because that's consistent with how getUser works in other controllers.
+But note that our controllers for users don't do that; they simply return the user object from DB.
+We can do something like:
+```
+const user = await User.findById(req.body.userId);
+if (!user) return res.status(404).json({ message: "User not found" });
+```
+Then use user.firstName and user.lastName.
+Also location? Possibly we can leave location empty or use user.location if available?
+In Post schema there is location field but not mandatory.
+Maybe we set location to user.location if exists.
+Also picturePath - if req.file exists then use req.file.filename as picturePath; else use req.body.picturePath if provided.
+Also userPicturePath - maybe set to user.picturePath?
+And likes default to new Map() and comments default to [].
+
+So createPost function:
+```
+export const createPost = async (req, res) => {
+   try {
+       const { userId, description } = req.body;
+       // Get user details
+       const userDoc = await User.findById(userId);
+       if (!userDoc) return res.status(404).json({ message: "User not found" });
+       // Determine picturePath
+       let picturePath;
+       if (req.file) {
+           picturePath = req.file.filename; // because multer saves original name
+       } else if (req.body.picturePath) {
+           picturePath = req.body.picturePath;
+       }
+       // Create new post
+       const newPost = new Post({
+           userId,
+           firstName: userDoc.firstName,
+           lastName: userDoc.lastName,
+           location: userDoc.location || "",
+           description,
+           picturePath,
+           userPicturePath: userDoc.picturePath || "",
+           likes: new Map(),
+           comments: []
+       });
+       const savedPost = await newPost.save();
+       res.status(201).json(savedPost);
+   } catch(err) {
+       res.status(500).json({ error: err.message });
+   }
+};
+```
+But wait! We need to import User model as well because we are using it in createPost. Check similar pattern in auth.js? They import bcrypt and jwt but not User because they use it indirectly? Actually auth.js does import User? Let's check auth.js:
+It says "import bcrypt from 'bcrypt'; import jwt from 'jsonwebtoken'; import User from '../models/User.js';". So yes.
+
+So in our posts.js file we need to import Post from "../models/Post.js" and also import User from "../models/User.js".
+
+Now check style consistency with other controllers:
+auth.js uses try/catch blocks with async functions.
+users.js uses similar structure.
+
+So our file structure:
+
+File path: server/controllers/posts.js
+
+At top:
+"use strict"; maybe not needed.
+
+Import statements:
+import Post from "../models/Post.js";
+import User from "../models/User.js";
+
+Then define functions:
+
+getFeedPosts
+getUserPosts
+likePost
+createPost
+
+Export them as named exports.
+
+Let's check naming conventions:
+In auth.js they do:
+export const register = async (req,res)=>{...}
+export const login = async (req,res)=>{...}
+
+In users.js they do:
+export const getUser = async (req,res)=>{...}
+export const getUserFriends = async (req,res)=>{...}
+export const addRemoveFriend = async (req,res)=>{...}
+
+So our functions should be similarly named.
+
+Now check potential pitfalls:
+
+For likePost function:
+We need to check if post exists; if not return 404.
+Then toggle like using Map methods.
+
+For createPost function:
+We need multer file handling; req.file might be undefined if no file uploaded.
+We need to check if req.file exists; if yes then use that filename; else if req.body has picturePath then use that; else leave empty string maybe.
+
+Also note that in MyPostWidget.jsx when calling fetch for create post, they don't set any header for content-type because it's FormData so browser sets multipart/form-data automatically. But our express route sets method POST with verifyToken and multer middleware so it's fine.
+
+Double-check ordering of middleware in index.js:
+app.post("/posts", verifyToken, upload.single("picture"), createPost);
+
+So multer runs before createPost so req.file will be available if file uploaded.
+
+Now check potential error handling.
+
+I'll now write code accordingly:
+
+File content:
+
+// server/controllers/posts.js
+
+"use strict";
+
+import Post from "../models/Post.js";
+import User from "../models/User.js";
+
+export const getFeedPosts = async (req, res) => {
+  try {
+    // Get all posts sorted by createdAt descending
+    const posts = await Post.find({}).sort({ createdAt: -1 });
+    res.status(200).json(posts);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
+
+export const getUserPosts = async (req, res) => {
+  try {
+    // Get posts for a specific user
+    const userId = req.params.userId;
+    const userPosts = await Post.find({ userId }).sort({ createdAt: -1 });
+    res.status(200).json(userPosts);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
+
+export const likePost = async (req, res) => {
+  try {
+    const postId = req.params.id;
+    const { userId } = req.body;
+    const post = await Post.findById(postId);
+    if (!post) return res.status(404).json({ message: "Post not found" });
+
+    // Toggle like
+    if (post.likes.get(userId)) {
+      // Remove like
+      post.likes.delete(userId);
+    } else {
+      post.likes.set(userId, true);
+    }
+    await post.save();
+    res.status(200).json(post);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
+
+export const createPost = async (req, res) => {
+  try {
+    const { userId, description } = req.body;
+    
+    // Get user details
+    const userDoc = await User.findById(userId);
+    if (!userDoc) return res.status(404).json({ message: "User not found" });
+
+    let picturePath;
+    if (req.file) {
+      picturePath = req.file.filename;
+    } else if (req.body.picturePath) {
+      picturePath = req.body.picturePath;
+    }
+
+    // Create new post
+    const newPost = new Post({
+      userId,
+      firstName: userDoc.firstName,
+      lastName: userDoc.lastName,
+      location: userDoc.location || "",
+      description,
+      picturePath,
+      userPicturePath: userDoc.picturePath || "",
+      likes: new Map(),
+      comments: []
+    });
+
+    const savedPost = await newPost.save();
+    res.status(201).json(savedPost);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
+
+That seems complete.
+
+I must output only the complete code for posts.js with no explanations or markdown formatting.
+
+I'll now produce final answer accordingly.import Post from "../models/Post.js";
+import User from "../models/User.js";
+
+export const getFeedPosts = async (req, res) => {
+  try {
+    // Retrieve all posts sorted by creation date (newest first)
+    const posts = await Post.find({}).sort({ createdAt: -1 });
+    res.status(200).json(posts);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
+
+export const getUserPosts = async (req, res) => {
+  try {
+    // Retrieve posts for a specific user based on userId parameter
+    const userId = req.params.userId;
+    const userPosts = await Post.find({ userId }).sort({ createdAt: -1 });
+    res.status(200).json(userPosts);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
+
+export const likePost = async (req, res) => {
+  try {
+    // Toggle like status for a given post by a specific user
+    const postId = req.params.id;
+    const { userId } = req.body;
+    
+    const post = await Post.findById(postId);
+    if (!post)
+      return res.status(404).json({ message: "Post not found" });
+
+    if (post.likes.get(userId)) {
+      // Remove like if already liked
+      post.likes.delete(userId);
+    } else {
+      // Add like if not already liked
+      post.likes.set(userId, true);
+    }
+
+    await post.save();
+    res.status(200).json(post);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
+
+export const createPost = async (req, res) => {
+  try {
+    // Create a new post using data from the request body and optional uploaded file
+    const { userId, description } = req.body;
+
+    // Retrieve the posting user's details
+    const userDoc = await User.findById(userId);
+    if (!userDoc)
+      return res.status(404).json({ message: "User not found" });
+
+    let picturePath;
+    if (req.file) {
+      // Use the filename from multer if a file was uploaded
+      picturePath = req.file.filename;
+    } else if (req.body.picturePath) {
+      // Fallback to provided picture path in the request body
+      picturePath = req.body.picturePath;
+    }
+
+    // Construct the new post document
+    const newPost = new Post({
+      userId,
+      firstName: userDoc.firstName,
+      lastName: userDoc.lastName,
+      location: userDoc.location || "",
+      description,
+      picturePath,
+      userPicturePath: userDoc.picturePath || "",
+      likes: new Map(),
+      comments: []
+    });
+
+    const savedPost = await newPost.save();
+    res.status(201).json(savedPost);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
+
+=== END LOG ===

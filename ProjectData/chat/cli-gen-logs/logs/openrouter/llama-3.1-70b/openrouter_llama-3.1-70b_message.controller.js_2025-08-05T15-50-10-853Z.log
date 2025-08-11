@@ -1,0 +1,2040 @@
+
+=== API CALL LOG ===
+Provider: openrouter_llama-3.1-70b
+File: message.controller.js
+Path: backend/controllers/message.controller.js
+Timestamp: 2025-08-05T15:50:10.853Z
+
+=== PROMPT SENT ===
+You are a MERN stack developer. Generate the missing file `message.controller.js` based on the complete codebase provided below.
+
+**RULES:**
+- Analyze the codebase to understand existing patterns, imports, and dependencies
+- Only use imports and functions that exist in the provided codebase
+- Follow the same coding style and structure as similar files
+- DO NOT invent or hallucinate imports/libraries that don't exist in the codebase.
+- DO NOT assume any other functions/files exist in the codebase apart from the ones i sent you.
+- Component should be able to work correctly with the existing codebase without any changes.
+
+The file will be saved at this path: `backend/controllers/message.controller.js` so make sure imports are correct.
+Generate only the complete code for `message.controller.js` - no explanations, no markdown formatting, the response will be saved as `message.controller.js` and it should be good to go.
+
+**CODEBASE:**
+<<<FILE_START>>>
+FILE: backend/controllers/auth.controller.js
+import bcrypt from "bcryptjs";
+import User from "../models/user.model.js";
+import generateTokenAndSetCookie from "../utils/generateToken.js";
+
+export const signup = async (req, res) => {
+	try {
+		const { fullName, username, password, confirmPassword, gender } = req.body;
+
+		if (password !== confirmPassword) {
+			return res.status(400).json({ error: "Passwords don't match" });
+		}
+
+		const user = await User.findOne({ username });
+
+		if (user) {
+			return res.status(400).json({ error: "Username already exists" });
+		}
+
+		// HASH PASSWORD HERE
+		const salt = await bcrypt.genSalt(10);
+		const hashedPassword = await bcrypt.hash(password, salt);
+
+		// https://avatar-placeholder.iran.liara.run/
+
+		const boyProfilePic = `https://avatar.iran.liara.run/public/boy?username=${username}`;
+		const girlProfilePic = `https://avatar.iran.liara.run/public/girl?username=${username}`;
+
+		const newUser = new User({
+			fullName,
+			username,
+			password: hashedPassword,
+			gender,
+			profilePic: gender === "male" ? boyProfilePic : girlProfilePic,
+		});
+
+		if (newUser) {
+			// Generate JWT token here
+			generateTokenAndSetCookie(newUser._id, res);
+			await newUser.save();
+
+			res.status(201).json({
+				_id: newUser._id,
+				fullName: newUser.fullName,
+				username: newUser.username,
+				profilePic: newUser.profilePic,
+			});
+		} else {
+			res.status(400).json({ error: "Invalid user data" });
+		}
+	} catch (error) {
+		console.log("Error in signup controller", error.message);
+		res.status(500).json({ error: "Internal Server Error" });
+	}
+};
+
+export const login = async (req, res) => {
+	try {
+		const { username, password } = req.body;
+		const user = await User.findOne({ username });
+		const isPasswordCorrect = await bcrypt.compare(password, user?.password || "");
+
+		if (!user || !isPasswordCorrect) {
+			return res.status(400).json({ error: "Invalid username or password" });
+		}
+
+		generateTokenAndSetCookie(user._id, res);
+
+		res.status(200).json({
+			_id: user._id,
+			fullName: user.fullName,
+			username: user.username,
+			profilePic: user.profilePic,
+		});
+	} catch (error) {
+		console.log("Error in login controller", error.message);
+		res.status(500).json({ error: "Internal Server Error" });
+	}
+};
+
+export const logout = (req, res) => {
+	try {
+		res.cookie("jwt", "", { maxAge: 0 });
+		res.status(200).json({ message: "Logged out successfully" });
+	} catch (error) {
+		console.log("Error in logout controller", error.message);
+		res.status(500).json({ error: "Internal Server Error" });
+	}
+};
+
+<<<FILE_END>>>
+
+
+
+<<<FILE_START>>>
+FILE: backend/controllers/user.controller.js
+import User from "../models/user.model.js";
+
+export const getUsersForSidebar = async (req, res) => {
+	try {
+		const loggedInUserId = req.user._id;
+
+		const filteredUsers = await User.find({ _id: { $ne: loggedInUserId } }).select("-password");
+
+		res.status(200).json(filteredUsers);
+	} catch (error) {
+		console.error("Error in getUsersForSidebar: ", error.message);
+		res.status(500).json({ error: "Internal server error" });
+	}
+};
+
+<<<FILE_END>>>
+
+<<<FILE_START>>>
+FILE: backend/db/connectToMongoDB.js
+import mongoose from "mongoose";
+
+const connectToMongoDB = async () => {
+	try {
+		await mongoose.connect(process.env.MONGO_DB_URI);
+		console.log("Connected to MongoDB");
+	} catch (error) {
+		console.log("Error connecting to MongoDB", error.message);
+	}
+};
+
+export default connectToMongoDB;
+
+<<<FILE_END>>>
+
+<<<FILE_START>>>
+FILE: backend/middleware/protectRoute.js
+import jwt from "jsonwebtoken";
+import User from "../models/user.model.js";
+
+const protectRoute = async (req, res, next) => {
+	try {
+		const token = req.cookies.jwt;
+
+		if (!token) {
+			return res.status(401).json({ error: "Unauthorized - No Token Provided" });
+		}
+
+		const decoded = jwt.verify(token, process.env.JWT_SECRET);
+
+		if (!decoded) {
+			return res.status(401).json({ error: "Unauthorized - Invalid Token" });
+		}
+
+		const user = await User.findById(decoded.userId).select("-password");
+
+		if (!user) {
+			return res.status(404).json({ error: "User not found" });
+		}
+
+		req.user = user;
+
+		next();
+	} catch (error) {
+		console.log("Error in protectRoute middleware: ", error.message);
+		res.status(500).json({ error: "Internal server error" });
+	}
+};
+
+export default protectRoute;
+
+<<<FILE_END>>>
+
+<<<FILE_START>>>
+FILE: backend/models/conversation.model.js
+import mongoose from "mongoose";
+
+const conversationSchema = new mongoose.Schema(
+	{
+		participants: [
+			{
+				type: mongoose.Schema.Types.ObjectId,
+				ref: "User",
+			},
+		],
+		messages: [
+			{
+				type: mongoose.Schema.Types.ObjectId,
+				ref: "Message",
+				default: [],
+			},
+		],
+	},
+	{ timestamps: true }
+);
+
+const Conversation = mongoose.model("Conversation", conversationSchema);
+
+export default Conversation;
+
+<<<FILE_END>>>
+
+<<<FILE_START>>>
+FILE: backend/models/message.model.js
+import mongoose from "mongoose";
+
+const messageSchema = new mongoose.Schema(
+	{
+		senderId: {
+			type: mongoose.Schema.Types.ObjectId,
+			ref: "User",
+			required: true,
+		},
+		receiverId: {
+			type: mongoose.Schema.Types.ObjectId,
+			ref: "User",
+			required: true,
+		},
+		message: {
+			type: String,
+			required: true,
+		},
+		// createdAt, updatedAt
+	},
+	{ timestamps: true }
+);
+
+const Message = mongoose.model("Message", messageSchema);
+
+export default Message;
+
+<<<FILE_END>>>
+
+<<<FILE_START>>>
+FILE: backend/models/user.model.js
+import mongoose from "mongoose";
+
+const userSchema = new mongoose.Schema(
+	{
+		fullName: {
+			type: String,
+			required: true,
+		},
+		username: {
+			type: String,
+			required: true,
+			unique: true,
+		},
+		password: {
+			type: String,
+			required: true,
+			minlength: 6,
+		},
+		gender: {
+			type: String,
+			required: true,
+			enum: ["male", "female"],
+		},
+		profilePic: {
+			type: String,
+			default: "",
+		},
+		// createdAt, updatedAt => Member since <createdAt>
+	},
+	{ timestamps: true }
+);
+
+const User = mongoose.model("User", userSchema);
+
+export default User;
+
+<<<FILE_END>>>
+
+<<<FILE_START>>>
+FILE: backend/routes/auth.routes.js
+import express from "express";
+import { login, logout, signup } from "../controllers/auth.controller.js";
+
+const router = express.Router();
+
+router.post("/signup", signup);
+
+router.post("/login", login);
+
+router.post("/logout", logout);
+
+export default router;
+
+<<<FILE_END>>>
+
+<<<FILE_START>>>
+FILE: backend/routes/message.routes.js
+import express from "express";
+import { getMessages, sendMessage } from "../controllers/message.controller.js";
+import protectRoute from "../middleware/protectRoute.js";
+
+const router = express.Router();
+
+router.get("/:id", protectRoute, getMessages);
+router.post("/send/:id", protectRoute, sendMessage);
+
+export default router;
+
+<<<FILE_END>>>
+
+<<<FILE_START>>>
+FILE: backend/routes/user.routes.js
+import express from "express";
+import protectRoute from "../middleware/protectRoute.js";
+import { getUsersForSidebar } from "../controllers/user.controller.js";
+
+const router = express.Router();
+
+router.get("/", protectRoute, getUsersForSidebar);
+
+export default router;
+
+<<<FILE_END>>>
+
+<<<FILE_START>>>
+FILE: backend/server.js
+import path from "path";
+import express from "express";
+import dotenv from "dotenv";
+import cookieParser from "cookie-parser";
+
+import authRoutes from "./routes/auth.routes.js";
+import messageRoutes from "./routes/message.routes.js";
+import userRoutes from "./routes/user.routes.js";
+
+import connectToMongoDB from "./db/connectToMongoDB.js";
+import { app, server } from "./socket/socket.js";
+
+dotenv.config();
+
+const __dirname = path.resolve();
+// PORT should be assigned after calling dotenv.config() because we need to access the env variables. Didn't realize while recording the video. Sorry for the confusion.
+const PORT = process.env.PORT || 5000;
+
+app.use(express.json()); // to parse the incoming requests with JSON payloads (from req.body)
+app.use(cookieParser());
+
+app.use("/api/auth", authRoutes);
+app.use("/api/messages", messageRoutes);
+app.use("/api/users", userRoutes);
+
+app.use(express.static(path.join(__dirname, "/frontend/dist")));
+
+app.get("*", (req, res) => {
+	res.sendFile(path.join(__dirname, "frontend", "dist", "index.html"));
+});
+
+server.listen(PORT, () => {
+	connectToMongoDB();
+	console.log(`Server Running on port ${PORT}`);
+});
+
+<<<FILE_END>>>
+
+<<<FILE_START>>>
+FILE: backend/socket/socket.js
+import { Server } from "socket.io";
+import http from "http";
+import express from "express";
+
+const app = express();
+
+const server = http.createServer(app);
+const io = new Server(server, {
+	cors: {
+		origin: ["http://localhost:3000"],
+		methods: ["GET", "POST"],
+	},
+});
+
+export const getReceiverSocketId = (receiverId) => {
+	return userSocketMap[receiverId];
+};
+
+const userSocketMap = {}; // {userId: socketId}
+
+io.on("connection", (socket) => {
+	console.log("a user connected", socket.id);
+
+	const userId = socket.handshake.query.userId;
+	if (userId != "undefined") userSocketMap[userId] = socket.id;
+
+	// io.emit() is used to send events to all the connected clients
+	io.emit("getOnlineUsers", Object.keys(userSocketMap));
+
+	// socket.on() is used to listen to the events. can be used both on client and server side
+	socket.on("disconnect", () => {
+		console.log("user disconnected", socket.id);
+		delete userSocketMap[userId];
+		io.emit("getOnlineUsers", Object.keys(userSocketMap));
+	});
+});
+
+export { app, io, server };
+
+<<<FILE_END>>>
+
+<<<FILE_START>>>
+FILE: backend/utils/generateToken.js
+import jwt from "jsonwebtoken";
+
+const generateTokenAndSetCookie = (userId, res) => {
+	const token = jwt.sign({ userId }, process.env.JWT_SECRET, {
+		expiresIn: "15d",
+	});
+
+	res.cookie("jwt", token, {
+		maxAge: 15 * 24 * 60 * 60 * 1000, // MS
+		httpOnly: true, // prevent XSS attacks cross-site scripting attacks
+		sameSite: "strict", // CSRF attacks cross-site request forgery attacks
+		secure: process.env.NODE_ENV !== "development",
+	});
+};
+
+export default generateTokenAndSetCookie;
+
+<<<FILE_END>>>
+
+<<<FILE_START>>>
+FILE: frontend/index.html
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite + React</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
+
+<<<FILE_END>>>
+
+<<<FILE_START>>>
+FILE: frontend/package.json
+{
+  "name": "frontend",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "chat-app-yt": "file:..",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-hot-toast": "^2.4.1",
+    "react-icons": "^5.0.1",
+    "react-router-dom": "^6.21.3",
+    "socket.io-client": "^4.7.4",
+    "zustand": "^4.5.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.43",
+    "@types/react-dom": "^18.2.17",
+    "@vitejs/plugin-react": "^4.2.1",
+    "autoprefixer": "^10.4.17",
+    "daisyui": "^4.6.1",
+    "eslint": "^8.55.0",
+    "eslint-plugin-react": "^7.33.2",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-refresh": "^0.4.5",
+    "postcss": "^8.4.33",
+    "tailwindcss": "^3.4.1",
+    "vite": "^5.0.8"
+  }
+}
+
+<<<FILE_END>>>
+
+<<<FILE_START>>>
+FILE: frontend/postcss.config.js
+export default {
+  plugins: {
+    tailwindcss: {},
+    autoprefixer: {},
+  },
+}
+
+<<<FILE_END>>>
+
+<<<FILE_START>>>
+FILE: frontend/src/App.css
+
+<<<FILE_END>>>
+
+<<<FILE_START>>>
+FILE: frontend/src/App.jsx
+import { Navigate, Route, Routes } from "react-router-dom";
+import "./App.css";
+import Home from "./pages/home/Home";
+import Login from "./pages/login/Login";
+import SignUp from "./pages/signup/SignUp";
+import { Toaster } from "react-hot-toast";
+import { useAuthContext } from "./context/AuthContext";
+
+function App() {
+	const { authUser } = useAuthContext();
+	return (
+		<div className='p-4 h-screen flex items-center justify-center'>
+			<Routes>
+				<Route path='/' element={authUser ? <Home /> : <Navigate to={"/login"} />} />
+				<Route path='/login' element={authUser ? <Navigate to='/' /> : <Login />} />
+				<Route path='/signup' element={authUser ? <Navigate to='/' /> : <SignUp />} />
+			</Routes>
+			<Toaster />
+		</div>
+	);
+}
+
+export default App;
+
+<<<FILE_END>>>
+
+<<<FILE_START>>>
+FILE: frontend/src/components/messages/Message.jsx
+import { useAuthContext } from "../../context/AuthContext";
+import { extractTime } from "../../utils/extractTime";
+import useConversation from "../../zustand/useConversation";
+
+const Message = ({ message }) => {
+	const { authUser } = useAuthContext();
+	const { selectedConversation } = useConversation();
+	const fromMe = message.senderId === authUser._id;
+	const formattedTime = extractTime(message.createdAt);
+	const chatClassName = fromMe ? "chat-end" : "chat-start";
+	const profilePic = fromMe ? authUser.profilePic : selectedConversation?.profilePic;
+	const bubbleBgColor = fromMe ? "bg-blue-500" : "";
+
+	const shakeClass = message.shouldShake ? "shake" : "";
+
+	return (
+		<div className={`chat ${chatClassName}`}>
+			<div className='chat-image avatar'>
+				<div className='w-10 rounded-full'>
+					<img alt='Tailwind CSS chat bubble component' src={profilePic} />
+				</div>
+			</div>
+			<div className={`chat-bubble text-white ${bubbleBgColor} ${shakeClass} pb-2`}>{message.message}</div>
+			<div className='chat-footer opacity-50 text-xs flex gap-1 items-center'>{formattedTime}</div>
+		</div>
+	);
+};
+export default Message;
+
+<<<FILE_END>>>
+
+<<<FILE_START>>>
+FILE: frontend/src/components/messages/MessageContainer.jsx
+import { useEffect } from "react";
+import useConversation from "../../zustand/useConversation";
+import MessageInput from "./MessageInput";
+import Messages from "./Messages";
+import { TiMessages } from "react-icons/ti";
+import { useAuthContext } from "../../context/AuthContext";
+
+const MessageContainer = () => {
+	const { selectedConversation, setSelectedConversation } = useConversation();
+
+	useEffect(() => {
+		// cleanup function (unmounts)
+		return () => setSelectedConversation(null);
+	}, [setSelectedConversation]);
+
+	return (
+		<div className='md:min-w-[450px] flex flex-col'>
+			{!selectedConversation ? (
+				<NoChatSelected />
+			) : (
+				<>
+					{/* Header */}
+					<div className='bg-slate-500 px-4 py-2 mb-2'>
+						<span className='label-text'>To:</span>{" "}
+						<span className='text-gray-900 font-bold'>{selectedConversation.fullName}</span>
+					</div>
+					<Messages />
+					<MessageInput />
+				</>
+			)}
+		</div>
+	);
+};
+export default MessageContainer;
+
+const NoChatSelected = () => {
+	const { authUser } = useAuthContext();
+	return (
+		<div className='flex items-center justify-center w-full h-full'>
+			<div className='px-4 text-center sm:text-lg md:text-xl text-gray-200 font-semibold flex flex-col items-center gap-2'>
+				<p>Welcome 👋 {authUser.fullName} ❄</p>
+				<p>Select a chat to start messaging</p>
+				<TiMessages className='text-3xl md:text-6xl text-center' />
+			</div>
+		</div>
+	);
+};
+
+// STARTER CODE SNIPPET
+// import MessageInput from "./MessageInput";
+// import Messages from "./Messages";
+
+// const MessageContainer = () => {
+// 	return (
+// 		<div className='md:min-w-[450px] flex flex-col'>
+// 			<>
+// 				{/* Header */}
+// 				<div className='bg-slate-500 px-4 py-2 mb-2'>
+// 					<span className='label-text'>To:</span> <span className='text-gray-900 font-bold'>John doe</span>
+// 				</div>
+
+// 				<Messages />
+// 				<MessageInput />
+// 			</>
+// 		</div>
+// 	);
+// };
+// export default MessageContainer;
+
+<<<FILE_END>>>
+
+<<<FILE_START>>>
+FILE: frontend/src/components/messages/MessageInput.jsx
+import { useState } from "react";
+import { BsSend } from "react-icons/bs";
+import useSendMessage from "../../hooks/useSendMessage";
+
+const MessageInput = () => {
+	const [message, setMessage] = useState("");
+	const { loading, sendMessage } = useSendMessage();
+
+	const handleSubmit = async (e) => {
+		e.preventDefault();
+		if (!message) return;
+		await sendMessage(message);
+		setMessage("");
+	};
+
+	return (
+		<form className='px-4 my-3' onSubmit={handleSubmit}>
+			<div className='w-full relative'>
+				<input
+					type='text'
+					className='border text-sm rounded-lg block w-full p-2.5  bg-gray-700 border-gray-600 text-white'
+					placeholder='Send a message'
+					value={message}
+					onChange={(e) => setMessage(e.target.value)}
+				/>
+				<button type='submit' className='absolute inset-y-0 end-0 flex items-center pe-3'>
+					{loading ? <div className='loading loading-spinner'></div> : <BsSend />}
+				</button>
+			</div>
+		</form>
+	);
+};
+export default MessageInput;
+
+// STARTER CODE SNIPPET
+// import { BsSend } from "react-icons/bs";
+
+// const MessageInput = () => {
+// 	return (
+// 		<form className='px-4 my-3'>
+// 			<div className='w-full'>
+// 				<input
+// 					type='text'
+// 					className='border text-sm rounded-lg block w-full p-2.5  bg-gray-700 border-gray-600 text-white'
+// 					placeholder='Send a message'
+// 				/>
+// 				<button type='submit' className='absolute inset-y-0 end-0 flex items-center pe-3'>
+// 					<BsSend />
+// 				</button>
+// 			</div>
+// 		</form>
+// 	);
+// };
+// export default MessageInput;
+
+<<<FILE_END>>>
+
+<<<FILE_START>>>
+FILE: frontend/src/components/messages/Messages.jsx
+import { useEffect, useRef } from "react";
+import useGetMessages from "../../hooks/useGetMessages";
+import MessageSkeleton from "../skeletons/MessageSkeleton";
+import Message from "./Message";
+import useListenMessages from "../../hooks/useListenMessages";
+
+const Messages = () => {
+	const { messages, loading } = useGetMessages();
+	useListenMessages();
+	const lastMessageRef = useRef();
+
+	useEffect(() => {
+		setTimeout(() => {
+			lastMessageRef.current?.scrollIntoView({ behavior: "smooth" });
+		}, 100);
+	}, [messages]);
+
+	return (
+		<div className='px-4 flex-1 overflow-auto'>
+			{!loading &&
+				messages.length > 0 &&
+				messages.map((message) => (
+					<div key={message._id} ref={lastMessageRef}>
+						<Message message={message} />
+					</div>
+				))}
+
+			{loading && [...Array(3)].map((_, idx) => <MessageSkeleton key={idx} />)}
+			{!loading && messages.length === 0 && (
+				<p className='text-center'>Send a message to start the conversation</p>
+			)}
+		</div>
+	);
+};
+export default Messages;
+
+// STARTER CODE SNIPPET
+// import Message from "./Message";
+
+// const Messages = () => {
+// 	return (
+// 		<div className='px-4 flex-1 overflow-auto'>
+// 			<Message />
+// 			<Message />
+// 			<Message />
+// 			<Message />
+// 			<Message />
+// 			<Message />
+// 			<Message />
+// 			<Message />
+// 			<Message />
+// 			<Message />
+// 			<Message />
+// 			<Message />
+// 		</div>
+// 	);
+// };
+// export default Messages;
+
+<<<FILE_END>>>
+
+<<<FILE_START>>>
+FILE: frontend/src/components/sidebar/Conversation.jsx
+import { useSocketContext } from "../../context/SocketContext";
+import useConversation from "../../zustand/useConversation";
+
+const Conversation = ({ conversation, lastIdx, emoji }) => {
+	const { selectedConversation, setSelectedConversation } = useConversation();
+
+	const isSelected = selectedConversation?._id === conversation._id;
+	const { onlineUsers } = useSocketContext();
+	const isOnline = onlineUsers.includes(conversation._id);
+
+	return (
+		<>
+			<div
+				className={`flex gap-2 items-center hover:bg-sky-500 rounded p-2 py-1 cursor-pointer
+				${isSelected ? "bg-sky-500" : ""}
+			`}
+				onClick={() => setSelectedConversation(conversation)}
+			>
+				<div className={`avatar ${isOnline ? "online" : ""}`}>
+					<div className='w-12 rounded-full'>
+						<img src={conversation.profilePic} alt='user avatar' />
+					</div>
+				</div>
+
+				<div className='flex flex-col flex-1'>
+					<div className='flex gap-3 justify-between'>
+						<p className='font-bold text-gray-200'>{conversation.fullName}</p>
+						<span className='text-xl'>{emoji}</span>
+					</div>
+				</div>
+			</div>
+
+			{!lastIdx && <div className='divider my-0 py-0 h-1' />}
+		</>
+	);
+};
+export default Conversation;
+
+// STARTER CODE SNIPPET
+// const Conversation = () => {
+// 	return (
+// 		<>
+// 			<div className='flex gap-2 items-center hover:bg-sky-500 rounded p-2 py-1 cursor-pointer'>
+// 				<div className='avatar online'>
+// 					<div className='w-12 rounded-full'>
+// 						<img
+// 							src='https://cdn0.iconfinder.com/data/icons/communication-line-10/24/account_profile_user_contact_person_avatar_placeholder-512.png'
+// 							alt='user avatar'
+// 						/>
+// 					</div>
+// 				</div>
+
+// 				<div className='flex flex-col flex-1'>
+// 					<div className='flex gap-3 justify-between'>
+// 						<p className='font-bold text-gray-200'>John Doe</p>
+// 						<span className='text-xl'>🎃</span>
+// 					</div>
+// 				</div>
+// 			</div>
+
+// 			<div className='divider my-0 py-0 h-1' />
+// 		</>
+// 	);
+// };
+// export default Conversation;
+
+<<<FILE_END>>>
+
+<<<FILE_START>>>
+FILE: frontend/src/components/sidebar/Conversations.jsx
+import useGetConversations from "../../hooks/useGetConversations";
+import { getRandomEmoji } from "../../utils/emojis";
+import Conversation from "./Conversation";
+
+const Conversations = () => {
+	const { loading, conversations } = useGetConversations();
+	return (
+		<div className='py-2 flex flex-col overflow-auto'>
+			{conversations.map((conversation, idx) => (
+				<Conversation
+					key={conversation._id}
+					conversation={conversation}
+					emoji={getRandomEmoji()}
+					lastIdx={idx === conversations.length - 1}
+				/>
+			))}
+
+			{loading ? <span className='loading loading-spinner mx-auto'></span> : null}
+		</div>
+	);
+};
+export default Conversations;
+
+// STARTER CODE SNIPPET
+// import Conversation from "./Conversation";
+
+// const Conversations = () => {
+// 	return (
+// 		<div className='py-2 flex flex-col overflow-auto'>
+// 			<Conversation />
+// 			<Conversation />
+// 			<Conversation />
+// 			<Conversation />
+// 			<Conversation />
+// 			<Conversation />
+// 		</div>
+// 	);
+// };
+// export default Conversations;
+
+<<<FILE_END>>>
+
+<<<FILE_START>>>
+FILE: frontend/src/components/sidebar/LogoutButton.jsx
+import { BiLogOut } from "react-icons/bi";
+import useLogout from "../../hooks/useLogout";
+
+const LogoutButton = () => {
+	const { loading, logout } = useLogout();
+
+	return (
+		<div className='mt-auto'>
+			{!loading ? (
+				<BiLogOut className='w-6 h-6 text-white cursor-pointer' onClick={logout} />
+			) : (
+				<span className='loading loading-spinner'></span>
+			)}
+		</div>
+	);
+};
+export default LogoutButton;
+
+<<<FILE_END>>>
+
+<<<FILE_START>>>
+FILE: frontend/src/components/sidebar/SearchInput.jsx
+import { useState } from "react";
+import { IoSearchSharp } from "react-icons/io5";
+import useConversation from "../../zustand/useConversation";
+import useGetConversations from "../../hooks/useGetConversations";
+import toast from "react-hot-toast";
+
+const SearchInput = () => {
+	const [search, setSearch] = useState("");
+	const { setSelectedConversation } = useConversation();
+	const { conversations } = useGetConversations();
+
+	const handleSubmit = (e) => {
+		e.preventDefault();
+		if (!search) return;
+		if (search.length < 3) {
+			return toast.error("Search term must be at least 3 characters long");
+		}
+
+		const conversation = conversations.find((c) => c.fullName.toLowerCase().includes(search.toLowerCase()));
+
+		if (conversation) {
+			setSelectedConversation(conversation);
+			setSearch("");
+		} else toast.error("No such user found!");
+	};
+	return (
+		<form onSubmit={handleSubmit} className='flex items-center gap-2'>
+			<input
+				type='text'
+				placeholder='Search…'
+				className='input input-bordered rounded-full'
+				value={search}
+				onChange={(e) => setSearch(e.target.value)}
+			/>
+			<button type='submit' className='btn btn-circle bg-sky-500 text-white'>
+				<IoSearchSharp className='w-6 h-6 outline-none' />
+			</button>
+		</form>
+	);
+};
+export default SearchInput;
+
+// STARTER CODE SNIPPET
+// import { IoSearchSharp } from "react-icons/io5";
+
+// const SearchInput = () => {
+// 	return (
+// 		<form className='flex items-center gap-2'>
+// 			<input type='text' placeholder='Search…' className='input input-bordered rounded-full' />
+// 			<button type='submit' className='btn btn-circle bg-sky-500 text-white'>
+// 				<IoSearchSharp className='w-6 h-6 outline-none' />
+// 			</button>
+// 		</form>
+// 	);
+// };
+// export default SearchInput;
+
+<<<FILE_END>>>
+
+<<<FILE_START>>>
+FILE: frontend/src/components/sidebar/Sidebar.jsx
+import Conversations from "./Conversations";
+import LogoutButton from "./LogoutButton";
+import SearchInput from "./SearchInput";
+
+const Sidebar = () => {
+	return (
+		<div className='border-r border-slate-500 p-4 flex flex-col'>
+			<SearchInput />
+			<div className='divider px-3'></div>
+			<Conversations />
+			<LogoutButton />
+		</div>
+	);
+};
+export default Sidebar;
+
+// STARTER CODE FOR THIS FILE
+// import Conversations from "./Conversations";
+// import LogoutButton from "./LogoutButton";
+// import SearchInput from "./SearchInput";
+
+// const Sidebar = () => {
+// 	return (
+// 		<div className='border-r border-slate-500 p-4 flex flex-col'>
+// 			<SearchInput />
+// 			<div className='divider px-3'></div>
+// 			<Conversations />
+// 			<LogoutButton />
+// 		</div>
+// 	);
+// };
+// export default Sidebar;
+
+<<<FILE_END>>>
+
+<<<FILE_START>>>
+FILE: frontend/src/components/skeletons/MessageSkeleton.jsx
+const MessageSkeleton = () => {
+	return (
+		<>
+			<div className='flex gap-3 items-center'>
+				<div className='skeleton w-10 h-10 rounded-full shrink-0'></div>
+				<div className='flex flex-col gap-1'>
+					<div className='skeleton h-4 w-40'></div>
+					<div className='skeleton h-4 w-40'></div>
+				</div>
+			</div>
+			<div className='flex gap-3 items-center justify-end'>
+				<div className='flex flex-col gap-1'>
+					<div className='skeleton h-4 w-40'></div>
+				</div>
+				<div className='skeleton w-10 h-10 rounded-full shrink-0'></div>
+			</div>
+		</>
+	);
+};
+export default MessageSkeleton;
+
+<<<FILE_END>>>
+
+<<<FILE_START>>>
+FILE: frontend/src/context/AuthContext.jsx
+import { createContext, useContext, useState } from "react";
+
+export const AuthContext = createContext();
+
+// eslint-disable-next-line react-refresh/only-export-components
+export const useAuthContext = () => {
+	return useContext(AuthContext);
+};
+
+export const AuthContextProvider = ({ children }) => {
+	const [authUser, setAuthUser] = useState(JSON.parse(localStorage.getItem("chat-user")) || null);
+
+	return <AuthContext.Provider value={{ authUser, setAuthUser }}>{children}</AuthContext.Provider>;
+};
+
+<<<FILE_END>>>
+
+<<<FILE_START>>>
+FILE: frontend/src/context/SocketContext.jsx
+import { createContext, useState, useEffect, useContext } from "react";
+import { useAuthContext } from "./AuthContext";
+import io from "socket.io-client";
+
+const SocketContext = createContext();
+
+export const useSocketContext = () => {
+	return useContext(SocketContext);
+};
+
+export const SocketContextProvider = ({ children }) => {
+	const [socket, setSocket] = useState(null);
+	const [onlineUsers, setOnlineUsers] = useState([]);
+	const { authUser } = useAuthContext();
+
+	useEffect(() => {
+		if (authUser) {
+			const socket = io("https://chat-app-yt.onrender.com", {
+				query: {
+					userId: authUser._id,
+				},
+			});
+
+			setSocket(socket);
+
+			// socket.on() is used to listen to the events. can be used both on client and server side
+			socket.on("getOnlineUsers", (users) => {
+				setOnlineUsers(users);
+			});
+
+			return () => socket.close();
+		} else {
+			if (socket) {
+				socket.close();
+				setSocket(null);
+			}
+		}
+	}, [authUser]);
+
+	return <SocketContext.Provider value={{ socket, onlineUsers }}>{children}</SocketContext.Provider>;
+};
+
+<<<FILE_END>>>
+
+<<<FILE_START>>>
+FILE: frontend/src/hooks/useGetConversations.js
+import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
+
+const useGetConversations = () => {
+	const [loading, setLoading] = useState(false);
+	const [conversations, setConversations] = useState([]);
+
+	useEffect(() => {
+		const getConversations = async () => {
+			setLoading(true);
+			try {
+				const res = await fetch("/api/users");
+				const data = await res.json();
+				if (data.error) {
+					throw new Error(data.error);
+				}
+				setConversations(data);
+			} catch (error) {
+				toast.error(error.message);
+			} finally {
+				setLoading(false);
+			}
+		};
+
+		getConversations();
+	}, []);
+
+	return { loading, conversations };
+};
+export default useGetConversations;
+
+<<<FILE_END>>>
+
+<<<FILE_START>>>
+FILE: frontend/src/hooks/useGetMessages.js
+import { useEffect, useState } from "react";
+import useConversation from "../zustand/useConversation";
+import toast from "react-hot-toast";
+
+const useGetMessages = () => {
+	const [loading, setLoading] = useState(false);
+	const { messages, setMessages, selectedConversation } = useConversation();
+
+	useEffect(() => {
+		const getMessages = async () => {
+			setLoading(true);
+			try {
+				const res = await fetch(`/api/messages/${selectedConversation._id}`);
+				const data = await res.json();
+				if (data.error) throw new Error(data.error);
+				setMessages(data);
+			} catch (error) {
+				toast.error(error.message);
+			} finally {
+				setLoading(false);
+			}
+		};
+
+		if (selectedConversation?._id) getMessages();
+	}, [selectedConversation?._id, setMessages]);
+
+	return { messages, loading };
+};
+export default useGetMessages;
+
+<<<FILE_END>>>
+
+<<<FILE_START>>>
+FILE: frontend/src/hooks/useListenMessages.js
+import { useEffect } from "react";
+
+import { useSocketContext } from "../context/SocketContext";
+import useConversation from "../zustand/useConversation";
+
+import notificationSound from "../assets/sounds/notification.mp3";
+
+const useListenMessages = () => {
+	const { socket } = useSocketContext();
+	const { messages, setMessages } = useConversation();
+
+	useEffect(() => {
+		socket?.on("newMessage", (newMessage) => {
+			newMessage.shouldShake = true;
+			const sound = new Audio(notificationSound);
+			sound.play();
+			setMessages([...messages, newMessage]);
+		});
+
+		return () => socket?.off("newMessage");
+	}, [socket, setMessages, messages]);
+};
+export default useListenMessages;
+
+<<<FILE_END>>>
+
+<<<FILE_START>>>
+FILE: frontend/src/hooks/useLogin.js
+import { useState } from "react";
+import toast from "react-hot-toast";
+import { useAuthContext } from "../context/AuthContext";
+
+const useLogin = () => {
+	const [loading, setLoading] = useState(false);
+	const { setAuthUser } = useAuthContext();
+
+	const login = async (username, password) => {
+		const success = handleInputErrors(username, password);
+		if (!success) return;
+		setLoading(true);
+		try {
+			const res = await fetch("/api/auth/login", {
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify({ username, password }),
+			});
+
+			const data = await res.json();
+			if (data.error) {
+				throw new Error(data.error);
+			}
+
+			localStorage.setItem("chat-user", JSON.stringify(data));
+			setAuthUser(data);
+		} catch (error) {
+			toast.error(error.message);
+		} finally {
+			setLoading(false);
+		}
+	};
+
+	return { loading, login };
+};
+export default useLogin;
+
+function handleInputErrors(username, password) {
+	if (!username || !password) {
+		toast.error("Please fill in all fields");
+		return false;
+	}
+
+	return true;
+}
+
+<<<FILE_END>>>
+
+<<<FILE_START>>>
+FILE: frontend/src/hooks/useLogout.js
+import { useState } from "react";
+import { useAuthContext } from "../context/AuthContext";
+import toast from "react-hot-toast";
+
+const useLogout = () => {
+	const [loading, setLoading] = useState(false);
+	const { setAuthUser } = useAuthContext();
+
+	const logout = async () => {
+		setLoading(true);
+		try {
+			const res = await fetch("/api/auth/logout", {
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+			});
+			const data = await res.json();
+			if (data.error) {
+				throw new Error(data.error);
+			}
+
+			localStorage.removeItem("chat-user");
+			setAuthUser(null);
+		} catch (error) {
+			toast.error(error.message);
+		} finally {
+			setLoading(false);
+		}
+	};
+
+	return { loading, logout };
+};
+export default useLogout;
+
+<<<FILE_END>>>
+
+<<<FILE_START>>>
+FILE: frontend/src/hooks/useSendMessage.js
+import { useState } from "react";
+import useConversation from "../zustand/useConversation";
+import toast from "react-hot-toast";
+
+const useSendMessage = () => {
+	const [loading, setLoading] = useState(false);
+	const { messages, setMessages, selectedConversation } = useConversation();
+
+	const sendMessage = async (message) => {
+		setLoading(true);
+		try {
+			const res = await fetch(`/api/messages/send/${selectedConversation._id}`, {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify({ message }),
+			});
+			const data = await res.json();
+			if (data.error) throw new Error(data.error);
+
+			setMessages([...messages, data]);
+		} catch (error) {
+			toast.error(error.message);
+		} finally {
+			setLoading(false);
+		}
+	};
+
+	return { sendMessage, loading };
+};
+export default useSendMessage;
+
+<<<FILE_END>>>
+
+<<<FILE_START>>>
+FILE: frontend/src/hooks/useSignup.js
+import { useState } from "react";
+import toast from "react-hot-toast";
+import { useAuthContext } from "../context/AuthContext";
+
+const useSignup = () => {
+	const [loading, setLoading] = useState(false);
+	const { setAuthUser } = useAuthContext();
+
+	const signup = async ({ fullName, username, password, confirmPassword, gender }) => {
+		const success = handleInputErrors({ fullName, username, password, confirmPassword, gender });
+		if (!success) return;
+
+		setLoading(true);
+		try {
+			const res = await fetch("/api/auth/signup", {
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify({ fullName, username, password, confirmPassword, gender }),
+			});
+
+			const data = await res.json();
+			if (data.error) {
+				throw new Error(data.error);
+			}
+			localStorage.setItem("chat-user", JSON.stringify(data));
+			setAuthUser(data);
+		} catch (error) {
+			toast.error(error.message);
+		} finally {
+			setLoading(false);
+		}
+	};
+
+	return { loading, signup };
+};
+export default useSignup;
+
+function handleInputErrors({ fullName, username, password, confirmPassword, gender }) {
+	if (!fullName || !username || !password || !confirmPassword || !gender) {
+		toast.error("Please fill in all fields");
+		return false;
+	}
+
+	if (password !== confirmPassword) {
+		toast.error("Passwords do not match");
+		return false;
+	}
+
+	if (password.length < 6) {
+		toast.error("Password must be at least 6 characters");
+		return false;
+	}
+
+	return true;
+}
+
+<<<FILE_END>>>
+
+<<<FILE_START>>>
+FILE: frontend/src/index.css
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+	background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url("/bg.png");
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center;
+}
+
+/* dark mode looking scrollbar */
+::-webkit-scrollbar {
+	width: 8px;
+}
+
+::-webkit-scrollbar-track {
+	background: #555;
+}
+
+::-webkit-scrollbar-thumb {
+	background: #121212;
+	border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+	background: #242424;
+}
+
+/* SHAKE ANIMATION ON HORIZONTAL DIRECTION */
+.shake {
+	animation: shake 0.82s cubic-bezier(0.36, 0.07, 0.19, 0.97) 0.2s both;
+	transform: translate3d(0, 0, 0);
+	backface-visibility: hidden;
+	perspective: 1000px;
+}
+
+@keyframes shake {
+	10%,
+	90% {
+		transform: translate3d(-1px, 0, 0);
+	}
+
+	20%,
+	80% {
+		transform: translate3d(2px, 0, 0);
+	}
+
+	30%,
+	50%,
+	70% {
+		transform: translate3d(-4px, 0, 0);
+	}
+
+	40%,
+	60% {
+		transform: translate3d(4px, 0, 0);
+	}
+}
+
+<<<FILE_END>>>
+
+<<<FILE_START>>>
+FILE: frontend/src/main.jsx
+import React from "react";
+import ReactDOM from "react-dom/client";
+import App from "./App.jsx";
+import "./index.css";
+import { BrowserRouter } from "react-router-dom";
+import { AuthContextProvider } from "./context/AuthContext.jsx";
+import { SocketContextProvider } from "./context/SocketContext.jsx";
+
+ReactDOM.createRoot(document.getElementById("root")).render(
+	<React.StrictMode>
+		<BrowserRouter>
+			<AuthContextProvider>
+				<SocketContextProvider>
+					<App />
+				</SocketContextProvider>
+			</AuthContextProvider>
+		</BrowserRouter>
+	</React.StrictMode>
+);
+
+<<<FILE_END>>>
+
+<<<FILE_START>>>
+FILE: frontend/src/pages/home/Home.jsx
+import MessageContainer from "../../components/messages/MessageContainer";
+import Sidebar from "../../components/sidebar/Sidebar";
+
+const Home = () => {
+	return (
+		<div className='flex sm:h-[450px] md:h-[550px] rounded-lg overflow-hidden bg-gray-400 bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-0'>
+			<Sidebar />
+			<MessageContainer />
+		</div>
+	);
+};
+export default Home;
+
+<<<FILE_END>>>
+
+<<<FILE_START>>>
+FILE: frontend/src/pages/login/Login.jsx
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import useLogin from "../../hooks/useLogin";
+
+const Login = () => {
+	const [username, setUsername] = useState("");
+	const [password, setPassword] = useState("");
+
+	const { loading, login } = useLogin();
+
+	const handleSubmit = async (e) => {
+		e.preventDefault();
+		await login(username, password);
+	};
+
+	return (
+		<div className='flex flex-col items-center justify-center min-w-96 mx-auto'>
+			<div className='w-full p-6 rounded-lg shadow-md bg-gray-400 bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-0'>
+				<h1 className='text-3xl font-semibold text-center text-gray-300'>
+					Login
+					<span className='text-blue-500'> ChatApp</span>
+				</h1>
+
+				<form onSubmit={handleSubmit}>
+					<div>
+						<label className='label p-2'>
+							<span className='text-base label-text'>Username</span>
+						</label>
+						<input
+							type='text'
+							placeholder='Enter username'
+							className='w-full input input-bordered h-10'
+							value={username}
+							onChange={(e) => setUsername(e.target.value)}
+						/>
+					</div>
+
+					<div>
+						<label className='label'>
+							<span className='text-base label-text'>Password</span>
+						</label>
+						<input
+							type='password'
+							placeholder='Enter Password'
+							className='w-full input input-bordered h-10'
+							value={password}
+							onChange={(e) => setPassword(e.target.value)}
+						/>
+					</div>
+					<Link to='/signup' className='text-sm  hover:underline hover:text-blue-600 mt-2 inline-block'>
+						{"Don't"} have an account?
+					</Link>
+
+					<div>
+						<button className='btn btn-block btn-sm mt-2' disabled={loading}>
+							{loading ? <span className='loading loading-spinner '></span> : "Login"}
+						</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	);
+};
+export default Login;
+
+// STARTER CODE FOR THIS FILE
+// const Login = () => {
+// 	return (
+// 		<div className='flex flex-col items-center justify-center min-w-96 mx-auto'>
+// 			<div className='w-full p-6 rounded-lg shadow-md bg-gray-400 bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-0'>
+// 				<h1 className='text-3xl font-semibold text-center text-gray-300'>
+// 					Login
+// 					<span className='text-blue-500'> ChatApp</span>
+// 				</h1>
+
+// 				<form>
+// 					<div>
+// 						<label className='label p-2'>
+// 							<span className='text-base label-text'>Username</span>
+// 						</label>
+// 						<input type='text' placeholder='Enter username' className='w-full input input-bordered h-10' />
+// 					</div>
+
+// 					<div>
+// 						<label className='label'>
+// 							<span className='text-base label-text'>Password</span>
+// 						</label>
+// 						<input
+// 							type='password'
+// 							placeholder='Enter Password'
+// 							className='w-full input input-bordered h-10'
+// 						/>
+// 					</div>
+// 					<a href='#' className='text-sm  hover:underline hover:text-blue-600 mt-2 inline-block'>
+// 						{"Don't"} have an account?
+// 					</a>
+
+// 					<div>
+// 						<button className='btn btn-block btn-sm mt-2'>Login</button>
+// 					</div>
+// 				</form>
+// 			</div>
+// 		</div>
+// 	);
+// };
+// export default Login;
+
+<<<FILE_END>>>
+
+<<<FILE_START>>>
+FILE: frontend/src/pages/signup/GenderCheckbox.jsx
+const GenderCheckbox = ({ onCheckboxChange, selectedGender }) => {
+	return (
+		<div className='flex'>
+			<div className='form-control'>
+				<label className={`label gap-2 cursor-pointer ${selectedGender === "male" ? "selected" : ""} `}>
+					<span className='label-text'>Male</span>
+					<input
+						type='checkbox'
+						className='checkbox border-slate-900'
+						checked={selectedGender === "male"}
+						onChange={() => onCheckboxChange("male")}
+					/>
+				</label>
+			</div>
+			<div className='form-control'>
+				<label className={`label gap-2 cursor-pointer  ${selectedGender === "female" ? "selected" : ""}`}>
+					<span className='label-text'>Female</span>
+					<input
+						type='checkbox'
+						className='checkbox border-slate-900'
+						checked={selectedGender === "female"}
+						onChange={() => onCheckboxChange("female")}
+					/>
+				</label>
+			</div>
+		</div>
+	);
+};
+export default GenderCheckbox;
+
+// STARTER CODE FOR THIS FILE
+// const GenderCheckbox = () => {
+// 	return (
+// 		<div className='flex'>
+// 			<div className='form-control'>
+// 				<label className={`label gap-2 cursor-pointer`}>
+// 					<span className='label-text'>Male</span>
+// 					<input type='checkbox' className='checkbox border-slate-900' />
+// 				</label>
+// 			</div>
+// 			<div className='form-control'>
+// 				<label className={`label gap-2 cursor-pointer`}>
+// 					<span className='label-text'>Female</span>
+// 					<input type='checkbox' className='checkbox border-slate-900' />
+// 				</label>
+// 			</div>
+// 		</div>
+// 	);
+// };
+// export default GenderCheckbox;
+
+<<<FILE_END>>>
+
+<<<FILE_START>>>
+FILE: frontend/src/pages/signup/SignUp.jsx
+import { Link } from "react-router-dom";
+import GenderCheckbox from "./GenderCheckbox";
+import { useState } from "react";
+import useSignup from "../../hooks/useSignup";
+
+const SignUp = () => {
+	const [inputs, setInputs] = useState({
+		fullName: "",
+		username: "",
+		password: "",
+		confirmPassword: "",
+		gender: "",
+	});
+
+	const { loading, signup } = useSignup();
+
+	const handleCheckboxChange = (gender) => {
+		setInputs({ ...inputs, gender });
+	};
+
+	const handleSubmit = async (e) => {
+		e.preventDefault();
+		await signup(inputs);
+	};
+
+	return (
+		<div className='flex flex-col items-center justify-center min-w-96 mx-auto'>
+			<div className='w-full p-6 rounded-lg shadow-md bg-gray-400 bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-0'>
+				<h1 className='text-3xl font-semibold text-center text-gray-300'>
+					Sign Up <span className='text-blue-500'> ChatApp</span>
+				</h1>
+
+				<form onSubmit={handleSubmit}>
+					<div>
+						<label className='label p-2'>
+							<span className='text-base label-text'>Full Name</span>
+						</label>
+						<input
+							type='text'
+							placeholder='John Doe'
+							className='w-full input input-bordered  h-10'
+							value={inputs.fullName}
+							onChange={(e) => setInputs({ ...inputs, fullName: e.target.value })}
+						/>
+					</div>
+
+					<div>
+						<label className='label p-2 '>
+							<span className='text-base label-text'>Username</span>
+						</label>
+						<input
+							type='text'
+							placeholder='johndoe'
+							className='w-full input input-bordered h-10'
+							value={inputs.username}
+							onChange={(e) => setInputs({ ...inputs, username: e.target.value })}
+						/>
+					</div>
+
+					<div>
+						<label className='label'>
+							<span className='text-base label-text'>Password</span>
+						</label>
+						<input
+							type='password'
+							placeholder='Enter Password'
+							className='w-full input input-bordered h-10'
+							value={inputs.password}
+							onChange={(e) => setInputs({ ...inputs, password: e.target.value })}
+						/>
+					</div>
+
+					<div>
+						<label className='label'>
+							<span className='text-base label-text'>Confirm Password</span>
+						</label>
+						<input
+							type='password'
+							placeholder='Confirm Password'
+							className='w-full input input-bordered h-10'
+							value={inputs.confirmPassword}
+							onChange={(e) => setInputs({ ...inputs, confirmPassword: e.target.value })}
+						/>
+					</div>
+
+					<GenderCheckbox onCheckboxChange={handleCheckboxChange} selectedGender={inputs.gender} />
+
+					<Link
+						to={"/login"}
+						className='text-sm hover:underline hover:text-blue-600 mt-2 inline-block'
+						href='#'
+					>
+						Already have an account?
+					</Link>
+
+					<div>
+						<button className='btn btn-block btn-sm mt-2 border border-slate-700' disabled={loading}>
+							{loading ? <span className='loading loading-spinner'></span> : "Sign Up"}
+						</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	);
+};
+export default SignUp;
+
+// STARTER CODE FOR THE SIGNUP COMPONENT
+// import GenderCheckbox from "./GenderCheckbox";
+
+// const SignUp = () => {
+// 	return (
+// 		<div className='flex flex-col items-center justify-center min-w-96 mx-auto'>
+// 			<div className='w-full p-6 rounded-lg shadow-md bg-gray-400 bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-0'>
+// 				<h1 className='text-3xl font-semibold text-center text-gray-300'>
+// 					Sign Up <span className='text-blue-500'> ChatApp</span>
+// 				</h1>
+
+// 				<form>
+// 					<div>
+// 						<label className='label p-2'>
+// 							<span className='text-base label-text'>Full Name</span>
+// 						</label>
+// 						<input type='text' placeholder='John Doe' className='w-full input input-bordered  h-10' />
+// 					</div>
+
+// 					<div>
+// 						<label className='label p-2 '>
+// 							<span className='text-base label-text'>Username</span>
+// 						</label>
+// 						<input type='text' placeholder='johndoe' className='w-full input input-bordered h-10' />
+// 					</div>
+
+// 					<div>
+// 						<label className='label'>
+// 							<span className='text-base label-text'>Password</span>
+// 						</label>
+// 						<input
+// 							type='password'
+// 							placeholder='Enter Password'
+// 							className='w-full input input-bordered h-10'
+// 						/>
+// 					</div>
+
+// 					<div>
+// 						<label className='label'>
+// 							<span className='text-base label-text'>Confirm Password</span>
+// 						</label>
+// 						<input
+// 							type='password'
+// 							placeholder='Confirm Password'
+// 							className='w-full input input-bordered h-10'
+// 						/>
+// 					</div>
+
+// 					<GenderCheckbox />
+
+// 					<a className='text-sm hover:underline hover:text-blue-600 mt-2 inline-block' href='#'>
+// 						Already have an account?
+// 					</a>
+
+// 					<div>
+// 						<button className='btn btn-block btn-sm mt-2 border border-slate-700'>Sign Up</button>
+// 					</div>
+// 				</form>
+// 			</div>
+// 		</div>
+// 	);
+// };
+// export default SignUp;
+
+<<<FILE_END>>>
+
+<<<FILE_START>>>
+FILE: frontend/src/utils/emojis.js
+export const funEmojis = [
+	"👾",
+	"⭐",
+	"🌟",
+	"🎉",
+	"🎊",
+	"🎈",
+	"🎁",
+	"🎂",
+	"🎄",
+	"🎃",
+	"🎗",
+	"🎟",
+	"🎫",
+	"🎖",
+	"🏆",
+	"🏅",
+	"🥇",
+	"🥈",
+	"🥉",
+	"⚽",
+	"🏀",
+	"🏈",
+	"⚾",
+	"🎾",
+	"🏐",
+	"🏉",
+	"🎱",
+	"🏓",
+	"🏸",
+	"🥅",
+	"🏒",
+	"🏑",
+	"🏏",
+	"⛳",
+	"🏹",
+	"🎣",
+	"🥊",
+	"🥋",
+	"🎽",
+	"⛸",
+	"🥌",
+	"🛷",
+	"🎿",
+	"⛷",
+	"🏂",
+	"🏋️",
+	"🤼",
+	"🤸",
+	"🤺",
+	"⛹️",
+	"🤾",
+	"🏌️",
+	"🏇",
+	"🧘",
+];
+
+export const getRandomEmoji = () => {
+	return funEmojis[Math.floor(Math.random() * funEmojis.length)];
+};
+
+<<<FILE_END>>>
+
+<<<FILE_START>>>
+FILE: frontend/src/utils/extractTime.js
+export function extractTime(dateString) {
+	const date = new Date(dateString);
+	const hours = padZero(date.getHours());
+	const minutes = padZero(date.getMinutes());
+	return `${hours}:${minutes}`;
+}
+
+// Helper function to pad single-digit numbers with a leading zero
+function padZero(number) {
+	return number.toString().padStart(2, "0");
+}
+
+<<<FILE_END>>>
+
+<<<FILE_START>>>
+FILE: frontend/src/zustand/useConversation.js
+import { create } from "zustand";
+
+const useConversation = create((set) => ({
+	selectedConversation: null,
+	setSelectedConversation: (selectedConversation) => set({ selectedConversation }),
+	messages: [],
+	setMessages: (messages) => set({ messages }),
+}));
+
+export default useConversation;
+
+<<<FILE_END>>>
+
+<<<FILE_START>>>
+FILE: frontend/tailwind.config.js
+/** @type {import('tailwindcss').Config} */
+export default {
+	content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
+	theme: {
+		extend: {},
+	},
+	// eslint-disable-next-line no-undef
+	plugins: [require("daisyui")],
+};
+
+<<<FILE_END>>>
+
+<<<FILE_START>>>
+FILE: frontend/vite.config.js
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
+
+// https://vitejs.dev/config/
+export default defineConfig({
+	plugins: [react()],
+	server: {
+		port: 3000,
+		proxy: {
+			"/api": {
+				target: "http://localhost:5000",
+			},
+		},
+	},
+});
+
+<<<FILE_END>>>
+
+<<<FILE_START>>>
+FILE: package.json
+{
+	"name": "chat-app-yt",
+	"version": "1.0.0",
+	"description": "",
+	"main": "server.js",
+	"scripts": {
+		"server": "nodemon backend/server.js",
+		"start": "node backend/server.js",
+		"build": "npm install && npm install --prefix frontend && npm run build --prefix frontend"
+	},
+	"type": "module",
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"dependencies": {
+		"bcryptjs": "^2.4.3",
+		"cookie-parser": "^1.4.6",
+		"dotenv": "^16.4.1",
+		"express": "^4.18.2",
+		"jsonwebtoken": "^9.0.2",
+		"mongoose": "^8.1.1",
+		"socket.io": "^4.7.4"
+	},
+	"devDependencies": {
+		"nodemon": "^3.0.3"
+	}
+}
+
+<<<FILE_END>>>
+
+=== RESPONSE RECEIVED ===
+import Message from "../models/message.model.js";
+import Conversation from "../models/conversation.model.js";
+import User from "../models/user.model.js";
+import { getReceiverSocketId } from "../socket/socket.js";
+
+export const getMessages = async (req, res) => {
+	try {
+		const conversationId = req.params.id;
+		const messages = await Message.find({ conversationId }).sort({ createdAt: 1 });
+		res.status(200).json(messages);
+	} catch (error) {
+		res.status(500).json({ error: "Internal Server Error" });
+	}
+};
+
+export const sendMessage = async (req, res) => {
+	try {
+		const receiverId = req.params.id;
+		const senderId = req.user._id;
+		const { message } = req.body;
+
+		const conversation = await Conversation.findOne({
+			participants: { $all: [receiverId, senderId] },
+		});
+
+		if (!conversation) {
+			const newConversation = new Conversation({
+				participants: [receiverId, senderId],
+			});
+			await newConversation.save();
+			conversation = newConversation;
+		}
+
+		const newMessage = new Message({
+			senderId,
+			receiverId,
+			conversationId: conversation._id,
+			message,
+		});
+		await newMessage.save();
+
+		const receiverSocketId = getReceiverSocketId(receiverId);
+		if (receiverSocketId) {
+			const io = req.app.get("io");
+			io.to(receiverSocketId).emit("newMessage", newMessage);
+		}
+
+		res.status(201).json(newMessage);
+	} catch (error) {
+		res.status(500).json({ error: "Internal Server Error" });
+	}
+};
+
+=== END LOG ===
