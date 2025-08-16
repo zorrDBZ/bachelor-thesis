@@ -22,40 +22,13 @@ Unlike previous studies focused on isolated coding tasks, our work examines AI-a
 
 ---
 
-## 🎯 Objectives
+## 🛠️ Selected Projects
 
-1. **Evaluate** AI-assisted coding impact on **quality, reliability, maintainability, hygiene, and security** in full-stack applications.
-2. **Compare** two different AI models (SLM vs LLM) in practical development contexts.
-3. **Provide** actionable recommendations for developers and organizations considering AI-assisted coding tools.
-
----
-
-## 🛠️ Methodology
-
-Our research follows a **controlled experimental design**:
-
-1. **Selected Projects**  
    Three open-source MERN stack projects:
    - [MERN Thinkboard](https://github.com/burakorkmez/mern-thinkboard)  
    - [MERN Social Media](https://github.com/ed-roh/mern-social-media)  
    - [MERN Chat App](https://github.com/burakorkmez/fullstack-chat-app)  
 
-2. **Experiment Process**
-   - Identify and remove 5 target files (min. 2 frontend) from each project.
-   - Use a **universal full-stack tailored prompt** to generate replacements with each AI model.
-   - Maintain separate branches for:
-     - Original code
-     - Phi-4 generated files
-     - Llama-3.1 generated files
-
-3. **Analysis Tools**
-   - **Static Analysis:** SonarQube, ESLint  
-   - **Runtime Performance:** Lighthouse  
-   - **Security Testing:** OWASP ZAP  
-
-4. **Statistical Tests**
-   - Wilcoxon Signed Rank Test  
-   - Mann–Whitney U Test  
 
 ---
 
@@ -95,17 +68,6 @@ See the **[Project Wiki](../../wiki)**.
 ## ⚠️ License
 
 This repository is licensed under the [MIT License](LICENSE), unless otherwise stated for third-party code or datasets.
-
----
-
-## 🌐 Related Work
-
-- Khan et al. (2023) — *Assessing the Promise and Pitfalls of ChatGPT for Automated Code Generation*  
-- Tan et al. (2024) — *How far are AI powered programming assistants from meeting developers' needs?*  
-- Agarwal et al. (2024) — *Copilot Evaluation Harness*  
-- more...
-
-(Full bibliography available in the thesis document.)
 
 ---
 
